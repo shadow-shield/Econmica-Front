@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'package:transifox/screen/auth/login.reverpod.dart';
-import 'package:transifox/screen/home.riverpod.dart';
+import 'package:transifox/page/auth/login.riverpod.dart';
+import 'package:transifox/page/home/home.riverpod.dart';
+import 'package:transifox/page/paginabotones/botones.riverpod.dart';
 
 void main() => runApp(const MyApp());
 
@@ -17,6 +18,7 @@ class MyApp extends StatelessWidget {
       routes: {
         'home': (BuildContext context) => const Home(),
         'login': (BuildContext context) => const Login(),
+        'botones': (BuildContext context) =>const BotonesInteres(),
       },
     );
   }

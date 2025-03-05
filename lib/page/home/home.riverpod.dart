@@ -1,7 +1,5 @@
-
 import 'package:flutter/material.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
-
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -28,7 +26,6 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
     );
 
     _controller.forward();
-    
   }
 
   @override
@@ -59,22 +56,41 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                 opacity: _fadeAnimation,
                 child: Image.asset('assets/logo.png', width: 350, height: 200),
               ),
-              DefaultTextStyle(
-                style: TextStyle(fontSize: 26.0, fontWeight: FontWeight.bold, color: Colors.blue[800]),
-                child: AnimatedTextKit(
-                  animatedTexts: [
-                    TypewriterAnimatedText('Bienvenido a Transifox', speed: Duration(milliseconds: 90)),
+              SizedBox(
+                height: 50,
+                width: 200,
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    SizedBox(
+                      width: 200,
+                      child: DefaultTextStyle(
+                        style: const TextStyle(
+                          fontSize: 20.0,
+                          fontFamily: 'Horizon',
+                        ),
+                        child: AnimatedTextKit(
+                          animatedTexts: [
+                            RotateAnimatedText('BIENVENIDO',textStyle: TextStyle(color: Colors.blue[800],fontWeight: FontWeight.bold,fontSize: 30)),
+                            RotateAnimatedText('A',textStyle: TextStyle(color: Colors.blue[800],fontWeight: FontWeight.bold,fontSize: 30)),
+                            RotateAnimatedText('TRANSIFOX',textStyle: TextStyle(color: Colors.blue[800],fontWeight: FontWeight.bold,fontSize: 30)),
+                          ],
+                          onTap: () {
+                            print("Tap Event");
+                          },
+                        ),
+                      ),
+                    ),
                   ],
-                  totalRepeatCount: 1,
                 ),
               ),
               SizedBox(height: 20),
               ScaleTransition(
                 scale: _fadeAnimation,
-                child: Image.asset('assets/person.png', width: 220, height: 220),
+                child:
+                    Image.asset('assets/person.png', width: 220, height: 220),
               ),
               SizedBox(height: 20),
-              
               SizedBox(height: 20),
               SizedBox(
                 height: 42,
@@ -87,15 +103,18 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                     padding: EdgeInsets.symmetric(horizontal: 25, vertical: 5),
                   ),
                   onPressed: () {
-                     Navigator.pushReplacementNamed(context, 'login');
-                   
+                    Navigator.pushReplacementNamed(context, 'login');
                   },
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Text("Continuar", style: TextStyle(fontSize: 18,color: Colors.white),),
+                      Text(
+                        "Continuar",
+                        style: TextStyle(fontSize: 18, color: Colors.white),
+                      ),
                       SizedBox(width: 4),
-                      Icon(Icons.arrow_forward_ios, color: Colors.white, size: 20),
+                      Icon(Icons.arrow_forward_ios,
+                          color: Colors.white, size: 20),
                     ],
                   ),
                 ),
