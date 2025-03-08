@@ -15,7 +15,7 @@ class BotonesInteresState extends State<BotonesInteres> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: CustomBottomNavigator(),
+      bottomNavigationBar: CustomBottomNavigator(color: Colors.blue[800]!,),
         body: Stack(
       fit: StackFit.expand,
       children: [Background(), _texto(),],

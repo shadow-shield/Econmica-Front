@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class CustomBottomNavigator extends StatefulWidget {
-  const CustomBottomNavigator({super.key});
+  const CustomBottomNavigator({super.key, required this.color});
+  final Color color;
 
   @override
   _CustomBottomNavigatorState createState() => _CustomBottomNavigatorState();
@@ -13,8 +14,9 @@ class _CustomBottomNavigatorState extends State<CustomBottomNavigator> {
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
-      backgroundColor: Colors.white,
-      selectedItemColor: Colors.blue[800],
+      selectedLabelStyle: TextStyle(fontWeight: FontWeight.bold),
+      backgroundColor: Colors.grey[250],
+      selectedItemColor: widget.color,
       unselectedItemColor: Colors.grey,
       currentIndex: _selectedIndex,
       onTap: (index) {
@@ -23,13 +25,14 @@ class _CustomBottomNavigatorState extends State<CustomBottomNavigator> {
           print('$index');
         });
       },
-      items: const [
+      items: [
         BottomNavigationBarItem(
-          icon: Icon(Icons.attach_money ),
+          
+          icon: Image.asset('assets/CalculosF.png',width: 33),
           label: 'Cálculos Financieros',
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.account_balance_wallet),
+          icon:  Image.asset('assets/gestortasa.png',width: 33),
           label: 'Gestor de Tasas',
         ),
       ],
