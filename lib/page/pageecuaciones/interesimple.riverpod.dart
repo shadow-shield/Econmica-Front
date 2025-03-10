@@ -30,7 +30,9 @@ class _Interes_simpleState extends State<Interes_simple> {
           foregroundColor: Colors.green,
           title: Text('Interes Simple'),
         ),
-        bottomNavigationBar: CustomBottomNavigator(color: Colors.green,),
+        bottomNavigationBar: CustomBottomNavigator(
+          color: Colors.green,
+        ),
         body: Stack(
           fit: StackFit.expand,
           children: [
@@ -38,18 +40,19 @@ class _Interes_simpleState extends State<Interes_simple> {
               decoration: boxDecoration,
             ),
             Container(
-              padding: EdgeInsets.only(bottom: 80),
+              padding: EdgeInsets.only(bottom: 40),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   Container(
                     padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-                    child: Text('Resultado de : '),
-                    margin: EdgeInsets.only(bottom: 80),
+                    child: Text('Interes Simple  : ',
+                        style: TextStyle(fontWeight: FontWeight.w300,color: Colors.green,fontStyle: FontStyle.normal,fontFamily: 'Roboto')),
+                    margin: EdgeInsets.only(bottom: 60),
                     height: 50,
                     width: 230,
                     decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: Colors.white54,
                         borderRadius: BorderRadius.circular(40)),
                   ),
                   Row(
@@ -73,7 +76,8 @@ class _Interes_simpleState extends State<Interes_simple> {
                           color: Colors.green,
                           icon: Container(
                               padding: EdgeInsets.all(6),
-                              child: Image.asset('assets/capital.png', width: 1)),
+                              child:
+                                  Image.asset('assets/capital.png', width: 1)),
                           labelText: 'Capital',
                         ),
                       ),
@@ -100,7 +104,8 @@ class _Interes_simpleState extends State<Interes_simple> {
                           color: Colors.green,
                           icon: Container(
                               padding: EdgeInsets.all(6),
-                              child: Image.asset('assets/tiempo.png', width: 1)),
+                              child:
+                                  Image.asset('assets/tiempo.png', width: 1)),
                           labelText: 'Tiempo',
                         ),
                       ),
@@ -109,7 +114,9 @@ class _Interes_simpleState extends State<Interes_simple> {
                   SizedBox(height: 20),
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 20),
-                    child: DropdownMenuItemButton(color: Colors.green,),
+                    child: DropdownMenuItemButton(
+                      color: Colors.green,
+                    ),
                   ),
                   SizedBox(height: 20),
                   ElevatedButton(

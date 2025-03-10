@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:transifox/widgets/Dropdowbutton.riverpod.dart';
+import 'package:transifox/widgets/DropdowButtonAnualidad.riverpod.dart';
 import 'package:transifox/widgets/bottonavigator.riverpod.dart';
 import 'package:transifox/widgets/textfield.priverpod.dart';
 
@@ -39,18 +39,38 @@ class _AnualidadState extends State<Anualidad> {
             decoration: boxDecoration,
           ),
           Container(
-            padding: EdgeInsets.only(bottom: 80),
+            padding: EdgeInsets.only(bottom: 40),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 Container(
                   padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-                  child: Text('Valor actual o final de la anualidad : '),
+                  child: Text('Valor Futuro  : ',
+                      style: TextStyle(
+                          fontWeight: FontWeight.w300,
+                          color: Colors.pink,
+                          fontStyle: FontStyle.normal,
+                          fontFamily: 'Roboto')),
+                  margin: EdgeInsets.only(bottom: 20),
+                  height: 50,
+                  width: 230,
+                  decoration: BoxDecoration(
+                      color: Colors.white54,
+                      borderRadius: BorderRadius.circular(40)),
+                ),
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+                  child: Text('Valor Presente  : ',
+                      style: TextStyle(
+                            fontWeight: FontWeight.w300,
+                            color: Colors.pink,
+                            fontStyle: FontStyle.normal,
+                            fontFamily: 'Roboto')),
                   margin: EdgeInsets.only(bottom: 80),
                   height: 50,
                   width: 230,
                   decoration: BoxDecoration(
-                      color: Colors.white,
+                      color: Colors.white54,
                       borderRadius: BorderRadius.circular(40)),
                 ),
                 Row(
@@ -63,8 +83,7 @@ class _AnualidadState extends State<Anualidad> {
                         color: Colors.pink,
                         icon: Container(
                             padding: EdgeInsets.all(6),
-                            child:
-                                Image.asset('assets/tasanu.png', width: 1)),
+                            child: Image.asset('assets/tasanu.png', width: 1)),
                         labelText: 'Tasa Anualidad',
                       ),
                     ),
@@ -92,19 +111,39 @@ class _AnualidadState extends State<Anualidad> {
                         color: Colors.pink,
                         icon: Container(
                             padding: EdgeInsets.all(6),
-                            child:
-                                Image.asset('assets/anu.png', width: 1)),
+                            child: Image.asset('assets/anu.png', width: 1)),
                         labelText: 'Anualidad',
                       ),
                     ),
-                    
                   ],
                 ),
                 SizedBox(height: 20),
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 20),
-                  child: DropdownMenuItemButton(
-                    color: Colors.pink,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text('Frecuentacia Capitalizacion',
+                              style: TextStyle(fontWeight: FontWeight.w300)),
+                          SizedBox(height: 10),
+                          DropMenuAnualidad(color: Colors.pink),
+                        ],
+                      ),
+                      SizedBox(width: 20),
+                      Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text('Frecuenca de Pago',
+                              style: TextStyle(fontWeight: FontWeight.w300)),
+                          SizedBox(height: 10),
+                          DropMenuAnualidad(color: Colors.pink),
+                        ],
+                      ),
+                    ],
                   ),
                 ),
                 SizedBox(height: 20),

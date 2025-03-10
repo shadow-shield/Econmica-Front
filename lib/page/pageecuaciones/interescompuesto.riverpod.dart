@@ -29,7 +29,9 @@ class _Interes_compuestoState extends State<Interes_compuesto> {
           foregroundColor: Colors.yellow[800]!,
           title: Text('Interes Compuesto'),
         ),
-        bottomNavigationBar: CustomBottomNavigator(color: Colors.yellow[800]!,),
+        bottomNavigationBar: CustomBottomNavigator(
+          color: Colors.yellow[800]!,
+        ),
         body: Stack(
           fit: StackFit.expand,
           children: [
@@ -37,18 +39,24 @@ class _Interes_compuestoState extends State<Interes_compuesto> {
               decoration: boxDecoration,
             ),
             Container(
-              padding: EdgeInsets.only(bottom: 80),
+              padding: EdgeInsets.only(bottom: 40),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   Container(
                     padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-                    child: Text('Resultado de : '),
-                    margin: EdgeInsets.only(bottom: 80),
+                    child: Text('Interes Compuesto  : ',
+                        style: TextStyle(
+                            fontWeight: FontWeight.w300,
+                            color: Colors.yellow[800]!,
+                            fontStyle: FontStyle.normal,
+                            fontFamily: 'Roboto')
+                            ),
+                    margin: EdgeInsets.only(bottom: 60),
                     height: 50,
                     width: 230,
                     decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: Colors.white54,
                         borderRadius: BorderRadius.circular(40)),
                   ),
                   Row(
@@ -61,7 +69,8 @@ class _Interes_compuestoState extends State<Interes_compuesto> {
                           color: Colors.yellow[800]!,
                           icon: Container(
                               padding: EdgeInsets.all(6),
-                              child: Image.asset('assets/interescom.png', width: 1)),
+                              child: Image.asset('assets/interescom.png',
+                                  width: 1)),
                           labelText: 'Interes',
                         ),
                       ),
@@ -72,8 +81,8 @@ class _Interes_compuestoState extends State<Interes_compuesto> {
                           color: Colors.yellow[800]!,
                           icon: Container(
                               padding: EdgeInsets.all(6),
-                              child:
-                                  Image.asset('assets/capitalcom.png', width: 1)),
+                              child: Image.asset('assets/capitalcom.png',
+                                  width: 1)),
                           labelText: 'Capital',
                         ),
                       ),
@@ -89,7 +98,8 @@ class _Interes_compuestoState extends State<Interes_compuesto> {
                           color: Colors.yellow[800]!,
                           icon: Container(
                               padding: EdgeInsets.all(6),
-                              child: Image.asset('assets/montocom.png', width: 1)),
+                              child:
+                                  Image.asset('assets/montocom.png', width: 1)),
                           labelText: 'Monto Compuesto',
                         ),
                       ),
@@ -100,8 +110,8 @@ class _Interes_compuestoState extends State<Interes_compuesto> {
                           color: Colors.yellow[800]!,
                           icon: Container(
                               padding: EdgeInsets.all(6),
-                              child:
-                                  Image.asset('assets/tiempocom.png', width: 1)),
+                              child: Image.asset('assets/tiempocom.png',
+                                  width: 1)),
                           labelText: 'Tiempo',
                         ),
                       ),
@@ -110,7 +120,9 @@ class _Interes_compuestoState extends State<Interes_compuesto> {
                   SizedBox(height: 20),
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 20),
-                    child: DropdownMenuItemButton(color: Colors.yellow[800]!,),
+                    child: DropdownMenuItemButton(
+                      color: Colors.yellow[800]!,
+                    ),
                   ),
                   SizedBox(height: 20),
                   ElevatedButton(

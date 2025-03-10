@@ -1,21 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-class DropdownMenuItemButton extends StatefulWidget {
-  final Color color;
 
-  const DropdownMenuItemButton({super.key, required this.color});
+class DropMenuAnualidad extends StatefulWidget {
+  final Color color;
+  const DropMenuAnualidad({super.key, required this.color});
 
   @override
-  State<DropdownMenuItemButton> createState() => _DropdownMenuItemButtonState();
+  State<DropMenuAnualidad> createState() => DropMenuAnualidadState();
 }
 
-class _DropdownMenuItemButtonState extends State<DropdownMenuItemButton> {
-  String? selectedValue; 
-
+class DropMenuAnualidadState extends State<DropMenuAnualidad> {
+   String? selectedValue; 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 140, 
+      width: 140,
       child: DropdownButtonFormField<String>(
         decoration: InputDecoration(
           border: OutlineInputBorder(

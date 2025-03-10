@@ -3,7 +3,10 @@ import 'package:flutter/services.dart';
 
 class TextfieldStyle extends StatelessWidget {
   const TextfieldStyle(
-      {super.key, required this.labelText, required this.icon, required this.color});
+      {super.key,
+      required this.labelText,
+      required this.icon,
+      required this.color});
   final String labelText;
   final Widget icon;
   final Color color;
@@ -11,11 +14,14 @@ class TextfieldStyle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextField(
-      keyboardType: TextInputType.number,
-      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+      keyboardType: TextInputType.numberWithOptions(decimal: true),
+      inputFormatters: [
+        FilteringTextInputFormatter.allow(RegExp(
+            r'^\d*\.?\d*$')), 
+      ],
       decoration: InputDecoration(
         filled: true,
-        fillColor: Colors.white,
+        fillColor: Colors.white54,
         suffixIcon: icon,
         border: UnderlineInputBorder(
           borderRadius: BorderRadius.circular(20),

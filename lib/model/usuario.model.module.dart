@@ -24,4 +24,9 @@ class Usuario{
     data['cuenta'] = this.cuenta;
     return data;
   }
+
+  @override
+  String toString() {
+    return 'UsuarioModel{idUsuario: $id, }';
+  }
 }
