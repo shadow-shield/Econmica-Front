@@ -18,7 +18,11 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
 
     _controller = AnimationController(
       vsync: this,
+<<<<<<< HEAD
       duration: const Duration(seconds: 2),
+=======
+      duration: Duration(seconds: 2),
+>>>>>>> 2e1885980043156a74dc70922b6175dc212e620b
     );
 
     _fadeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
@@ -42,7 +46,11 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
         fit: StackFit.expand,
         children: [
           Container(
+<<<<<<< HEAD
             decoration: const BoxDecoration(
+=======
+            decoration: BoxDecoration(
+>>>>>>> 2e1885980043156a74dc70922b6175dc212e620b
               image: DecorationImage(
                 image: AssetImage('assets/fondoapp.png'),
                 fit: BoxFit.cover,
@@ -84,14 +92,23 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                   ],
                 ),
               ),
+<<<<<<< HEAD
               const SizedBox(height: 20),
+=======
+              SizedBox(height: 20),
+>>>>>>> 2e1885980043156a74dc70922b6175dc212e620b
               ScaleTransition(
                 scale: _fadeAnimation,
                 child:
                     Image.asset('assets/person.png', width: 220, height: 220),
               ),
+<<<<<<< HEAD
               const SizedBox(height: 20),
               const SizedBox(height: 20),
+=======
+              SizedBox(height: 20),
+              SizedBox(height: 20),
+>>>>>>> 2e1885980043156a74dc70922b6175dc212e620b
               SizedBox(
                 height: 42,
                 child: ElevatedButton(
@@ -100,12 +117,20 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20),
                     ),
+<<<<<<< HEAD
                     padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 5),
+=======
+                    padding: EdgeInsets.symmetric(horizontal: 25, vertical: 5),
+>>>>>>> 2e1885980043156a74dc70922b6175dc212e620b
                   ),
                   onPressed: () {
                     Navigator.pushReplacementNamed(context, 'login');
                   },
+<<<<<<< HEAD
                   child: const Row(
+=======
+                  child: Row(
+>>>>>>> 2e1885980043156a74dc70922b6175dc212e620b
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Text(

@@ -18,7 +18,11 @@ class BotonesInteresState extends State<BotonesInteres> {
       bottomNavigationBar: CustomBottomNavigator(color: Colors.blue[800]!,),
         body: Stack(
       fit: StackFit.expand,
+<<<<<<< HEAD
       children: [const Background(), _texto(),],
+=======
+      children: [Background(), _texto(),],
+>>>>>>> 2e1885980043156a74dc70922b6175dc212e620b
     ));
   }
 }
@@ -28,7 +32,11 @@ class _texto extends StatelessWidget {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Column(
+<<<<<<< HEAD
         children: [TituloTexto(),const CardTable()],
+=======
+        children: [TituloTexto(),CardTable()],
+>>>>>>> 2e1885980043156a74dc70922b6175dc212e620b
       ),
     );
   }
