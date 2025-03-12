@@ -34,7 +34,7 @@ class UsuarioController extends GetxController {
       return await gestionUser.getUsuarioId(usuarioRe);
     } catch (e) {
       return Usuario(
-          id: '10', cedula: '100202', clave: '10505', cuenta: '50505');
+           cedula: '100202', clave: '10505', cuenta: '50505');
     }
   }
 
