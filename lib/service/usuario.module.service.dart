@@ -4,7 +4,7 @@ import 'package:transifox/service/Crudeco.riverpod.dart';
 class UsuarioService extends CrudProvider<Usuario> {
   Future<String> registrarUsuario(Usuario usuarioRe) async {
     try {
-      return await agregar(usuarioRe, 'agregarUser');
+      return await agregar(usuarioRe, 'addUsuarios');
     } catch (e) {
       return "Error al Registrar el Usuario";
     }
@@ -32,7 +32,7 @@ class UsuarioService extends CrudProvider<Usuario> {
       return usuario;
     } catch (e) {
       print(' el error es  $e');
-      return Usuario(cedula: '101014',correo: '123445',clave: '112345' );
+      return Usuario(cedula: '1010',clave: '12455',correo: 'null@gmail' );
     }
   }
 

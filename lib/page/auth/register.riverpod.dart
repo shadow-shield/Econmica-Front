@@ -23,7 +23,7 @@ class Registro_UserState extends State<Registro_User> {
       body: Stack(children: [
         Positioned.fill(
           child: Image.asset(
-            'assets/fondomo.gif',
+            'assets/fondoapp.png',
             fit: BoxFit.cover,
           ),
         ),
@@ -217,7 +217,7 @@ class Registro_UserState extends State<Registro_User> {
     String clave = user_Clave.text.trim();
     String correo = user_Correo.text.trim();
 
-    // Expresión regular para validar un correo electrónico
+    
     RegExp emailRegex =
         RegExp(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$');
 
