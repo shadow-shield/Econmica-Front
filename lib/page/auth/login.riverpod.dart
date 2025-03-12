@@ -118,7 +118,7 @@ class _LoginState extends State<Login> {
           padding: EdgeInsets.symmetric(horizontal: 25, vertical: 5),
         ),
         onPressed: () {
-          // Navegación a otra pantalla
+          
           Navigator.pushReplacementNamed(context, 'botones');
         },
         child: Text('Iniciar Sesión',style: TextStyle(color: Colors.white),),

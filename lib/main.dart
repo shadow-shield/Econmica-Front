@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:transifox/page/auth/login.riverpod.dart';
+import 'package:transifox/page/auth/register.riverpod.dart';
 import 'package:transifox/page/home/home.riverpod.dart';
 import 'package:transifox/page/pageecuaciones/anualidades.riverpod.dart';
 import 'package:transifox/page/pageecuaciones/interescompuesto.riverpod.dart';
@@ -22,11 +23,12 @@ class MyApp extends StatelessWidget {
       routes: {
         'home': (BuildContext context) => const Home(),
         'login': (BuildContext context) => const Login(),
-        'botones': (BuildContext context) =>const BotonesInteres(),
-        'tasa': (BuildContext context) =>const Tasa(),
-        'interesS': (BuildContext context) =>const Interes_simple(),
-        'interesC': (BuildContext context) =>const Interes_compuesto(),
-        'anualida': (BuildContext context) =>const Anualidad()
+        'botones': (BuildContext context) => const BotonesInteres(),
+        'tasa': (BuildContext context) => const Tasa(),
+        'registro': (BuildContext context) => Registro_User(),
+        'interesS': (BuildContext context) => const Interes_simple(),
+        'interesC': (BuildContext context) => const Interes_compuesto(),
+        'anualida': (BuildContext context) => const Anualidad()
       },
     );
   }

@@ -31,10 +31,9 @@ class UsuarioController extends GetxController {
 
   Future<Usuario> consultarUserporId(Usuario usuarioRe) async {
     try {
-      return await gestionUser.getUsuarioId(usuarioRe);
+      return await gestionUser.getUsuarioEspecifico(usuarioRe);
     } catch (e) {
-      return Usuario(
-          id: '10', cedula: '100202', clave: '10505', cuenta: '50505');
+      return Usuario(cedula: '100202', clave: '10505', correo: '50505');
     }
   }
 
@@ -53,5 +52,4 @@ class UsuarioController extends GetxController {
       return 'Error al eliminar el Usuario';
     }
   }
-
 }

@@ -22,17 +22,17 @@ class UsuarioService extends CrudProvider<Usuario> {
     }
   }
 
-   Future<Usuario> getUsuarioId(Usuario usuarioRe) async {
+   Future<Usuario> getUsuarioEspecifico(Usuario usuarioRe) async {
     try {
       Map<String, dynamic> usuarioVeri =
-          await busquedaPersonalizada(usuarioRe, 'getUserConId');
+          await busquedaPersonalizada(usuarioRe, 'getUsuarioEspecifico');
 
       Usuario usuario = Usuario.fromJson(usuarioVeri);
 
       return usuario;
     } catch (e) {
-      print(' el error es  $e');
-      return Usuario(cedula:'1065' ,clave:'1234' ,cuenta:'1452' ,id:'200' );
+ 
+      return Usuario(cedula:'1065' ,clave:'1234' ,correo:'1452' );
     }
   }
 
