@@ -48,23 +48,23 @@ class _LoginState extends State<Login> {
         onPressed: () {
           print('boton de recuperar contraseña');
         },
-<<<<<<< HEAD
-        child: const Text('¿Olvidastes la contraseña?',
-=======
         child: Text('¿Olvidastes la contraseña?',
+            style: TextStyle(color: Colors.white)),
+      ),
     );
+  }
 
   Widget textoinicarsesion() {
-<<<<<<< HEAD
-    return const Padding(
-      padding: EdgeInsets.all(20.0),
-=======
     return Padding(
       padding: const EdgeInsets.all(20.0),
->>>>>>> 2e1885980043156a74dc70922b6175dc212e620b
       child: Text(
+        'Iniciar Sesión',
+        style: TextStyle(
+          color: Colors.white,
+          fontSize: 30,
           fontWeight: FontWeight.bold,
         ),
+      ),
     );
   }
 
@@ -72,38 +72,11 @@ class _LoginState extends State<Login> {
     return Padding(
       padding: const EdgeInsets.all(20.0),
       child: TextField(
-<<<<<<< HEAD
-        style: const TextStyle(color: Colors.white),
-        decoration: InputDecoration(
-          prefixIcon: const Icon(Icons.lock, color: Colors.white),
-          hintText: 'Clave',
-          hintStyle: const TextStyle(
-=======
         style: TextStyle(color: Colors.white),
         decoration: InputDecoration(
           prefixIcon: Icon(Icons.lock, color: Colors.white),
           hintText: 'Clave',
           hintStyle: TextStyle(
->>>>>>> 2e1885980043156a74dc70922b6175dc212e620b
-    );
-  }
-
-  Widget inputcuenta() {
-    return Padding(
-      child: TextField(
-<<<<<<< HEAD
-        style: const TextStyle(color: Colors.white),
-        decoration: InputDecoration(
-          prefixIcon: const Icon(Icons.person, color: Colors.white),
-          hintText: 'Cuenta',
-          hintStyle: const TextStyle(
-=======
-        style: TextStyle(color: Colors.white),
-        decoration: InputDecoration(
-          prefixIcon: Icon(Icons.person, color: Colors.white),
-          hintText: 'Cuenta',
-          hintStyle: TextStyle(
->>>>>>> 2e1885980043156a74dc70922b6175dc212e620b
             color: Colors.white,
           ),
           border: OutlineInputBorder(
@@ -112,24 +85,43 @@ class _LoginState extends State<Login> {
         ),
       ),
     );
+  }
+
+  Widget inputcuenta() {
+    return Padding(
+      padding: const EdgeInsets.all(20.0),
+      child: TextField(
+        style: TextStyle(color: Colors.white),
+        decoration: InputDecoration(
+          prefixIcon: Icon(Icons.person, color: Colors.white),
+          hintText: 'Cuenta',
+          hintStyle: TextStyle(
+            color: Colors.white,
+          ),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget botoninicarsesion() {
+    return Padding(
+      padding: const EdgeInsets.all(20.0),
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
           backgroundColor: Colors.blue[800],
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20),
           ),
-<<<<<<< HEAD
-=======
           padding: EdgeInsets.symmetric(horizontal: 25, vertical: 5),
->>>>>>> 2e1885980043156a74dc70922b6175dc212e620b
         ),
         onPressed: () {
-          // Navegación a otra pantalla
+          
           Navigator.pushReplacementNamed(context, 'botones');
         },
-<<<<<<< HEAD
-        child: const Text('Iniciar Sesión',style: TextStyle(color: Colors.white),),
-=======
         child: Text('Iniciar Sesión',style: TextStyle(color: Colors.white),),
->>>>>>> 2e1885980043156a74dc70922b6175dc212e620b
       ),
     );
   }
