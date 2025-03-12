@@ -1,0 +1,2 @@
+C:/Users/Zeus/Documents/Ingenieria de Sistemas/Octavo Semestre/IE/Econmica-Front-main/android/app/.cxx/Debug/2s58305x/armeabi-v7a/CMakeFiles/edit_cache.dir
+C:/Users/Zeus/Documents/Ingenieria de Sistemas/Octavo Semestre/IE/Econmica-Front-main/android/app/.cxx/Debug/2s58305x/armeabi-v7a/CMakeFiles/rebuild_cache.dir

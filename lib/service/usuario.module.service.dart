@@ -31,8 +31,8 @@ class UsuarioService extends CrudProvider<Usuario> {
 
       return usuario;
     } catch (e) {
- 
-      return Usuario(cedula:'1065' ,clave:'1234' ,correo:'1452' );
+      print(' el error es  $e');
+      return Usuario(cedula: '101014',correo: '123445',clave: '112345' );
     }
   }
 
