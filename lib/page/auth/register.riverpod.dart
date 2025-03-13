@@ -13,7 +13,7 @@ class Registro_User extends StatefulWidget {
 class Registro_UserState extends State<Registro_User> {
   UsuarioController gestionUsuarios = UsuarioController();
 
-  TextEditingController user_Correo = TextEditingController();
+  TextEditingController user_Email = TextEditingController();
   TextEditingController user_Cedula = TextEditingController();
   TextEditingController user_Clave = TextEditingController();
 
@@ -164,7 +164,7 @@ class Registro_UserState extends State<Registro_User> {
                                   hintStyle: TextStyle(color: Colors.white),
                                   hintText: "Correo Electronico",
                                 ),
-                                controller: user_Correo,
+                                controller: user_Email,
                               )),
                             ],
                           ),
@@ -213,38 +213,36 @@ class Registro_UserState extends State<Registro_User> {
   }
 
   void _register(BuildContext context, Usuario usuario) {
-    String cedula = user_Cedula.text.trim();
-    String clave = user_Clave.text.trim();
-    String correo = user_Correo.text.trim();
+    String Cedula = user_Cedula.text.trim();
+    String Clave = user_Clave.text.trim();
+    String Correo = user_Email.text.trim();
 
-    
     RegExp emailRegex =
         RegExp(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$');
 
     // Validaciones
-    if (cedula.isEmpty || clave.isEmpty || correo.isEmpty) {
+    if (Cedula.isEmpty || Clave.isEmpty || Correo.isEmpty) {
       _mostrarError(context, 'Todos los campos son obligatorios');
       return;
     }
 
-    if (!emailRegex.hasMatch(correo)) {
+    if (!emailRegex.hasMatch(Correo)) {
       _mostrarError(context, 'Ingrese un correo válido');
       return;
     }
 
-    if (clave.length < 6) {
+    if (Clave.length < 6) {
       _mostrarError(context, 'La clave debe tener al menos 6 caracteres');
       return;
     }
 
-    usuario.cedula = cedula;
-    usuario.clave = clave;
-    usuario.correo = correo;
+    usuario.Cedula = Cedula;
+    usuario.Clave = Clave;
+    usuario.Email = Correo;
 
     gestionUsuarios.registrarUser(usuario);
   }
 
-// Función para mostrar mensajes de error en un AlertDialog
   void _mostrarError(BuildContext context, String mensaje) {
     showDialog(
       context: context,
@@ -268,9 +266,9 @@ class Registro_UserState extends State<Registro_User> {
 
   void registro(BuildContext context) {
     Usuario usuario = Usuario(
-        cedula: user_Cedula.text,
-        clave: user_Clave.text,
-        correo: user_Correo.text);
+        Email: user_Email.text,
+        Cedula: user_Cedula.text,
+        Clave: user_Clave.text);
 
     _register(context, usuario);
   }

@@ -1,3 +1,3 @@
 class Environment {
-  static const baseUrl = 'https://transifoxbackend.onrender.com';
+  static const baseUrl = 'https://transifoxbackend.onrender.com/api';
 }
