@@ -1,29 +1,31 @@
 //model usuario
-class Usuario{
-  late String cedula;
-  late String clave;
-  late String correo;
+class Usuario {
+  late String Email;
+  late String Cedula;
+  late String Clave;
 
+  Usuario({
+    required this.Email,
+    required this.Cedula,
+    required this.Clave,
+  });
 
-  Usuario({required this.cedula, required this.clave, required this.correo,});
-
-  Usuario.fromJson(Map<String, dynamic> json){
-    cedula = json['nombre'];
-    clave = json['clave'];
-    correo = json['correo'];
-    
+  Usuario.fromJson(Map<String, dynamic> json) {
+    Email = json['Email'];
+    Cedula = json['Cedula'];
+    Clave = json['Clave'];
   }
 
-  Map<String, dynamic> toJson(){
+  Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['cedula'] = this.cedula;
-    data['clave'] = this.clave;
-    data['correo'] = this.correo;
+    data['Email'] = this.Email;
+    data['Cedula'] = this.Cedula;
+    data['Clave'] = this.Clave;
     return data;
   }
 
   @override
   String toString() {
-    return 'Usuario{idUsuario: $cedula, }';
+    return 'Usuario{idUsuario: $Cedula, }';
   }
 }

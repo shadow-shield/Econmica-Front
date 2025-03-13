@@ -10,8 +10,7 @@ class CrudProvider<T> {
     try {
       final url = '$baseUrl/$endpoint';
 
-      
-      print(jsonEncode(body));
+      print('aqui esta la respuesta si va o no ${jsonEncode(body)}');
       final response = await http.post(
         Uri.parse(url),
         headers: {'Content-Type': 'application/json'},
@@ -42,12 +41,12 @@ class CrudProvider<T> {
 
   Future<String> actualizar(dynamic body, String endpoint) async {
     final url = '$baseUrl/$endpoint';
-  
-   final response = await http.put(
-        Uri.parse(url),
-        headers: {'Content-Type': 'application/json'},
-        body: jsonEncode(body),
-      );
+
+    final response = await http.put(
+      Uri.parse(url),
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode(body),
+    );
     return response.body;
   }
 
@@ -70,18 +69,16 @@ class CrudProvider<T> {
     }
   }
 
+  Future<dynamic> consultarDinamico(String endpoint) async {
+    final url = '$baseUrl/$endpoint';
+    final response = await http.get(Uri.parse(url));
 
-Future<dynamic> consultarDinamico(String endpoint) async {
-  final url = '$baseUrl/$endpoint';
-  final response = await http.get(Uri.parse(url));
+    if (response.statusCode == 200) {
+      final dynamic decodedData = jsonDecode(response.body);
 
-  if (response.statusCode == 200) {
-    final dynamic decodedData = jsonDecode(response.body);
-
-    return decodedData;
-  } else {
-    throw Exception('Error al consultar datos');
+      return decodedData;
+    } else {
+      throw Exception('Error al consultar datos');
+    }
   }
-}
-
 }

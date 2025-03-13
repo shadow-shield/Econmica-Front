@@ -33,7 +33,7 @@ class UsuarioController extends GetxController {
     try {
       return await gestionUser.getUsuarioEspecifico(usuarioRe);
     } catch (e) {
-      return Usuario(cedula: '100202', clave: '10505', correo: '50505');
+      return Usuario(Cedula: '100202', Clave: '10505', Email: '50505');
     }
   }
 
