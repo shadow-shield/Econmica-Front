@@ -58,28 +58,63 @@ class _Interes_simpleState extends State<Interes_simple> {
                       children: [
                         Padding(
                           padding: EdgeInsets.symmetric(horizontal: 20),
-                          child: DropdownButton<String>(
-                            value: selectedCalculation,
-                            hint: Text('Seleccione qué calcular'),
-                            onChanged: (String? newValue) {
-                              setState(() {
-                                selectedCalculation = newValue;
-                              });
-                            },
-                            items: [
-                              'Monto',
-                              'Capital',
-                              'Tasa de interes',
-                              'Tiempo',
-                              'Interes Simple'
-                            ].map<DropdownMenuItem<String>>((String value) {
-                              return DropdownMenuItem<String>(
-                                value: value,
-                                child: Text(value),
-                              );
-                            }).toList(),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(12),
+                              border: Border.all(color: Colors.green, width: 2),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black26,
+                                  blurRadius: 5,
+                                  offset: Offset(2, 2),
+                                ),
+                              ],
+                            ),
+                            padding: EdgeInsets.symmetric(horizontal: 16),
+                            child: DropdownButtonHideUnderline(
+                              child: DropdownButton<String>(
+                                value: selectedCalculation,
+                                hint: Text(
+                                  'Seleccione qué calcular',
+                                  style: TextStyle(
+                                      color: Colors.green,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                icon: Icon(Icons.arrow_drop_down,
+                                    color: Colors.green, size: 30),
+                                style: TextStyle(
+                                    color: Colors.black, fontSize: 16),
+                                isExpanded: true,
+                                onChanged: (String? newValue) {
+                                  setState(() {
+                                    selectedCalculation = newValue;
+                                  });
+                                },
+                                items: [
+                                  'Monto',
+                                  'Capital',
+                                  'Tasa de interes',
+                                  'Tiempo',
+                                  'Interes Simple'
+                                ].map<DropdownMenuItem<String>>((String value) {
+                                  return DropdownMenuItem<String>(
+                                    value: value,
+                                    child: Padding(
+                                      padding:
+                                          EdgeInsets.symmetric(vertical: 8),
+                                      child: Text(
+                                        value,
+                                        style: TextStyle(fontSize: 16),
+                                      ),
+                                    ),
+                                  );
+                                }).toList(),
+                              ),
+                            ),
                           ),
                         ),
+                        SizedBox(height: 15),
                         SizedBox(
                           width: 180,
                           child: TextField(
