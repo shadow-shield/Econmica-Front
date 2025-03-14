@@ -22,6 +22,13 @@ class _AnualidadState extends State<Anualidad> {
       ],
     ),
   );
+  String? selectedCalculation;
+
+  final TextEditingController tasaanualidadController = TextEditingController();
+  final TextEditingController periodosanulidadController =
+      TextEditingController();
+  final TextEditingController anualidadController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -62,10 +69,10 @@ class _AnualidadState extends State<Anualidad> {
                   padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
                   child: Text('Valor Presente  : ',
                       style: TextStyle(
-                            fontWeight: FontWeight.w300,
-                            color: Colors.pink,
-                            fontStyle: FontStyle.normal,
-                            fontFamily: 'Roboto')),
+                          fontWeight: FontWeight.w300,
+                          color: Colors.pink,
+                          fontStyle: FontStyle.normal,
+                          fontFamily: 'Roboto')),
                   margin: EdgeInsets.only(bottom: 80),
                   height: 50,
                   width: 230,
@@ -74,29 +81,44 @@ class _AnualidadState extends State<Anualidad> {
                       borderRadius: BorderRadius.circular(40)),
                 ),
                 Row(
-                  mainAxisAlignment:
-                      MainAxisAlignment.center, // Centra los elementos
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     SizedBox(
-                      width: 180,
-                      child: TextfieldStyle(
-                        color: Colors.pink,
-                        icon: Container(
-                            padding: EdgeInsets.all(6),
-                            child: Image.asset('assets/tasanu.png', width: 1)),
-                        labelText: 'Tasa Anualidad',
-                      ),
-                    ),
-                    SizedBox(width: 10),
-                    SizedBox(
-                      width: 180,
-                      child: TextfieldStyle(
-                        color: Colors.pink,
-                        icon: Container(
-                            padding: EdgeInsets.all(6),
-                            child:
-                                Image.asset('assets/tiempoanu.png', width: 1)),
-                        labelText: 'Peridos',
+                      width: 360,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SizedBox(
+                            width: 140,
+                            child: TextField(
+                              controller: tasaanualidadController,
+                              decoration: InputDecoration(
+                                labelText: 'Tasa Anualidad',
+                                prefixIcon: Padding(
+                                  padding: EdgeInsets.all(6),
+                                  child: Image.asset('assets/interescom.png',
+                                      width: 1),
+                                ),
+                              ),
+                            ),
+                          ),
+                          SizedBox(width: 20),
+                          SizedBox(
+                            width: 140,
+                            child: TextField(
+                              controller: periodosanulidadController,
+                              enabled: selectedCalculation != 'Tiempo',
+                              decoration: InputDecoration(
+                                labelText: 'Tiempo',
+                                prefixIcon: Padding(
+                                  padding: EdgeInsets.all(6),
+                                  child: Image.asset('assets/tiempocom.png',
+                                      width: 1),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ],
@@ -107,44 +129,20 @@ class _AnualidadState extends State<Anualidad> {
                   children: [
                     SizedBox(
                       width: 180,
-                      child: TextfieldStyle(
-                        color: Colors.pink,
-                        icon: Container(
+                      child: TextField(
+                        controller: anualidadController,
+                        enabled: selectedCalculation != 'Anualidades',
+                        decoration: InputDecoration(
+                          labelText: 'Anualidades',
+                          prefixIcon: Padding(
                             padding: EdgeInsets.all(6),
-                            child: Image.asset('assets/anu.png', width: 1)),
-                        labelText: 'Anualidad',
+                            child:
+                                Image.asset('assets/tiempocom.png', width: 1),
+                          ),
+                        ),
                       ),
                     ),
                   ],
-                ),
-                SizedBox(height: 20),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 20),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text('Frecuentacia Capitalizacion',
-                              style: TextStyle(fontWeight: FontWeight.w300)),
-                          SizedBox(height: 10),
-                          DropMenuAnualidad(color: Colors.pink),
-                        ],
-                      ),
-                      SizedBox(width: 20),
-                      Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text('Frecuenca de Pago',
-                              style: TextStyle(fontWeight: FontWeight.w300)),
-                          SizedBox(height: 10),
-                          DropMenuAnualidad(color: Colors.pink),
-                        ],
-                      ),
-                    ],
-                  ),
                 ),
                 SizedBox(height: 20),
                 ElevatedButton(
