@@ -63,7 +63,7 @@ class CardTable extends StatelessWidget {
                             color: Colors.yellow[800]!,
                             image: Image.asset('assets/incompuesto.png'),
                             text: 'Interés Compuesto',
-                            ruta: Interes_compuesto(),
+                            ruta: InteresCompuesto(),
                           ),
                         ),
                         ZoomIn(

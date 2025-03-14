@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
         'tasa': (BuildContext context) => const Tasa(),
         'registro': (BuildContext context) => Registro_User(),
         'interesS': (BuildContext context) => const Interes_simple(),
-        'interesC': (BuildContext context) => const Interes_compuesto(),
+        'interesC': (BuildContext context) => const InteresCompuesto(),
         'anualida': (BuildContext context) => const Anualidad()
       },
     );

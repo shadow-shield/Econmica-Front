@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+
 class DropdownMenuItemButton extends StatefulWidget {
   final Color color;
 
@@ -10,12 +11,12 @@ class DropdownMenuItemButton extends StatefulWidget {
 }
 
 class _DropdownMenuItemButtonState extends State<DropdownMenuItemButton> {
-  String? selectedValue; 
+  String? selectedValue;
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 140, 
+      width: 160,
       child: DropdownButtonFormField<String>(
         decoration: InputDecoration(
           border: OutlineInputBorder(
@@ -59,6 +60,12 @@ class _DropdownMenuItemButtonState extends State<DropdownMenuItemButton> {
           DropdownMenuItem(
               value: 'opcion5',
               child: Text('Diario', style: TextStyle(color: widget.color))),
+          DropdownMenuItem(
+              value: 'opcion6',
+              child: Text('Trismestral', style: TextStyle(color: widget.color))),
+          DropdownMenuItem(
+              value: 'opcion7',
+              child: Text('Cuatrimestral', style: TextStyle(color: widget.color)))
         ],
       ),
     );
