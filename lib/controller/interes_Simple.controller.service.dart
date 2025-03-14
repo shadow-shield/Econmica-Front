@@ -4,12 +4,12 @@ import 'package:transifox/model/interes_Simple.model.module.dart';
 import 'package:transifox/service/interes_simple.module.service.dart';
 
 
-class UsuarioController extends GetxController {
-  InteresSimpleService gestionUser = InteresSimpleService();
+class IntereSimpleController extends GetxController {
+  InteresSimpleService gestionSimple = InteresSimpleService();
 
   Future<String> registrarInteres(InteresSimple interessimpleRe) async {
     try {
-      return await gestionUser.registrarInteresSimple(interessimpleRe);
+      return await gestionSimple.registrarInteresSimple(interessimpleRe);
     } catch (e) {
       return 'Erro al registro Interes Simple ${e}';
     }

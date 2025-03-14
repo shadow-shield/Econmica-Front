@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:transifox/widgets/Dropdowbutton.riverpod.dart';
 import 'package:transifox/widgets/bottonavigator.riverpod.dart';
-import 'package:transifox/widgets/formato_fecha.riverpod.dart';
 
 class InteresCompuesto extends StatefulWidget {
   const InteresCompuesto({super.key});
@@ -29,6 +28,7 @@ class _InteresCompuestoState extends State<InteresCompuesto> {
   final TextEditingController capitalController = TextEditingController();
   final TextEditingController montoController = TextEditingController();
   final TextEditingController tiempoController = TextEditingController();
+  final TextEditingController interesCompuestoController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -65,7 +65,7 @@ class _InteresCompuestoState extends State<InteresCompuesto> {
                                   color: Colors.yellow[800]!, width: 2),
                               boxShadow: [
                                 BoxShadow(
-                                  color: Colors.black26,
+                                  color: Colors.red,
                                   blurRadius: 5,
                                   offset: Offset(2, 2),
                                 ),
@@ -96,6 +96,7 @@ class _InteresCompuestoState extends State<InteresCompuesto> {
                                   'Capital',
                                   'Monto Compuesto',
                                   'Tiempo',
+                                  'Interes Simple'
                                 ].map<DropdownMenuItem<String>>((String value) {
                                   return DropdownMenuItem<String>(
                                     value: value,
@@ -113,7 +114,22 @@ class _InteresCompuestoState extends State<InteresCompuesto> {
                             ),
                           ),
                         ),
-                        SizedBox(height: 40),
+                        SizedBox(height: 20),
+                        SizedBox(
+                          width: 180,
+                          child: TextField(
+                            controller: interesCompuestoController,
+                            enabled: selectedCalculation != 'Interés' && selectedCalculation != 'Interés Compuesto',
+                            decoration: InputDecoration(
+                              labelText: 'Interés Compuesto',
+                              prefixIcon: Padding(
+                                padding: EdgeInsets.all(6),
+                                child: Image.asset('assets/incompuesto.png', width: 1),
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: 20),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -126,8 +142,7 @@ class _InteresCompuestoState extends State<InteresCompuesto> {
                                   labelText: 'Interés',
                                   prefixIcon: Padding(
                                     padding: EdgeInsets.all(6),
-                                    child: Image.asset('assets/interescom.png',
-                                        width: 1),
+                                    child: Image.asset('assets/interescom.png', width: 1),
                                   ),
                                 ),
                               ),
@@ -142,8 +157,7 @@ class _InteresCompuestoState extends State<InteresCompuesto> {
                                   labelText: 'Tiempo',
                                   prefixIcon: Padding(
                                     padding: EdgeInsets.all(6),
-                                    child: Image.asset('assets/tiempocom.png',
-                                        width: 1),
+                                    child: Image.asset('assets/tiempocom.png', width: 1),
                                   ),
                                 ),
                               ),
@@ -162,8 +176,7 @@ class _InteresCompuestoState extends State<InteresCompuesto> {
                                   labelText: 'Capital',
                                   prefixIcon: Padding(
                                     padding: EdgeInsets.all(6),
-                                    child: Image.asset('assets/capitalcom.png',
-                                        width: 1),
+                                    child: Image.asset('assets/capitalcom.png', width: 1),
                                   ),
                                 ),
                               ),
@@ -173,14 +186,12 @@ class _InteresCompuestoState extends State<InteresCompuesto> {
                               width: 180,
                               child: TextField(
                                 controller: montoController,
-                                enabled:
-                                    selectedCalculation != 'Monto Compuesto',
+                                enabled: selectedCalculation != 'Monto Compuesto',
                                 decoration: InputDecoration(
                                   labelText: 'Monto Compuesto',
                                   prefixIcon: Padding(
                                     padding: EdgeInsets.all(6),
-                                    child: Image.asset('assets/montocom.png',
-                                        width: 1),
+                                    child: Image.asset('assets/montocom.png', width: 1),
                                   ),
                                 ),
                               ),

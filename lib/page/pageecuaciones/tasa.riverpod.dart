@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:transifox/widgets/Dropdowbutton.riverpod.dart';
 import 'package:transifox/widgets/bottonavigator.riverpod.dart';
-import 'package:transifox/widgets/textfield.priverpod.dart';
 
 class Tasa extends StatefulWidget {
   const Tasa({super.key});
@@ -89,8 +88,8 @@ class _TasaState extends State<Tasa> {
                               labelText: 'Capital',
                               prefixIcon: Padding(
                                 padding: EdgeInsets.all(6),
-                                child: Image.asset('assets/capital.png',
-                                    width: 1),
+                                child:
+                                    Image.asset('assets/capital.png', width: 1),
                               ),
                             ),
                           ),
@@ -107,8 +106,7 @@ class _TasaState extends State<Tasa> {
                           labelText: 'Tiempo',
                           prefixIcon: Padding(
                             padding: EdgeInsets.all(6),
-                            child:
-                                Image.asset('assets/tiempo.png', width: 1),
+                            child: Image.asset('assets/tiempo.png', width: 1),
                           ),
                         ),
                       ),

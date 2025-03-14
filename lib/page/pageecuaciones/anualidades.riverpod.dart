@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:transifox/widgets/DropdowButtonAnualidad.riverpod.dart';
 import 'package:transifox/widgets/bottonavigator.riverpod.dart';
-import 'package:transifox/widgets/textfield.priverpod.dart';
+
 
 class Anualidad extends StatefulWidget {
   const Anualidad({super.key});
