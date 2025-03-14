@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:transifox/widgets/Dropdowbutton.riverpod.dart';
 import 'package:transifox/widgets/bottonavigator.riverpod.dart';
@@ -131,5 +133,44 @@ class _Interes_simpleState extends State<Interes_simple> {
             )
           ],
         ));
+  }
+
+
+  double CalcularTiempo(){
+
+      var periodo='Anual';
+      var formato='AÑO,MES,DIA';
+      var ano=4;
+      var mes=5;
+      var dias=20;
+      DateTime fechaEspecifica = DateTime(2025, 3, 13);
+      DateTime fechaEspecifica2 = DateTime(2026, 3, 13);
+
+
+        Duration diferencia = fechaEspecifica2.difference(fechaEspecifica);
+
+
+      if (periodo=='Anual') {
+
+        if (formato=='AÑO,MES,DIA'){
+
+          return (ano+(mes/12)+ (dias/360));
+  
+
+        }
+
+        else{
+
+           
+        }
+
+
+
+
+
+      }
+
+
+
   }
 }
