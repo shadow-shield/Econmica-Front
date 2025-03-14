@@ -2,11 +2,11 @@
 
 
 class InteresCompuesto {
-  late double Monto_Compuesto;
-  late double Capital;
-  late double Tasa_Interes;
-  late double Tiempo;
-  late double Interes_Compuesto;
+  late double? Monto_Compuesto;
+  late double? Capital;
+  late double? Tasa_Interes;
+  late double? Tiempo;
+  late double? Interes_Compuesto;
 
   InteresCompuesto({
     required this.Monto_Compuesto,
