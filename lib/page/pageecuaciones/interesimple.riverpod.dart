@@ -197,41 +197,45 @@ class _Interes_simpleState extends State<Interes_simple> {
   }
 
 
-CalcularTiempo(){
-
-      var periodo='Anual';
-      var formato='AÑO,MES,DIA';
-      var ano=4;
-      var mes=5;
-      var dias=20;
-      DateTime fechaEspecifica = DateTime(2025, 3, 13);
-      DateTime fechaEspecifica2 = DateTime(2026, 3, 13);
-
-
-        Duration diferencia = fechaEspecifica2.difference(fechaEspecifica);
-
-
-      if (periodo=='Anual') {
-
-        if (formato=='AÑO,MES,DIA'){
-
-         // return (ano+(mes/12)+ (dias/360));
+ double CalcularTiempo() {
+  var periodo = 'Trimestral'; // Cambia esto para probar diferentes períodos
+  var formato = 'AÑO,MES,DIA'; // Usa valores fijos si es este formato
+  var ano = 4;
+  var mes = 5;
+  var dias = 20;
   
+  DateTime fechaEspecifica = DateTime(2025, 3, 13);
+  DateTime fechaEspecifica2 = DateTime(2026, 3, 13);
 
-        }
+  Duration diferencia = fechaEspecifica2.difference(fechaEspecifica);
+  double tiempo;
 
-        else{
-
-           
-        }
-
-
-
-
-
-      }
-
-
-
+  // 🔹 Calcular tiempo base según el formato
+  if (formato == 'AÑO,MES,DIA') {
+    tiempo = ano + (mes / 12) + (dias / 360);
+  } else {
+    tiempo = diferencia.inDays / 365;
   }
+
+  // 🔹 Ajustar tiempo según el período
+  switch (periodo) {
+    case 'Anual':
+      return tiempo;
+    case 'Semestral':
+      return tiempo * 2; // Un año tiene 2 semestres
+    case 'Trimestral':
+      return tiempo * 4; // Un año tiene 4 trimestres
+    case 'Bimestral':
+      return tiempo * 6; // Un año tiene 6 bimestres
+    case 'Mensual':
+      return tiempo * 12; // Un año tiene 12 meses
+    case 'Semanal':
+      return tiempo * 52.14; // Un año tiene aprox. 52.14 semanas
+    case 'Diario':
+      return tiempo * 365; // Convertimos a días
+    default:
+      throw Exception("Período no válido");
+  }
+}
+
 }
