@@ -32,6 +32,7 @@ class _LoginState extends State<Login> {
                 inputclave(),
                 botoninicarsesion(),
                 recuContrasena(),
+                registerUser()
               ],
             )
             // Aquí va el contenido del login
@@ -43,13 +44,35 @@ class _LoginState extends State<Login> {
 
   Widget recuContrasena() {
     return Padding(
-      padding: const EdgeInsets.all(20.0),
+      padding: const EdgeInsets.all(0),
       child: TextButton(
         onPressed: () {
           print('boton de recuperar contraseña');
         },
         child: Text('¿Olvidastes la contraseña?',
             style: TextStyle(color: Colors.white)),
+      ),
+    );
+  }
+
+  Widget registerUser() {
+    return Padding(
+      padding: const EdgeInsets.all(0),
+      child: TextButton(
+        onPressed: () {
+         Navigator.pushReplacementNamed(context, 'registro');
+        },
+        style: TextButton.styleFrom(
+          foregroundColor:
+              Colors.blue, 
+        ),
+        child: Text(
+          'Registrarse',
+          style: TextStyle(
+            color: Colors.white, 
+            decoration: TextDecoration.underline, 
+          ),
+        ),
       ),
     );
   }
@@ -118,10 +141,12 @@ class _LoginState extends State<Login> {
           padding: EdgeInsets.symmetric(horizontal: 25, vertical: 5),
         ),
         onPressed: () {
-          
           Navigator.pushReplacementNamed(context, 'botones');
         },
-        child: Text('Iniciar Sesión',style: TextStyle(color: Colors.white),),
+        child: Text(
+          'Iniciar Sesión',
+          style: TextStyle(color: Colors.white),
+        ),
       ),
     );
   }
