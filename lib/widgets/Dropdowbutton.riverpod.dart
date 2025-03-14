@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 // 🔹 Global para almacenar el valor seleccionado
-final ValueNotifier<String?> periodoNotifier = ValueNotifier<String?>(null);
+ValueNotifier<String?> periodoNotifier = ValueNotifier<String?>(null);
 
 class DropdownMenuItemButton extends StatelessWidget {
   final Color color;
@@ -30,16 +30,18 @@ class DropdownMenuItemButton extends StatelessWidget {
             iconEnabledColor: color,
             value: selectedValue,
             onChanged: (String? newValue) {
-              periodoNotifier.value = newValue; 
+              if (newValue != null) {
+                periodoNotifier.value = newValue;
+              }
             },
             items: [
-              DropdownMenuItem(value: 'Anual', child: Text('Anual',style: TextStyle(color: color),)),
-              DropdownMenuItem(value: 'Semestral', child: Text('Semestral',style: TextStyle(color: color))),
-              DropdownMenuItem(value: 'Mensual', child: Text('Mensual',style: TextStyle(color: color))),
-              DropdownMenuItem(value: 'Bimestral', child: Text('Bimestral',style: TextStyle(color: color))),
-              DropdownMenuItem(value: 'Cuatrimestral', child: Text('Cuatrimestral',style: TextStyle(color: color))),
-              DropdownMenuItem(value: 'Semanal', child: Text('Semanal',style: TextStyle(color: color))),
-              DropdownMenuItem(value: 'Diario', child: Text('Diario',style: TextStyle(color: color))),
+              DropdownMenuItem(value: 'Anual', child: Text('Anual', style: TextStyle(color: color))),
+              DropdownMenuItem(value: 'Semestral', child: Text('Semestral', style: TextStyle(color: color))),
+              DropdownMenuItem(value: 'Mensual', child: Text('Mensual', style: TextStyle(color: color))),
+              DropdownMenuItem(value: 'Bimestral', child: Text('Bimestral', style: TextStyle(color: color))),
+              DropdownMenuItem(value: 'Cuatrimestral', child: Text('Cuatrimestral', style: TextStyle(color: color))),
+              DropdownMenuItem(value: 'Semanal', child: Text('Semanal', style: TextStyle(color: color))),
+              DropdownMenuItem(value: 'Diario', child: Text('Diario', style: TextStyle(color: color))),
             ],
           );
         },

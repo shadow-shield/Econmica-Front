@@ -2,11 +2,11 @@
 
 
 class InteresSimple {
-  late double Monto;
-  late double Capital;
-  late double Tasa_Interes;
-  late double Tiempo;
-  late double Interes_Simple;
+  late double? Monto;
+  late double? Capital;
+  late double? Tasa_Interes;
+  late double? Tiempo;
+  late double? Interes_Simple;
 
   InteresSimple({
     required this.Monto,

@@ -220,7 +220,9 @@ class _Interes_simpleState extends State<Interes_simple> {
                     SizedBox(height: 30),
                     FechaSelector(),
                     SizedBox(height: 20),
-                    DropdownMenuItemButton(color: Colors.green),
+                    DropdownMenuItemButton(
+                      color: Colors.green,
+                    ),
                     SizedBox(height: 20),
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
@@ -241,8 +243,10 @@ class _Interes_simpleState extends State<Interes_simple> {
 
   double CalcularTiempo() {
     // 🔥 Acceder a los valores almacenados en los ValueNotifier
-    String? periodo = miNotifiers.periodoNotifier.value;
+    String? periodo = periodoNotifier.value;
     String? formatoActual = formatoSeleccionado.value;
+
+    print(periodo);
 
     // Extraer valores de la fecha ingresada
     String? anioStr = valoresFechas.value['anio'];
@@ -293,6 +297,8 @@ class _Interes_simpleState extends State<Interes_simple> {
         return tiempo * 2;
       case 'Trimestral':
         return tiempo * 4;
+       case 'Cuatrimestral':
+       return tiempo * 3; // 
       case 'Bimestral':
         return tiempo * 6;
       case 'Mensual':
@@ -308,21 +314,21 @@ class _Interes_simpleState extends State<Interes_simple> {
 
   void calcularSimple() async {
     try {
-      double capital = double.tryParse(capitalController.text.trim()) ?? 0.0;
-      double interesSimple =
-          double.tryParse(interesimpleController.text.trim()) ?? 0.0;
-      double monto = double.tryParse(montoController.text.trim()) ?? 0.0;
-      double tasaInteres = double.tryParse(tasaController.text.trim()) ?? 0.0;
-      double tiempo = double.tryParse(tiempoController.text.trim()) ?? 0.0;
+      reiniciarCampos(selectedCalculation!);
 
-      if (capital == 0.0 || tasaInteres == 0.0 || tiempo == 0.0) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-              content: Text('Por favor ingrese valores numéricos válidos')),
-        );
-        return;
+      double? capital = double.tryParse(capitalController.text.trim());
+      double? interesSimple =
+          double.tryParse(interesimpleController.text.trim());
+      double? monto = double.tryParse(montoController.text.trim());
+      double? tasaInteres = double.tryParse(tasaController.text.trim());
+      double? tiempo = CalcularTiempo();
+
+      if (tiempo != null) {
+        tiempo =
+            double.parse(tiempo.toStringAsFixed(2)); // Redondea a 2 decimales
       }
 
+      // Se permite que los valores sean null
       InteresSimple interesSimpleObj = InteresSimple(
         Capital: capital,
         Interes_Simple: interesSimple,
@@ -331,15 +337,55 @@ class _Interes_simpleState extends State<Interes_simple> {
         Tiempo: tiempo,
       );
 
-      await gestionSimple.registrarInteres(interesSimpleObj);
+      Map<String, dynamic> resultado =
+          await gestionSimple.registrarInteres(interesSimpleObj);
+
+      print(resultado);
 
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Interés registrado con éxito')),
+        SnackBar(content: Text('Interés Calculado con éxito')),
       );
+
+      // Evita asignar null a los controladores
+      montoController.text = resultado["Monto"]?.toString() ?? "";
+      interesimpleController.text =
+          resultado["Interes_Simple"]?.toString() ?? "";
+      capitalController.text = resultado["Capital"]?.toString() ?? "";
+      tasaController.text = resultado["Tasa_Interes"]?.toString() ?? "";
+      tiempoController.text = resultado["Tiempo"]?.toString() ?? "";
     } catch (e) {
+      print(e);
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Error al registrar interés: $e')),
       );
+    }
+  }
+
+  void reiniciarCampos(String Seleccion) {
+    if (Seleccion == 'Monto') {
+      tiempoController.text='';
+      montoController.text = '';
+      interesimpleController.text = '0.0'.toString();
+    }
+
+    if (Seleccion == 'Capital') {
+      capitalController.clear();
+      montoController.text = 0.toString();
+    }
+
+    if (Seleccion == 'Tasa de interes') {
+      tasaController.clear();
+      montoController.text = 0.toString();
+    }
+
+    if (Seleccion == 'Tiempo') {
+      tiempoController.clear();
+      montoController.text = 0.toString();
+    }
+
+    if (Seleccion == 'Interes Simple') {
+      interesimpleController.clear();
+      montoController.text = '';
     }
   }
 }

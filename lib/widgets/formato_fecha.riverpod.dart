@@ -9,7 +9,6 @@ ValueNotifier<Map<String, String?>> valoresFechas = ValueNotifier<Map<String, St
   'fechaInicio': null,
   'fechaFin': null,
 });
-ValueNotifier<String?> periodoNotifier = ValueNotifier<String?>(null);
 
 class FechaSelector extends StatefulWidget {
   @override
@@ -71,26 +70,6 @@ class _FechaSelectorState extends State<FechaSelector> {
               );
             }
             return SizedBox.shrink();
-          },
-        ),
-        const SizedBox(height: 20),
-        // 🔹 Selector de período
-        ValueListenableBuilder<String?>(
-          valueListenable: periodoNotifier,
-          builder: (context, selectedPeriod, child) {
-            return DropdownButtonFormField<String>(
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: 'Período',
-              ),
-              value: selectedPeriod,
-              onChanged: (String? newValue) {
-                periodoNotifier.value = newValue;
-              },
-              items: ['Anual', 'Semestral', 'Trimestral', 'Bimestral', 'Mensual', 'Semanal', 'Diario']
-                  .map((value) => DropdownMenuItem(value: value, child: Text(value)))
-                  .toList(),
-            );
           },
         ),
       ],
