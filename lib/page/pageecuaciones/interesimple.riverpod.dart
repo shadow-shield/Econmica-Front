@@ -1,10 +1,7 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:transifox/widgets/Dropdowbutton.riverpod.dart';
 import 'package:transifox/widgets/bottonavigator.riverpod.dart';
 import 'package:transifox/widgets/formato_fecha.riverpod.dart';
-import 'package:transifox/widgets/textfield.priverpod.dart';
 
 class Interes_simple extends StatefulWidget {
   const Interes_simple({super.key});
@@ -88,7 +85,8 @@ class _Interes_simpleState extends State<Interes_simple> {
                           child: TextField(
                             controller: interesimpleController,
                             enabled: selectedCalculation != 'Monto' &&
-                                selectedCalculation != 'Interes Simple',
+                                selectedCalculation != 'Interes Simple' &&
+                                selectedCalculation != 'Tiempo',
                             decoration: InputDecoration(
                               labelText: 'Interes Simple',
                               prefixIcon: Padding(
@@ -100,8 +98,7 @@ class _Interes_simpleState extends State<Interes_simple> {
                           ),
                         ),
                         Row(
-                          mainAxisAlignment:
-                              MainAxisAlignment.center, // Centra los elementos
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             SizedBox(
                               width: 180,
@@ -109,7 +106,8 @@ class _Interes_simpleState extends State<Interes_simple> {
                                 controller: montoController,
                                 enabled:
                                     selectedCalculation != 'Interes Simple' &&
-                                        selectedCalculation != 'Monto',
+                                        selectedCalculation != 'Monto' &&
+                                        selectedCalculation != 'Tiempo',
                                 decoration: InputDecoration(
                                   labelText: 'Monto',
                                   prefixIcon: Padding(
@@ -163,7 +161,11 @@ class _Interes_simpleState extends State<Interes_simple> {
                           width: 180,
                           child: TextField(
                             controller: tiempoController,
-                            enabled: selectedCalculation != 'Tiempo',
+                            enabled: selectedCalculation != 'Tiempo' &&
+                                selectedCalculation != 'Interes Simple' &&
+                                selectedCalculation != 'Monto' &&
+                                selectedCalculation != 'Capital' &&
+                                selectedCalculation != 'Tasa de interes',
                             decoration: InputDecoration(
                               labelText: 'Tiempo',
                               prefixIcon: Padding(
@@ -196,42 +198,21 @@ class _Interes_simpleState extends State<Interes_simple> {
         ));
   }
 
+  CalcularTiempo() {
+    var periodo = 'Anual';
+    var formato = 'AÑO,MES,DIA';
+    var ano = 4;
+    var mes = 5;
+    var dias = 20;
+    DateTime fechaEspecifica = DateTime(2025, 3, 13);
+    DateTime fechaEspecifica2 = DateTime(2026, 3, 13);
 
-CalcularTiempo(){
+    Duration diferencia = fechaEspecifica2.difference(fechaEspecifica);
 
-      var periodo='Anual';
-      var formato='AÑO,MES,DIA';
-      var ano=4;
-      var mes=5;
-      var dias=20;
-      DateTime fechaEspecifica = DateTime(2025, 3, 13);
-      DateTime fechaEspecifica2 = DateTime(2026, 3, 13);
-
-
-        Duration diferencia = fechaEspecifica2.difference(fechaEspecifica);
-
-
-      if (periodo=='Anual') {
-
-        if (formato=='AÑO,MES,DIA'){
-
-         // return (ano+(mes/12)+ (dias/360));
-  
-
-        }
-
-        else{
-
-           
-        }
-
-
-
-
-
-      }
-
-
-
+    if (periodo == 'Anual') {
+      if (formato == 'AÑO,MES,DIA') {
+        // return (ano+(mes/12)+ (dias/360));
+      } else {}
+    }
   }
 }

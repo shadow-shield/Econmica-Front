@@ -54,7 +54,10 @@ class _FechaSelectorState extends State<FechaSelector> {
             items: ['Año, Mes, Día', 'Fecha Inicio - Fecha Fin']
                 .map((String value) => DropdownMenuItem<String>(
                       value: value,
-                      child: Text(value,style: TextStyle(color: Colors.green),),
+                      child: Text(
+                        value,
+                        style: TextStyle(color: Colors.green),
+                      ),
                     ))
                 .toList(),
           ),
@@ -146,6 +149,7 @@ class _FechaSelectorState extends State<FechaSelector> {
                 width: 140,
                 child: TextField(
                   controller: fechaInicioController,
+                  readOnly: true, // Evita la edición manual
                   decoration: InputDecoration(
                     border: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.green),
@@ -163,14 +167,30 @@ class _FechaSelectorState extends State<FechaSelector> {
                     fillColor: Colors.white54,
                     labelText: 'Fecha inicio',
                     labelStyle: TextStyle(color: Colors.green),
+                    suffixIcon: Icon(Icons.calendar_today, color: Colors.green),
                   ),
+                  onTap: () async {
+                    DateTime? pickedDate = await showDatePicker(
+                      context: context,
+                      initialDate: DateTime.now(),
+                      firstDate: DateTime(2000),
+                      lastDate: DateTime(2100),
+                    );
+                    if (pickedDate != null) {
+                      setState(() {
+                        fechaInicioController.text =
+                            pickedDate.toLocal().toString().split(' ')[0];
+                      });
+                    }
+                  },
                 ),
               ),
-              SizedBox(width: 20,),
+              SizedBox(width: 20),
               SizedBox(
                 width: 140,
                 child: TextField(
                   controller: fechaFinController,
+                  readOnly: true,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.green),
@@ -188,11 +208,26 @@ class _FechaSelectorState extends State<FechaSelector> {
                     fillColor: Colors.white54,
                     labelText: 'Fecha fin',
                     labelStyle: TextStyle(color: Colors.green),
+                    suffixIcon: Icon(Icons.calendar_today, color: Colors.green),
                   ),
+                  onTap: () async {
+                    DateTime? pickedDate = await showDatePicker(
+                      context: context,
+                      initialDate: DateTime.now(),
+                      firstDate: DateTime(2000),
+                      lastDate: DateTime(2100),
+                    );
+                    if (pickedDate != null) {
+                      setState(() {
+                        fechaFinController.text =
+                            pickedDate.toLocal().toString().split(' ')[0];
+                      });
+                    }
+                  },
                 ),
               ),
             ],
-          )
+          ),
         ],
       ],
     );
