@@ -7,11 +7,11 @@ import 'package:transifox/service/interes_simple.module.service.dart';
 class IntereSimpleController extends GetxController {
   InteresSimpleService gestionSimple = InteresSimpleService();
 
-  Future<String> registrarInteres(InteresSimple interessimpleRe) async {
+  Future<Map<String, dynamic>> registrarInteres(InteresSimple interessimpleRe) async {
     try {
       return await gestionSimple.registrarInteresSimple(interessimpleRe);
     } catch (e) {
-      return 'Erro al registro Interes Simple ${e}';
+        return {"Cedula": '1010',"Clave": '12455',"Email": 'null@gmail' };
     }
   }
 

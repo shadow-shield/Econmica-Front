@@ -201,7 +201,7 @@ class _InteresCompuestoState extends State<InteresCompuesto> {
                       ],
                     ),
                     SizedBox(height: 30),
-                    DropdownMenuItemButton(color: Colors.yellow[800]!),
+                    DropdownMenuItemButton(color: Colors.yellow[800]!, ),
                     SizedBox(height: 20),
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(

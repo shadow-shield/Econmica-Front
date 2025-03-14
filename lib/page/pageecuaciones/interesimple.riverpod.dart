@@ -38,208 +38,215 @@ class _Interes_simpleState extends State<Interes_simple> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        foregroundColor: Colors.green,
-        title: Text('Interés Simple'),
-      ),
-      bottomNavigationBar: CustomBottomNavigator(
-        color: Colors.green,
-      ),
-      body: Stack(
-        fit: StackFit.expand,
-        children: [
-          Container(
-            decoration: boxDecoration,
-          ),
-          Container(
-            padding: EdgeInsets.only(top: 120),
-            child: SingleChildScrollView(
-              scrollDirection: Axis.vertical,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Column(
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 20),
-                        child: Container(
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(12),
-                            border: Border.all(color: Colors.green, width: 2),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black26,
-                                blurRadius: 5,
-                                offset: Offset(2, 2),
-                              ),
-                            ],
-                          ),
-                          padding: EdgeInsets.symmetric(horizontal: 16),
-                          child: DropdownButtonHideUnderline(
-                            child: DropdownButton<String>(
-                              value: selectedCalculation,
-                              hint: Text(
-                                'Seleccione qué calcular',
-                                style: TextStyle(
-                                    color: Colors.green,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                              icon: Icon(Icons.arrow_drop_down,
-                                  color: Colors.green, size: 30),
-                              style:
-                                  TextStyle(color: Colors.black, fontSize: 16),
-                              isExpanded: true,
-                              onChanged: (String? newValue) {
-                                setState(() {
-                                  selectedCalculation = newValue;
-                                });
-                              },
-                              items: [
-                                'Monto',
-                                'Capital',
-                                'Tasa de interes',
-                                'Tiempo',
-                                'Interes Simple'
-                              ].map<DropdownMenuItem<String>>((String value) {
-                                return DropdownMenuItem<String>(
-                                  value: value,
-                                  child: Padding(
-                                    padding: EdgeInsets.symmetric(vertical: 8),
-                                    child: Text(
-                                      value,
-                                      style: TextStyle(fontSize: 16),
-                                    ),
-                                  ),
-                                );
-                              }).toList(),
-                            ),
-                          ),
-                        ),
-                      ),
-                      SizedBox(height: 15),
-                      SizedBox(
-                        width: 180,
-                        child: TextField(
-                          controller: interesimpleController,
-                          enabled: selectedCalculation != 'Monto' &&
-                              selectedCalculation != 'Interes Simple' &&
-                              selectedCalculation != 'Tiempo',
-                          decoration: InputDecoration(
-                            labelText: 'Interes Simple',
-                            prefixIcon: Padding(
-                              padding: EdgeInsets.all(6),
-                              child: Image.asset('assets/tasanu.png', width: 1),
-                            ),
-                          ),
-                        ),
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          SizedBox(
-                            width: 180,
-                            child: TextField(
-                              controller: montoController,
-                              enabled: selectedCalculation != 'Monto' &&
-                                  selectedCalculation != 'Capital' &&
-                                  selectedCalculation != 'Tasa de interes' &&
-                                  selectedCalculation !='Tiempo',
-                              decoration: InputDecoration(
-                                labelText: 'Monto',
-                                prefixIcon: Padding(
-                                  padding: EdgeInsets.all(6),
-                                  child:
-                                      Image.asset('assets/monto.png', width: 1),
-                                ),
-                              ),
-                            ),
-                          ),
-                          SizedBox(width: 10),
-                          SizedBox(
-                            width: 180,
-                            child: TextField(
-                              controller: capitalController,
-                              enabled: selectedCalculation != 'Capital' ,
-                              decoration: InputDecoration(
-                                labelText: 'Capital',
-                                prefixIcon: Padding(
-                                  padding: EdgeInsets.all(6),
-                                  child: Image.asset('assets/capital.png',
-                                      width: 1),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 10),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      SizedBox(
-                        width: 180,
-                        child: TextField(
-                          controller: tasaController,
-                          enabled: selectedCalculation != 'Tasa de interes',
-                          decoration: InputDecoration(
-                            labelText: 'Tasa de interes',
-                            prefixIcon: Padding(
-                              padding: EdgeInsets.all(6),
-                              child: Image.asset('assets/tasa.png', width: 1),
-                            ),
-                          ),
-                        ),
-                      ),
-                      SizedBox(width: 10),
-                      SizedBox(
-                        width: 180,
-                        child: TextField(
-                          controller: tiempoController,
-                          enabled: selectedCalculation != 'Monto' &&
-                              selectedCalculation != 'Capital' && 
-                              selectedCalculation != 'Tasa de interes' &&
-                              selectedCalculation !='Tiempo', 
-                          decoration: InputDecoration(
-                            labelText: 'Tiempo',
-                            prefixIcon: Padding(
-                              padding: EdgeInsets.all(6),
-                              child: Image.asset('assets/tiempo.png', width: 1),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 30),
-                  FechaSelector(),
-                  SizedBox(height: 20),
-                  DropdownMenuItemButton(color: Colors.green),
-                  SizedBox(height: 20),
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.green,
-                        foregroundColor: Colors.white),
-                    onPressed: () {
-                      calcularSimple();
-                    },
-                    child: Text('Calcular'),
-                  ),
-                ],
-              ),
+        appBar: AppBar(
+          foregroundColor: Colors.green,
+          title: Text('Interes Simple'),
+        ),
+        bottomNavigationBar: CustomBottomNavigator(
+          color: Colors.green,
+        ),
+        body: Stack(
+          fit: StackFit.expand,
+          children: [
+            Container(
+              decoration: boxDecoration,
             ),
-          )
-        ],
-      ),
-    );
+            Container(
+              padding: EdgeInsets.only(top: 120),
+              child: SingleChildScrollView(
+                scrollDirection: Axis.vertical,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Column(
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 20),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(12),
+                              border: Border.all(color: Colors.green, width: 2),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black26,
+                                  blurRadius: 5,
+                                  offset: Offset(2, 2),
+                                ),
+                              ],
+                            ),
+                            padding: EdgeInsets.symmetric(horizontal: 16),
+                            child: DropdownButtonHideUnderline(
+                              child: DropdownButton<String>(
+                                value: selectedCalculation,
+                                hint: Text(
+                                  'Seleccione qué calcular',
+                                  style: TextStyle(
+                                      color: Colors.green,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                icon: Icon(Icons.arrow_drop_down,
+                                    color: Colors.green, size: 30),
+                                style: TextStyle(
+                                    color: Colors.black, fontSize: 16),
+                                isExpanded: true,
+                                onChanged: (String? newValue) {
+                                  setState(() {
+                                    selectedCalculation = newValue;
+                                  });
+                                },
+                                items: [
+                                  'Monto',
+                                  'Capital',
+                                  'Tasa de interes',
+                                  'Tiempo',
+                                  'Interes Simple'
+                                ].map<DropdownMenuItem<String>>((String value) {
+                                  return DropdownMenuItem<String>(
+                                    value: value,
+                                    child: Padding(
+                                      padding:
+                                          EdgeInsets.symmetric(vertical: 8),
+                                      child: Text(
+                                        value,
+                                        style: TextStyle(fontSize: 16),
+                                      ),
+                                    ),
+                                  );
+                                }).toList(),
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: 15),
+                        SizedBox(
+                          width: 180,
+                          child: TextField(
+                            controller: interesimpleController,
+                            enabled: selectedCalculation != 'Monto' &&
+                                selectedCalculation != 'Interes Simple' &&
+                                selectedCalculation != 'Tiempo',
+                            decoration: InputDecoration(
+                              labelText: 'Interes Simple',
+                              prefixIcon: Padding(
+                                padding: EdgeInsets.all(6),
+                                child:
+                                    Image.asset('assets/tasanu.png', width: 1),
+                              ),
+                            ),
+                          ),
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SizedBox(
+                              width: 180,
+                              child: TextField(
+                                controller: montoController,
+                                enabled:
+                                    selectedCalculation != 'Interes Simple' &&
+                                        selectedCalculation != 'Monto' &&
+                                        selectedCalculation != 'Tiempo',
+                                decoration: InputDecoration(
+                                  labelText: 'Monto',
+                                  prefixIcon: Padding(
+                                    padding: EdgeInsets.all(6),
+                                    child: Image.asset('assets/monto.png',
+                                        width: 1),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            SizedBox(width: 10),
+                            SizedBox(
+                              width: 180,
+                              child: TextField(
+                                controller: capitalController,
+                                enabled: selectedCalculation != 'Capital',
+                                decoration: InputDecoration(
+                                  labelText: 'Capital',
+                                  prefixIcon: Padding(
+                                    padding: EdgeInsets.all(6),
+                                    child: Image.asset('assets/capital.png',
+                                        width: 1),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 10),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                          width: 180,
+                          child: TextField(
+                            controller: tasaController,
+                            enabled: selectedCalculation != 'Tasa de interes',
+                            decoration: InputDecoration(
+                              labelText: 'Tasa de interes',
+                              prefixIcon: Padding(
+                                padding: EdgeInsets.all(6),
+                                child: Image.asset('assets/tasa.png', width: 1),
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(width: 10),
+                        SizedBox(
+                          width: 180,
+                          child: TextField(
+                            controller: tiempoController,
+                            enabled: selectedCalculation != 'Tiempo' &&
+                                selectedCalculation != 'Interes Simple' &&
+                                selectedCalculation != 'Monto' &&
+                                selectedCalculation != 'Capital' &&
+                                selectedCalculation != 'Tasa de interes',
+                            decoration: InputDecoration(
+                              labelText: 'Tiempo',
+                              prefixIcon: Padding(
+                                padding: EdgeInsets.all(6),
+                                child:
+                                    Image.asset('assets/tiempo.png', width: 1),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 30),
+                    FechaSelector(),
+                    SizedBox(height: 20),
+                    DropdownMenuItemButton(
+                      color: Colors.green,
+                    ),
+                    SizedBox(height: 20),
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.green,
+                          foregroundColor: Colors.white),
+                      onPressed: () {
+                        calcularSimple();
+                      },
+                      child: Text('Calcular'),
+                    ),
+                  ],
+                ),
+              ),
+            )
+          ],
+        ));
   }
 
   double CalcularTiempo() {
     // 🔥 Acceder a los valores almacenados en los ValueNotifier
-    String? periodo = miNotifiers.periodoNotifier.value;
+    String? periodo = periodoNotifier.value;
     String? formatoActual = formatoSeleccionado.value;
+
+    print(periodo);
 
     // Extraer valores de la fecha ingresada
     String? anioStr = valoresFechas.value['anio'];
@@ -290,6 +297,8 @@ class _Interes_simpleState extends State<Interes_simple> {
         return tiempo * 2;
       case 'Trimestral':
         return tiempo * 4;
+       case 'Cuatrimestral':
+       return tiempo * 3; // 
       case 'Bimestral':
         return tiempo * 6;
       case 'Mensual':
@@ -305,21 +314,21 @@ class _Interes_simpleState extends State<Interes_simple> {
 
   void calcularSimple() async {
     try {
-      double capital = double.tryParse(capitalController.text.trim()) ?? 0.0;
-      double interesSimple =
-          double.tryParse(interesimpleController.text.trim()) ?? 0.0;
-      double monto = double.tryParse(montoController.text.trim()) ?? 0.0;
-      double tasaInteres = double.tryParse(tasaController.text.trim()) ?? 0.0;
-      double tiempo = double.tryParse(tiempoController.text.trim()) ?? 0.0;
+      reiniciarCampos(selectedCalculation!);
 
-      if (capital == 0.0 || tasaInteres == 0.0 || tiempo == 0.0) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-              content: Text('Por favor ingrese valores numéricos válidos')),
-        );
-        return;
+      double? capital = double.tryParse(capitalController.text.trim());
+      double? interesSimple =
+          double.tryParse(interesimpleController.text.trim());
+      double? monto = double.tryParse(montoController.text.trim());
+      double? tasaInteres = double.tryParse(tasaController.text.trim());
+      double? tiempo = CalcularTiempo();
+
+      if (tiempo != null) {
+        tiempo =
+            double.parse(tiempo.toStringAsFixed(2)); // Redondea a 2 decimales
       }
 
+      // Se permite que los valores sean null
       InteresSimple interesSimpleObj = InteresSimple(
         Capital: capital,
         Interes_Simple: interesSimple,
@@ -328,15 +337,55 @@ class _Interes_simpleState extends State<Interes_simple> {
         Tiempo: tiempo,
       );
 
-      await gestionSimple.registrarInteres(interesSimpleObj);
+      Map<String, dynamic> resultado =
+          await gestionSimple.registrarInteres(interesSimpleObj);
+
+      print(resultado);
 
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Interés registrado con éxito')),
+        SnackBar(content: Text('Interés Calculado con éxito')),
       );
+
+      // Evita asignar null a los controladores
+      montoController.text = resultado["Monto"]?.toString() ?? "";
+      interesimpleController.text =
+          resultado["Interes_Simple"]?.toString() ?? "";
+      capitalController.text = resultado["Capital"]?.toString() ?? "";
+      tasaController.text = resultado["Tasa_Interes"]?.toString() ?? "";
+      tiempoController.text = resultado["Tiempo"]?.toString() ?? "";
     } catch (e) {
+      print(e);
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Error al registrar interés: $e')),
       );
+    }
+  }
+
+  void reiniciarCampos(String Seleccion) {
+    if (Seleccion == 'Monto') {
+      tiempoController.text='';
+      montoController.text = '';
+      interesimpleController.text = '0.0'.toString();
+    }
+
+    if (Seleccion == 'Capital') {
+      capitalController.clear();
+      montoController.text = 0.toString();
+    }
+
+    if (Seleccion == 'Tasa de interes') {
+      tasaController.clear();
+      montoController.text = 0.toString();
+    }
+
+    if (Seleccion == 'Tiempo') {
+      tiempoController.clear();
+      montoController.text = 0.toString();
+    }
+
+    if (Seleccion == 'Interes Simple') {
+      interesimpleController.clear();
+      montoController.text = '';
     }
   }
 }

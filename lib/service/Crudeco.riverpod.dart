@@ -24,6 +24,32 @@ class CrudProvider<T> {
     }
   }
 
+  Future<Map<String, dynamic>> calcular(T body, String endpoint) async {
+  try {
+    final url = '$baseUrl/$endpoint';
+
+    print('📤 Enviando: ${jsonEncode(body)}');
+
+    final response = await http.post(
+      Uri.parse(url),
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode(body),
+    );
+
+    // Convertir la respuesta en un Map
+    final Map<String, dynamic> responseData = jsonDecode(response.body);
+
+    print('✅ Respuesta recibida: $responseData');
+    
+    return responseData;
+  } catch (e) {
+    print('❌ Error: $e');
+
+    return {'error': 'Error al agregar el elemento: $e'};
+  }
+}
+
+
   Future<List<Map<String, dynamic>>> consultar(String endpoint) async {
     final url = '$baseUrl/$endpoint';
     final response = await http.get(Uri.parse(url));
