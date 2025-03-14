@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:transifox/widgets/Dropdowbutton.riverpod.dart';
 import 'package:transifox/widgets/bottonavigator.riverpod.dart';
 import 'package:transifox/widgets/formato_fecha.riverpod.dart';
+import 'package:transifox/widgets/formato_fecha.riverpod.dart' as miNotifiers;
+
 
 class Interes_simple extends StatefulWidget {
   const Interes_simple({super.key});
@@ -233,45 +235,73 @@ class _Interes_simpleState extends State<Interes_simple> {
         ));
   }
 
+
+
+
   double CalcularTiempo() {
-    var ano = 4;
-    var mes = 5;
-    var dias = 20;
+  // 🔥 Acceder a los valores almacenados en los ValueNotifier
+ String? periodo = miNotifiers.periodoNotifier.value;
+  String? formatoActual = formatoSeleccionado.value;
 
-    String? periodo = periodoNotifier.value;
-    String? formatoActual = formatoSeleccionado.value;
+  // Extraer valores de la fecha ingresada
+  String? anioStr = valoresFechas.value['anio'];
+  String? mesStr = valoresFechas.value['mes'];
+  String? diaStr = valoresFechas.value['dia'];
 
-    DateTime fechaEspecifica = DateTime(2025, 3, 13);
-    DateTime fechaEspecifica2 = DateTime(2026, 3, 13);
+  String? fechaInicioStr = valoresFechas.value['fechaInicio'];
+  String? fechaFinStr = valoresFechas.value['fechaFin'];
 
-    Duration diferencia = fechaEspecifica2.difference(fechaEspecifica);
-    double tiempo;
+  // 🔹 Convertir valores a enteros (manejar casos nulos)
+  int ano = anioStr != null ? int.tryParse(anioStr) ?? 0 : 0;
+  int mes = mesStr != null ? int.tryParse(mesStr) ?? 0 : 0;
+  int dias = diaStr != null ? int.tryParse(diaStr) ?? 0 : 0;
 
-    // 🔹 Calcular tiempo base según el formato
-    if (formatoActual == 'Año, Mes, Día') {
-      tiempo = ano + (mes / 12) + (dias / 360);
+  DateTime fechaEspecifica;
+  DateTime fechaEspecifica2;
+
+  if (formatoActual == 'Año, Mes, Día') {
+    // Usar los valores ingresados
+    fechaEspecifica = DateTime(ano, mes, dias);
+    fechaEspecifica2 = DateTime(ano + 1, mes, dias); // Un año después para referencia
+  } else {
+    // Si el usuario seleccionó 'Fecha Inicio - Fecha Fin'
+    if (fechaInicioStr != null && fechaFinStr != null) {
+      fechaEspecifica = DateTime.parse(fechaInicioStr);
+      fechaEspecifica2 = DateTime.parse(fechaFinStr);
     } else {
-      tiempo = diferencia.inDays / 365;
-    }
-
-    // 🔹 Ajustar tiempo según el período
-    switch (periodo) {
-      case 'Anual':
-        return tiempo;
-      case 'Semestral':
-        return tiempo * 2; // Un año tiene 2 semestres
-      case 'Trimestral':
-        return tiempo * 4; // Un año tiene 4 trimestres
-      case 'Bimestral':
-        return tiempo * 6; // Un año tiene 6 bimestres
-      case 'Mensual':
-        return tiempo * 12; // Un año tiene 12 meses
-      case 'Semanal':
-        return tiempo * 52.14; // Un año tiene aprox. 52.14 semanas
-      case 'Diario':
-        return tiempo * 365; // Convertimos a días
-      default:
-        throw Exception("Período no válido");
+      throw Exception("Las fechas de inicio y fin no pueden estar vacías.");
     }
   }
+
+  // 🔹 Calcular la diferencia entre fechas
+  Duration diferencia = fechaEspecifica2.difference(fechaEspecifica);
+  double tiempo;
+
+  if (formatoActual == 'Año, Mes, Día') {
+    tiempo = ano + (mes / 12) + (dias / 360);
+  } else {
+    tiempo = diferencia.inDays / 365;
+  }
+
+  // 🔹 Ajustar tiempo según el período seleccionado
+  switch (periodo) {
+    case 'Anual':
+      return tiempo;
+    case 'Semestral':
+      return tiempo * 2;
+    case 'Trimestral':
+      return tiempo * 4;
+    case 'Bimestral':
+      return tiempo * 6;
+    case 'Mensual':
+      return tiempo * 12;
+    case 'Semanal':
+      return tiempo * 52.14;
+    case 'Diario':
+      return tiempo * 365;
+    default:
+      throw Exception("Período no válido");
+  }
+}
+
 }
