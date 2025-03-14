@@ -19,7 +19,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Material App',
+<<<<<<< HEAD
       initialRoute: 'botones',
+=======
+      initialRoute: 'home',
+>>>>>>> cf14101713befb2abbc5ef68a27b3e805540b6dc
       routes: {
         'home': (BuildContext context) => const Home(),
         'login': (BuildContext context) => const Login(),

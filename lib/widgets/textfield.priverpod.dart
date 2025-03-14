@@ -6,7 +6,7 @@ class TextfieldStyle extends StatelessWidget {
       {super.key,
       required this.labelText,
       required this.icon,
-      required this.color});
+      required this.color,});
   final String labelText;
   final Widget icon;
   final Color color;

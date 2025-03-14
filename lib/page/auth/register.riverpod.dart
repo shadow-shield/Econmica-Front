@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:transifox/controller/usuario.controller.service.dart';
 import 'package:transifox/model/usuario.model.module.dart';
-import 'package:transifox/page/auth/login.riverpod.dart';
+
 
 class Registro_User extends StatefulWidget {
   @override
@@ -48,7 +46,7 @@ class Registro_UserState extends State<Registro_User> {
                     height: 30,
                   ),
                   onPressed: () {
-                    Get.to(Login());
+                    Navigator.pushReplacementNamed(context, 'login');
                   },
                 ),
               ),

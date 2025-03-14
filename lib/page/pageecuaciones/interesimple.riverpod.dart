@@ -3,6 +3,7 @@ import 'dart:ffi';
 import 'package:flutter/material.dart';
 import 'package:transifox/widgets/Dropdowbutton.riverpod.dart';
 import 'package:transifox/widgets/bottonavigator.riverpod.dart';
+import 'package:transifox/widgets/formato_fecha.riverpod.dart';
 import 'package:transifox/widgets/textfield.priverpod.dart';
 
 class Interes_simple extends StatefulWidget {
@@ -25,6 +26,14 @@ class _Interes_simpleState extends State<Interes_simple> {
     ),
   );
 
+  String? selectedCalculation;
+
+  final TextEditingController montoController = TextEditingController();
+  final TextEditingController capitalController = TextEditingController();
+  final TextEditingController tasaController = TextEditingController();
+  final TextEditingController tiempoController = TextEditingController();
+  final TextEditingController interesimpleController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,93 +51,145 @@ class _Interes_simpleState extends State<Interes_simple> {
               decoration: boxDecoration,
             ),
             Container(
-              padding: EdgeInsets.only(bottom: 40),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Container(
-                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-                    child: Text('Interes Simple  : ',
-                        style: TextStyle(fontWeight: FontWeight.w300,color: Colors.green,fontStyle: FontStyle.normal,fontFamily: 'Roboto')),
-                    margin: EdgeInsets.only(bottom: 60),
-                    height: 50,
-                    width: 230,
-                    decoration: BoxDecoration(
-                        color: Colors.white54,
-                        borderRadius: BorderRadius.circular(40)),
-                  ),
-                  Row(
-                    mainAxisAlignment:
-                        MainAxisAlignment.center, // Centra los elementos
-                    children: [
-                      SizedBox(
-                        width: 180,
-                        child: TextfieldStyle(
-                          color: Colors.green,
-                          icon: Container(
-                              padding: EdgeInsets.all(6),
-                              child: Image.asset('assets/monto.png', width: 1)),
-                          labelText: 'Monto',
+              padding: EdgeInsets.only(top: 120),
+              child: SingleChildScrollView(
+                scrollDirection: Axis.vertical,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Column(
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 20),
+                          child: DropdownButton<String>(
+                            value: selectedCalculation,
+                            hint: Text('Seleccione qué calcular'),
+                            onChanged: (String? newValue) {
+                              setState(() {
+                                selectedCalculation = newValue;
+                              });
+                            },
+                            items: [
+                              'Monto',
+                              'Capital',
+                              'Tasa de interes',
+                              'Tiempo',
+                              'Interes Simple'
+                            ].map<DropdownMenuItem<String>>((String value) {
+                              return DropdownMenuItem<String>(
+                                value: value,
+                                child: Text(value),
+                              );
+                            }).toList(),
+                          ),
                         ),
-                      ),
-                      SizedBox(width: 10),
-                      SizedBox(
-                        width: 180,
-                        child: TextfieldStyle(
-                          color: Colors.green,
-                          icon: Container(
-                              padding: EdgeInsets.all(6),
-                              child:
-                                  Image.asset('assets/capital.png', width: 1)),
-                          labelText: 'Capital',
+                        SizedBox(
+                          width: 180,
+                          child: TextField(
+                            controller: interesimpleController,
+                            enabled: selectedCalculation != 'Monto' &&
+                                selectedCalculation != 'Interes Simple',
+                            decoration: InputDecoration(
+                              labelText: 'Interes Simple',
+                              prefixIcon: Padding(
+                                padding: EdgeInsets.all(6),
+                                child:
+                                    Image.asset('assets/tasanu.png', width: 1),
+                              ),
+                            ),
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 10),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      SizedBox(
-                        width: 180,
-                        child: TextfieldStyle(
-                          color: Colors.green,
-                          icon: Container(
-                              padding: EdgeInsets.all(6),
-                              child: Image.asset('assets/tasa.png', width: 1)),
-                          labelText: 'Tasa de interes',
+                        Row(
+                          mainAxisAlignment:
+                              MainAxisAlignment.center, // Centra los elementos
+                          children: [
+                            SizedBox(
+                              width: 180,
+                              child: TextField(
+                                controller: montoController,
+                                enabled:
+                                    selectedCalculation != 'Interes Simple' &&
+                                        selectedCalculation != 'Monto',
+                                decoration: InputDecoration(
+                                  labelText: 'Monto',
+                                  prefixIcon: Padding(
+                                    padding: EdgeInsets.all(6),
+                                    child: Image.asset('assets/monto.png',
+                                        width: 1),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            SizedBox(width: 10),
+                            SizedBox(
+                              width: 180,
+                              child: TextField(
+                                controller: capitalController,
+                                enabled: selectedCalculation != 'Capital',
+                                decoration: InputDecoration(
+                                  labelText: 'Capital',
+                                  prefixIcon: Padding(
+                                    padding: EdgeInsets.all(6),
+                                    child: Image.asset('assets/capital.png',
+                                        width: 1),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
-                      ),
-                      SizedBox(width: 10),
-                      SizedBox(
-                        width: 180,
-                        child: TextfieldStyle(
-                          color: Colors.green,
-                          icon: Container(
-                              padding: EdgeInsets.all(6),
-                              child:
-                                  Image.asset('assets/tiempo.png', width: 1)),
-                          labelText: 'Tiempo',
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 20),
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 20),
-                    child: DropdownMenuItemButton(
-                      color: Colors.green,
+                      ],
                     ),
-                  ),
-                  SizedBox(height: 20),
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.green,
-                        foregroundColor: Colors.white),
-                    onPressed: () {},
-                    child: Text('Calcular'),
-                  ),
-                ],
+                    SizedBox(height: 10),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                          width: 180,
+                          child: TextField(
+                            controller: tasaController,
+                            enabled: selectedCalculation != 'Tasa de interes',
+                            decoration: InputDecoration(
+                              labelText: 'Tasa de interes',
+                              prefixIcon: Padding(
+                                padding: EdgeInsets.all(6),
+                                child: Image.asset('assets/tasa.png', width: 1),
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(width: 10),
+                        SizedBox(
+                          width: 180,
+                          child: TextField(
+                            controller: tiempoController,
+                            enabled: selectedCalculation != 'Tiempo',
+                            decoration: InputDecoration(
+                              labelText: 'Tiempo',
+                              prefixIcon: Padding(
+                                padding: EdgeInsets.all(6),
+                                child:
+                                    Image.asset('assets/tiempo.png', width: 1),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 30),
+                    FechaSelector(),
+                    SizedBox(height: 20),
+                    DropdownMenuItemButton(color: Colors.green),
+                    SizedBox(height: 20),
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.green,
+                          foregroundColor: Colors.white),
+                      onPressed: () {},
+                      child: Text('Calcular'),
+                    ),
+                  ],
+                ),
               ),
             )
           ],
@@ -136,7 +197,7 @@ class _Interes_simpleState extends State<Interes_simple> {
   }
 
 
-  double CalcularTiempo(){
+CalcularTiempo(){
 
       var periodo='Anual';
       var formato='AÑO,MES,DIA';
@@ -154,7 +215,7 @@ class _Interes_simpleState extends State<Interes_simple> {
 
         if (formato=='AÑO,MES,DIA'){
 
-          return (ano+(mes/12)+ (dias/360));
+         // return (ano+(mes/12)+ (dias/360));
   
 
         }
