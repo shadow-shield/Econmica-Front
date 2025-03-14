@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+ValueNotifier<String?> formatoSeleccionado = ValueNotifier<String?>(null);
+
 class FechaSelector extends StatefulWidget {
   const FechaSelector({super.key});
 
@@ -9,12 +11,6 @@ class FechaSelector extends StatefulWidget {
 
 class _FechaSelectorState extends State<FechaSelector> {
   String? selectedOption;
-
-  final TextEditingController anioController = TextEditingController();
-  final TextEditingController mesController = TextEditingController();
-  final TextEditingController diaController = TextEditingController();
-  final TextEditingController fechaInicioController = TextEditingController();
-  final TextEditingController fechaFinController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -50,6 +46,7 @@ class _FechaSelectorState extends State<FechaSelector> {
               setState(() {
                 selectedOption = newValue;
               });
+              formatoSeleccionado.value = newValue; // 🔥 Actualiza el ValueNotifier
             },
             items: ['Año, Mes, Día', 'Fecha Inicio - Fecha Fin']
                 .map((String value) => DropdownMenuItem<String>(
@@ -62,173 +59,6 @@ class _FechaSelectorState extends State<FechaSelector> {
                 .toList(),
           ),
         ),
-        const SizedBox(height: 20),
-        if (selectedOption == 'Año, Mes, Día') ...[
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              SizedBox(
-                width: 100,
-                child: TextField(
-                  controller: anioController,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.green),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.green, width: 2),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.green, width: 3),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    filled: true,
-                    fillColor: Colors.white54,
-                    labelText: 'Año',
-                    labelStyle: TextStyle(color: Colors.green),
-                  ),
-                ),
-              ),
-              SizedBox(
-                width: 100,
-                child: TextField(
-                  controller: mesController,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.green),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.green, width: 2),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.green, width: 3),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    filled: true,
-                    fillColor: Colors.white54,
-                    labelText: 'Mes',
-                    labelStyle: TextStyle(color: Colors.green),
-                  ),
-                ),
-              ),
-              SizedBox(
-                width: 100,
-                child: TextField(
-                  controller: diaController,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.green),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.green, width: 2),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.green, width: 3),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    filled: true,
-                    fillColor: Colors.white54,
-                    labelText: 'dia',
-                    labelStyle: TextStyle(color: Colors.green),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ] else if (selectedOption == 'Fecha Inicio - Fecha Fin') ...[
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SizedBox(
-                width: 140,
-                child: TextField(
-                  controller: fechaInicioController,
-                  readOnly: true, // Evita la edición manual
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.green),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.green, width: 2),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.green, width: 3),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    filled: true,
-                    fillColor: Colors.white54,
-                    labelText: 'Fecha inicio',
-                    labelStyle: TextStyle(color: Colors.green),
-                    suffixIcon: Icon(Icons.calendar_today, color: Colors.green),
-                  ),
-                  onTap: () async {
-                    DateTime? pickedDate = await showDatePicker(
-                      context: context,
-                      initialDate: DateTime.now(),
-                      firstDate: DateTime(2000),
-                      lastDate: DateTime(2100),
-                    );
-                    if (pickedDate != null) {
-                      setState(() {
-                        fechaInicioController.text =
-                            pickedDate.toLocal().toString().split(' ')[0];
-                      });
-                    }
-                  },
-                ),
-              ),
-              SizedBox(width: 20),
-              SizedBox(
-                width: 140,
-                child: TextField(
-                  controller: fechaFinController,
-                  readOnly: true,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.green),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.green, width: 2),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.green, width: 3),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    filled: true,
-                    fillColor: Colors.white54,
-                    labelText: 'Fecha fin',
-                    labelStyle: TextStyle(color: Colors.green),
-                    suffixIcon: Icon(Icons.calendar_today, color: Colors.green),
-                  ),
-                  onTap: () async {
-                    DateTime? pickedDate = await showDatePicker(
-                      context: context,
-                      initialDate: DateTime.now(),
-                      firstDate: DateTime(2000),
-                      lastDate: DateTime(2100),
-                    );
-                    if (pickedDate != null) {
-                      setState(() {
-                        fechaFinController.text =
-                            pickedDate.toLocal().toString().split(' ')[0];
-                      });
-                    }
-                  },
-                ),
-              ),
-            ],
-          ),
-        ],
       ],
     );
   }
