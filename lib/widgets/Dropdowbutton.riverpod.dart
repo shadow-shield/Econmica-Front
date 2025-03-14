@@ -11,7 +11,7 @@ class DropdownMenuItemButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 140,
+      width: 160,
       child: ValueListenableBuilder<String?>(
         valueListenable: periodoNotifier,
         builder: (context, selectedValue, _) {
@@ -30,14 +30,16 @@ class DropdownMenuItemButton extends StatelessWidget {
             iconEnabledColor: color,
             value: selectedValue,
             onChanged: (String? newValue) {
-              periodoNotifier.value = newValue; // 🔹 Guarda el valor globalmente
+              periodoNotifier.value = newValue; 
             },
             items: [
-              DropdownMenuItem(value: 'Anual', child: Text('Anual')),
-              DropdownMenuItem(value: 'Semestral', child: Text('Semestral')),
-              DropdownMenuItem(value: 'Mensual', child: Text('Mensual')),
-              DropdownMenuItem(value: 'Semanal', child: Text('Semanal')),
-              DropdownMenuItem(value: 'Diario', child: Text('Diario')),
+              DropdownMenuItem(value: 'Anual', child: Text('Anual',style: TextStyle(color: color),)),
+              DropdownMenuItem(value: 'Semestral', child: Text('Semestral',style: TextStyle(color: color))),
+              DropdownMenuItem(value: 'Mensual', child: Text('Mensual',style: TextStyle(color: color))),
+              DropdownMenuItem(value: 'Bimestral', child: Text('Bimestral',style: TextStyle(color: color))),
+              DropdownMenuItem(value: 'Cuatrimestral', child: Text('Cuatrimestral',style: TextStyle(color: color))),
+              DropdownMenuItem(value: 'Semanal', child: Text('Semanal',style: TextStyle(color: color))),
+              DropdownMenuItem(value: 'Diario', child: Text('Diario',style: TextStyle(color: color))),
             ],
           );
         },

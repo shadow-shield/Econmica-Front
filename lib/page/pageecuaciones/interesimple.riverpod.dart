@@ -234,7 +234,7 @@ class _Interes_simpleState extends State<Interes_simple> {
   }
 
   double CalcularTiempo() {
-    var formato = 'AÑO,MES,DIA'; // Usa valores fijos si es este formato
+    var formato = 'AÑO,MES,DIA'; 
     var ano = 4;
     var mes = 5;
     var dias = 20;
