@@ -1,11 +1,11 @@
 //model usuario
-import 'dart:nativewrappers/_internal/vm/lib/ffi_native_type_patch.dart';
+
 
 class InteresCompuesto {
-  late Double Monto_Anualidad;
-  late Double Tasa_Anualidad;
-  late Double Periodos_Capitalizacion;
-  late Double Valor_Presente;
+  late double Monto_Anualidad;
+  late double Tasa_Anualidad;
+  late double Periodos_Capitalizacion;
+  late double Valor_Presente;
 
   InteresCompuesto({
     required this.Monto_Anualidad,

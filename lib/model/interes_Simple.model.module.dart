@@ -1,12 +1,12 @@
 //model usuario
-import 'dart:nativewrappers/_internal/vm/lib/ffi_native_type_patch.dart';
+
 
 class InteresSimple {
-  late Double Monto;
-  late Double Capital;
-  late Double Tasa_Interes;
-  late Double Tiempo;
-  late Double Interes_Simple;
+  late double Monto;
+  late double Capital;
+  late double Tasa_Interes;
+  late double Tiempo;
+  late double Interes_Simple;
 
   InteresSimple({
     required this.Monto,

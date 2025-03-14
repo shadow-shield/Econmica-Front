@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:transifox/widgets/bottonavigator.riverpod.dart';
 
-
 class Anualidad extends StatefulWidget {
   const Anualidad({super.key});
 
@@ -27,6 +26,7 @@ class _AnualidadState extends State<Anualidad> {
   final TextEditingController periodosanulidadController =
       TextEditingController();
   final TextEditingController anualidadController = TextEditingController();
+  final TextEditingController valorController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -49,36 +49,37 @@ class _AnualidadState extends State<Anualidad> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                Container(
-                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-                  child: Text('Valor Futuro  : ',
-                      style: TextStyle(
-                          fontWeight: FontWeight.w300,
-                          color: Colors.pink,
-                          fontStyle: FontStyle.normal,
-                          fontFamily: 'Roboto')),
-                  margin: EdgeInsets.only(bottom: 20),
-                  height: 50,
-                  width: 230,
-                  decoration: BoxDecoration(
-                      color: Colors.white54,
-                      borderRadius: BorderRadius.circular(40)),
+                DropdownButton<String>(
+                  value: selectedCalculation,
+                  hint: Text('Seleccione una opción'),
+                  items: ['Valor Futuro', 'Valor Presente']
+                      .map((String value) => DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(value),
+                          ))
+                      .toList(),
+                  onChanged: (String? newValue) {
+                    setState(() {
+                      selectedCalculation = newValue;
+                    });
+                  },
                 ),
-                Container(
-                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-                  child: Text('Valor Presente  : ',
-                      style: TextStyle(
-                          fontWeight: FontWeight.w300,
-                          color: Colors.pink,
-                          fontStyle: FontStyle.normal,
-                          fontFamily: 'Roboto')),
-                  margin: EdgeInsets.only(bottom: 80),
-                  height: 50,
-                  width: 230,
-                  decoration: BoxDecoration(
-                      color: Colors.white54,
-                      borderRadius: BorderRadius.circular(40)),
-                ),
+                SizedBox(height: 20),
+                if (selectedCalculation == 'Valor Presente' || selectedCalculation == 'Valor Futuro')
+                  SizedBox(
+                    width: 140,
+                    child: TextField(
+                      controller: valorController,
+                      decoration: InputDecoration(
+                        labelText: selectedCalculation,
+                        prefixIcon: Padding(
+                          padding: EdgeInsets.all(6),
+                          child: Image.asset('assets/tasa-de-interes.png', width: 1),
+                        ),
+                      ),
+                    ),
+                  ),
+                SizedBox(height: 20),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -135,8 +136,7 @@ class _AnualidadState extends State<Anualidad> {
                           labelText: 'Anualidades',
                           prefixIcon: Padding(
                             padding: EdgeInsets.all(6),
-                            child:
-                                Image.asset('assets/anu.png', width: 1),
+                            child: Image.asset('assets/anu.png', width: 1),
                           ),
                         ),
                       ),

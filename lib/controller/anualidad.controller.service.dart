@@ -2,7 +2,6 @@ import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 import 'package:transifox/page/pageecuaciones/anualidades.riverpod.dart';
 import 'package:transifox/service/anualidades.module.service.dart';
 
-import 'package:transifox/service/interes_compuesto.module.service.dart';
 
 
 

@@ -215,25 +215,7 @@ class Registro_UserState extends State<Registro_User> {
     String Clave = user_Clave.text.trim();
     String Correo = user_Email.text.trim();
 
-    RegExp emailRegex =
-        RegExp(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$');
-
-    // Validaciones
-    if (Cedula.isEmpty || Clave.isEmpty || Correo.isEmpty) {
-      _mostrarError(context, 'Todos los campos son obligatorios');
-      return;
-    }
-
-    if (!emailRegex.hasMatch(Correo)) {
-      _mostrarError(context, 'Ingrese un correo válido');
-      return;
-    }
-
-    if (Clave.length < 6) {
-      _mostrarError(context, 'La clave debe tener al menos 6 caracteres');
-      return;
-    }
-
+    
     usuario.Cedula = Cedula;
     usuario.Clave = Clave;
     usuario.Email = Correo;
