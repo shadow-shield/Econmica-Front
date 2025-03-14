@@ -311,7 +311,7 @@ class _Interes_simpleState extends State<Interes_simple> {
 
   void calcularSimple() async {
     try {
-      reiniciarCampos(selectedCalculation!);
+      LimpiarCampos(selectedCalculation!);
 
       double? capital = double.tryParse(capitalController.text.trim());
       double? interesSimple =
@@ -357,7 +357,7 @@ class _Interes_simpleState extends State<Interes_simple> {
     }
   }
 
-  void reiniciarCampos(String Seleccion) {
+  void LimpiarCampos(String Seleccion) {
     if (Seleccion == 'Monto') {
       tiempoController.text = '';
       montoController.text = '';

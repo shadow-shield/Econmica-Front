@@ -9,11 +9,11 @@ import 'package:transifox/service/interes_compuesto.module.service.dart';
 class IntereCompuestoController extends GetxController {
   InteresCompuestoService gestionCompuesto = InteresCompuestoService();
 
-  Future<String> registrarCompuesto(InteresCompuesto interesCompuesto) async {
+  Future<Map<String, dynamic>> registrarCompuesto(InteresCompuesto interesCompuesto) async {
     try {
       return await gestionCompuesto.registrarInteresCompuesto(interesCompuesto);
     } catch (e) {
-      return 'Erro al registro Interes Compuesto ${e}';
+     return {"Cedula": '1010',"Clave": '12455',"Email": 'null@gmail' };
     }
   }
 

@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:transifox/controller/interes_Compuesto.controller.service.dart';
+import 'package:transifox/model/interes_Compuesto.module.dart';
+import 'package:transifox/page/pageecuaciones/tasa.riverpod.dart';
 import 'package:transifox/widgets/Dropdowbutton.riverpod.dart';
 import 'package:transifox/widgets/bottonavigator.riverpod.dart';
 
-class InteresCompuesto extends StatefulWidget {
-  const InteresCompuesto({super.key});
+class InteresCompuestoPage extends StatefulWidget {
+  const InteresCompuestoPage({super.key});
 
   @override
-  State<InteresCompuesto> createState() => _InteresCompuestoState();
+  State<InteresCompuestoPage> createState() => _InteresCompuestoState();
 }
 
-class _InteresCompuestoState extends State<InteresCompuesto> {
+class _InteresCompuestoState extends State<InteresCompuestoPage> {
   final boxDecoration = BoxDecoration(
     gradient: LinearGradient(
       begin: Alignment.bottomLeft,
@@ -23,8 +26,8 @@ class _InteresCompuestoState extends State<InteresCompuesto> {
   );
 
   String? selectedCalculation;
-
-  final TextEditingController interesController = TextEditingController();
+  IntereCompuestoController gestionCompuesto= IntereCompuestoController();
+  final TextEditingController TasainteresController = TextEditingController();
   final TextEditingController capitalController = TextEditingController();
   final TextEditingController montoController = TextEditingController();
   final TextEditingController tiempoController = TextEditingController();
@@ -92,7 +95,7 @@ class _InteresCompuestoState extends State<InteresCompuesto> {
                                   });
                                 },
                                 items: [
-                                  'Interés',
+                                  'Tasa De Interés',
                                   'Capital',
                                   'Monto Compuesto',
                                   'Tiempo',
@@ -136,7 +139,7 @@ class _InteresCompuestoState extends State<InteresCompuesto> {
                             SizedBox(
                               width: 180,
                               child: TextField(
-                                controller: interesController,
+                                controller: TasainteresController,
                                 enabled: selectedCalculation != 'Interés',
                                 decoration: InputDecoration(
                                   labelText: 'Interés',
@@ -217,4 +220,98 @@ class _InteresCompuestoState extends State<InteresCompuesto> {
           ],
         ));
   }
+
+
+
+  void calcularCompuesto() async {
+    try {
+
+
+       final TextEditingController TasainteresController = TextEditingController();
+      final TextEditingController capitalController = TextEditingController();
+      final TextEditingController montoController = TextEditingController();
+      final TextEditingController tiempoController = TextEditingController();
+      final TextEditingController interesCompuestoController = TextEditingController();
+
+      LimpiarCampos(selectedCalculation!);
+
+      double? tasaCompuesto = double.tryParse(TasainteresController.text.trim());
+      double? capital = double.tryParse(capitalController.text.trim());
+      double?  monto= double.tryParse(montoController.text.trim());
+      double? tiempo = double.tryParse(tiempoController.text.trim());
+      double? interesCompuesto=double.tryParse(interesCompuestoController.text.trim());
+
+      if (tiempo != null) {
+        tiempo =
+            double.parse(tiempo.toStringAsFixed(2)); // Redondea a 2 decimales
+      }
+
+      // Se permite que los valores sean null
+      InteresCompuesto interesCompu = InteresCompuesto(
+
+        Monto_Compuesto: monto,
+        Capital: capital,
+        Tasa_Interes: tasaCompuesto,
+        Tiempo: tiempo, 
+        Interes_Compuesto: interesCompuesto
+        );
+
+        
+
+      Map<String, dynamic> resultado =
+          await gestionCompuesto.registrarCompuesto(interesCompu);
+
+          
+
+      print(resultado);
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Interés Calculado con éxito')),
+      );
+
+      // Evita asignar null a los controladores
+      TasainteresController.text = resultado["Tasa_Interes"]?.toString() ?? "";
+      capitalController.text =   resultado["Capital"]?.toString() ?? "";
+      tiempoController.text = resultado["Tiempo"]?.toString() ?? "";
+      interesCompuestoController.text = resultado["Interes_Compuesto"]?.toString() ?? "";
+   
+    } catch (e) {
+      print(e);
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Error al registrar interés: $e')),
+      );
+    }
+  }
+
+
+  void LimpiarCampos(String Seleccion) {
+    if (Seleccion == 'Monto Compuesto') {
+   
+      montoController.text = '';
+      interesCompuestoController.text='0'.toString();
+    }
+
+    if (Seleccion == 'Interés') {
+      TasainteresController.text='0'.toString();
+      tiempoController.text='0'.toLowerCase();
+      interesCompuestoController.text='';
+  
+    }
+
+    if (Seleccion == 'Capital') {
+      capitalController.text='';
+      interesCompuestoController.text='0'.toString();
+    }
+
+    if (Seleccion == 'Tasa De Interes') {
+      tiempoController.clear();
+      montoController.text = 0.toString();
+    }
+
+    if (Seleccion == 'Tiempo') {
+      tiempoController.text='';
+      interesCompuestoController.text='0'.toString();
+    }
+  }
+
 }
