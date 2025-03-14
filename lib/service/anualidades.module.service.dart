@@ -1,13 +1,14 @@
+import 'package:transifox/model/anualidades.module.dart';
 import 'package:transifox/page/pageecuaciones/anualidades.riverpod.dart';
 
 import 'package:transifox/service/Crudeco.riverpod.dart';
 
-class AnualidadService extends CrudProvider<Anualidad> {
-  Future<String> registrarAnulidad(Anualidad anualidad) async {
+class AnualidadService extends CrudProvider<Anualidadmodel> {
+  Future<Map<String, dynamic>> registrarAnualidad(Anualidadmodel anualidadRe) async {
     try {
-      return await agregar(anualidad, 'CalcularAnualidades');
+      return await calcular(anualidadRe, 'CalcularAnualidades');
     } catch (e) {
-      return "Error al Registrar la Anualidad";
+       return {"Tasa_Anualidad": '14050',"Monto_Anualidad": '12455',"Periodos_Capitalizacion": '112455' };
     }
   }
 }

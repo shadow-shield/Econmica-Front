@@ -123,9 +123,7 @@ class _Interes_simpleState extends State<Interes_simple> {
                           width: 180,
                           child: TextField(
                             controller: interesimpleController,
-                            enabled: selectedCalculation != 'Monto' &&
-                                selectedCalculation != 'Interes Simple' &&
-                                selectedCalculation != 'Tiempo',
+                            enabled: selectedCalculation == 'Tiempo',
                             decoration: InputDecoration(
                               labelText: 'Interes Simple',
                               prefixIcon: Padding(
@@ -143,10 +141,10 @@ class _Interes_simpleState extends State<Interes_simple> {
                               width: 180,
                               child: TextField(
                                 controller: montoController,
-                                enabled:
-                                    selectedCalculation != 'Interes Simple' &&
-                                        selectedCalculation != 'Monto' &&
-                                        selectedCalculation != 'Tiempo',
+                                enabled: selectedCalculation != 'Monto' &&
+                                    selectedCalculation != 'Capital' &&
+                                    selectedCalculation != 'Tasa de interes' &&
+                                    selectedCalculation != 'Tiempo',
                                 decoration: InputDecoration(
                                   labelText: 'Monto',
                                   prefixIcon: Padding(
@@ -201,7 +199,6 @@ class _Interes_simpleState extends State<Interes_simple> {
                           child: TextField(
                             controller: tiempoController,
                             enabled: selectedCalculation != 'Tiempo' &&
-                                selectedCalculation != 'Interes Simple' &&
                                 selectedCalculation != 'Monto' &&
                                 selectedCalculation != 'Capital' &&
                                 selectedCalculation != 'Tasa de interes',
@@ -297,8 +294,8 @@ class _Interes_simpleState extends State<Interes_simple> {
         return tiempo * 2;
       case 'Trimestral':
         return tiempo * 4;
-       case 'Cuatrimestral':
-       return tiempo * 3; // 
+      case 'Cuatrimestral':
+        return tiempo * 3; //
       case 'Bimestral':
         return tiempo * 6;
       case 'Mensual':
@@ -348,8 +345,7 @@ class _Interes_simpleState extends State<Interes_simple> {
 
       // Evita asignar null a los controladores
       montoController.text = resultado["Monto"]?.toString() ?? "";
-      interesimpleController.text =
-          resultado["Interes_Simple"]?.toString() ?? "";
+      interesimpleController.text = resultado["Interes_Simple"]?.toString() ?? "";
       capitalController.text = resultado["Capital"]?.toString() ?? "";
       tasaController.text = resultado["Tasa_Interes"]?.toString() ?? "";
       tiempoController.text = resultado["Tiempo"]?.toString() ?? "";
@@ -363,7 +359,7 @@ class _Interes_simpleState extends State<Interes_simple> {
 
   void reiniciarCampos(String Seleccion) {
     if (Seleccion == 'Monto') {
-      tiempoController.text='';
+      tiempoController.text = '';
       montoController.text = '';
       interesimpleController.text = '0.0'.toString();
     }

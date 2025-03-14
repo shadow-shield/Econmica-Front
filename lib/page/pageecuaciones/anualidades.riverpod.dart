@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:transifox/controller/anualidad.controller.service.dart';
+import 'package:transifox/model/anualidades.module.dart';
 import 'package:transifox/widgets/bottonavigator.riverpod.dart';
 
 class Anualidad extends StatefulWidget {
@@ -22,11 +24,13 @@ class _AnualidadState extends State<Anualidad> {
   );
   String? selectedCalculation;
 
+  AnualidadController gestionAnulidad = AnualidadController();
   final TextEditingController tasaanualidadController = TextEditingController();
   final TextEditingController periodosanulidadController =
       TextEditingController();
   final TextEditingController anualidadController = TextEditingController();
-  final TextEditingController valorController = TextEditingController();
+  final TextEditingController valorFController = TextEditingController();
+  final TextEditingController valorPController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -65,20 +69,36 @@ class _AnualidadState extends State<Anualidad> {
                   },
                 ),
                 SizedBox(height: 20),
-                if (selectedCalculation == 'Valor Presente' || selectedCalculation == 'Valor Futuro')
-                  SizedBox(
-                    width: 140,
-                    child: TextField(
-                      controller: valorController,
-                      decoration: InputDecoration(
-                        labelText: selectedCalculation,
-                        prefixIcon: Padding(
-                          padding: EdgeInsets.all(6),
-                          child: Image.asset('assets/tasa-de-interes.png', width: 1),
+                selectedCalculation == 'Valor Presente'
+                    ? SizedBox(
+                        width: 140,
+                        child: TextField(
+                          controller: valorPController,
+                          enabled: selectedCalculation == 'Valor Presente',
+                          decoration: InputDecoration(
+                            labelText: selectedCalculation,
+                            prefixIcon: Padding(
+                              padding: EdgeInsets.all(6),
+                              child: Image.asset('assets/tasa-de-interes.png',
+                                  width: 1),
+                            ),
+                          ),
+                        ),
+                      )
+                    : SizedBox(
+                        width: 140,
+                        child: TextField(
+                          controller: valorFController,
+                          enabled: selectedCalculation == 'Valor Futuro',
+                          decoration: InputDecoration(
+                            labelText: selectedCalculation,
+                            prefixIcon: Padding(
+                              padding: EdgeInsets.all(6),
+                              child: Image.asset('assets/tasanu.png', width: 1),
+                            ),
+                          ),
                         ),
                       ),
-                    ),
-                  ),
                 SizedBox(height: 20),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -148,7 +168,9 @@ class _AnualidadState extends State<Anualidad> {
                   style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.pink,
                       foregroundColor: Colors.white),
-                  onPressed: () {},
+                  onPressed: () {
+                    calcularAnualidad();
+                  },
                   child: Text('Calcular'),
                 ),
               ],
@@ -157,5 +179,51 @@ class _AnualidadState extends State<Anualidad> {
         ],
       ),
     );
+  }
+
+  void calcularAnualidad() async {
+    try {
+      limpiarCampos(selectedCalculation!);
+      double? tasa = double.parse(tasaanualidadController.text);
+      double? periodo = double.parse(periodosanulidadController.text);
+      double? anualidades = double.parse(anualidadController.text);
+      double? valorF = double.parse(valorFController.text);
+      double? valorP = double.parse(valorPController.text);
+
+      Anualidadmodel anualidad = Anualidadmodel(
+        Monto_Fijo: anualidades,
+        Periodos_Capitalizacion: periodo,
+        Tasa_Anualidad: tasa,
+        Valor_Futuro: valorF,
+        Valor_Presente: valorP,
+      );
+
+      Map<String, dynamic> resultado =
+          await gestionAnulidad.registrarAnualidades(anualidad);
+
+      anualidadController.text = resultado["Monto_Fijo"]?.toString() ?? "";
+      periodosanulidadController.text =resultado["Periodos_Capitalizacion"]?.toString() ?? "";
+      tasaanualidadController.text =resultado["Tasa_Anualidad"]?.toString() ?? "";
+      valorFController.text = resultado["Valor_Futuro"]?.toString() ?? "";
+      valorPController.text = resultado["Valor_Presente"]?.toString() ?? "";
+    } catch (e) {
+      print(e);
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Error al registrar la anualidad: $e')),
+      );
+    }
+  }
+
+  void limpiarCampos(String Seleccion) {
+    if (Seleccion == 'Valor Presente') {
+      valorPController.text = '';
+      valorFController.text = 0.toString();
+      ;
+    }
+
+    if (Seleccion == 'Valor Futuro') {
+      valorFController.text = '';
+      valorPController.text = 0.toString();
+    }
   }
 }
