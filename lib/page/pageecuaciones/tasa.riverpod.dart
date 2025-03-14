@@ -52,100 +52,124 @@ class _TasaState extends State<Tasa> {
                         fontStyle: FontStyle.normal,
                         fontFamily: 'Roboto'),
                   ),
-                  margin: EdgeInsets.only(bottom: 60),
+                  margin: EdgeInsets.only(bottom: 30),
                   height: 50,
                   width: 230,
                   decoration: BoxDecoration(
                       color: Colors.white54,
                       borderRadius: BorderRadius.circular(40)),
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SizedBox(
-                      width: 180,
-                      child: TextfieldStyle(
-                        color: Colors.red[900]!,
-                        icon: Container(
-                          padding: EdgeInsets.all(6),
-                          child: Image.asset('assets/valor.png', width: 1),
-                        ),
-                        labelText: 'Valor Presente',
-                      ),
-                    ),
-                    SizedBox(width: 10),
-                    SizedBox(
-                      width: 180,
-                      child: TextfieldStyle(
-                        color: Colors.red[900]!,
-                        icon: Container(
-                          padding: EdgeInsets.all(6),
-                          child: Image.asset('assets/valorf.png', width: 1),
-                        ),
-                        labelText: 'Valor Futuro',
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(height: 10),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SizedBox(
-                      width: 180,
-                      child: TextfieldStyle(
-                        color: Colors.red[900]!,
-                        icon: Container(
-                          padding: EdgeInsets.all(6),
-                          child: Image.asset('assets/periodo.png', width: 1),
-                        ),
-                        labelText: 'Periodo',
-                      ),
-                    ),
-                    SizedBox(width: 10),
-                    Opacity(
-                      opacity: isCompuesto ? 0.5 : 1.0,
-                      child: SizedBox(
-                        width: 180,
-                        child: TextField(
-                          enabled: !isCompuesto,
-                          keyboardType:
-                              TextInputType.numberWithOptions(decimal: true),
-                          decoration: InputDecoration(
-                            filled: true,
-                            fillColor:
-                                isCompuesto ? Colors.red[900]! : Colors.white54,
-                            suffixIcon: Container(
-                              padding: EdgeInsets.all(6),
-                              child:
-                                  Image.asset('assets/interesg.png', width: 1),
-                            ),
-                            border: UnderlineInputBorder(
-                              borderRadius: BorderRadius.circular(20),
-                              borderSide: BorderSide(
-                                color: Colors.red[900]!,
-                                width: 3,
+                if (!isCompuesto) ...[
+                  Row(
+                    children: [
+                      Padding(
+                        padding:
+                            EdgeInsets.symmetric(vertical: 5, horizontal: 20),
+                        child: SizedBox(
+                          width: 150,
+                          child: TextField(
+                            decoration: InputDecoration(
+                              labelText: 'Interés Simple',
+                              prefixIcon: Padding(
+                                padding: EdgeInsets.all(6),
+                                child: Image.asset('assets/interes simple.png',
+                                    width: 1),
                               ),
-                            ),
-                            focusedBorder: UnderlineInputBorder(
-                              borderRadius: BorderRadius.circular(20),
-                              borderSide: BorderSide(
-                                color: Colors.red[900]!,
-                                width: 3,
-                              ),
-                            ),
-                            labelText: 'Interes Generado',
-                            labelStyle: TextStyle(
-                              color: isCompuesto
-                                  ? Colors.grey[700]
-                                  : Colors.red[900]!,
                             ),
                           ),
                         ),
                       ),
+                      Padding(
+                        padding:
+                            EdgeInsets.symmetric(vertical: 5, horizontal: 20),
+                        child: SizedBox(
+                          width: 150,
+                          child: TextField(
+                            decoration: InputDecoration(
+                              labelText: 'Capital',
+                              prefixIcon: Padding(
+                                padding: EdgeInsets.all(6),
+                                child: Image.asset('assets/capital.png',
+                                    width: 1),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(vertical: 5, horizontal: 20),
+                    child: SizedBox(
+                      width: 150,
+                      child: TextField(
+                        decoration: InputDecoration(
+                          labelText: 'Tiempo',
+                          prefixIcon: Padding(
+                            padding: EdgeInsets.all(6),
+                            child:
+                                Image.asset('assets/tiempo.png', width: 1),
+                          ),
+                        ),
+                      ),
                     ),
-                  ],
-                ),
+                  ),
+                ] else ...[
+                  Row(
+                    children: [
+                      Padding(
+                        padding:
+                            EdgeInsets.symmetric(vertical: 5, horizontal: 20),
+                        child: SizedBox(
+                          width: 150,
+                          child: TextField(
+                            decoration: InputDecoration(
+                              labelText: 'Monto Compuesto',
+                              prefixIcon: Padding(
+                                padding: EdgeInsets.all(6),
+                                child: Image.asset('assets/montocom.png',
+                                    width: 1),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding:
+                            EdgeInsets.symmetric(vertical: 5, horizontal: 20),
+                        child: SizedBox(
+                          width: 150,
+                          child: TextField(
+                            decoration: InputDecoration(
+                              labelText: 'Capital',
+                              prefixIcon: Padding(
+                                padding: EdgeInsets.all(6),
+                                child: Image.asset('assets/capitalcom.png',
+                                    width: 1),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(vertical: 5, horizontal: 20),
+                    child: SizedBox(
+                      width: 150,
+                      child: TextField(
+                        decoration: InputDecoration(
+                          labelText: 'Tiempo o Periodo',
+                          prefixIcon: Padding(
+                            padding: EdgeInsets.all(6),
+                            child:
+                                Image.asset('assets/tiempocom.png', width: 1),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
                 SizedBox(height: 20),
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 20),
@@ -164,13 +188,7 @@ class _TasaState extends State<Tasa> {
                         setState(() {
                           isCompuesto = false;
                         });
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                              content: Text("Simple activado"),
-                              duration: Duration(seconds: 1),
-                              behavior: SnackBarBehavior.floating,
-                              backgroundColor: Colors.green),
-                        );
+                        showSnackbar(context, "Simple activado", Colors.green);
                       },
                       child: Text('Modo Simple'),
                     ),
@@ -184,13 +202,8 @@ class _TasaState extends State<Tasa> {
                         setState(() {
                           isCompuesto = true;
                         });
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                              content: Text("Compuesto activado"),
-                              duration: Duration(seconds: 1),
-                              behavior: SnackBarBehavior.floating,
-                              backgroundColor: Colors.yellow[800]!),
-                        );
+                        showSnackbar(
+                            context, "Compuesto activado", Colors.yellow[800]!);
                       },
                       child: Text('Modo Compuesto'),
                     ),
@@ -209,6 +222,35 @@ class _TasaState extends State<Tasa> {
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  Widget buildTextField(String labelText, String assetPath) {
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: 5, horizontal: 20),
+      child: SizedBox(
+        width: 150,
+        child: TextField(
+          decoration: InputDecoration(
+            labelText: 'Interés',
+            prefixIcon: Padding(
+              padding: EdgeInsets.all(6),
+              child: Image.asset('assets/interescom.png', width: 1),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  void showSnackbar(BuildContext context, String message, Color color) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message),
+        duration: Duration(seconds: 1),
+        behavior: SnackBarBehavior.floating,
+        backgroundColor: color,
       ),
     );
   }

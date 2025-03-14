@@ -96,7 +96,7 @@ class _AnualidadState extends State<Anualidad> {
                                 labelText: 'Tasa Anualidad',
                                 prefixIcon: Padding(
                                   padding: EdgeInsets.all(6),
-                                  child: Image.asset('assets/interescom.png',
+                                  child: Image.asset('assets/tasanu.png',
                                       width: 1),
                                 ),
                               ),
@@ -112,7 +112,7 @@ class _AnualidadState extends State<Anualidad> {
                                 labelText: 'Tiempo',
                                 prefixIcon: Padding(
                                   padding: EdgeInsets.all(6),
-                                  child: Image.asset('assets/tiempocom.png',
+                                  child: Image.asset('assets/tiempoanu.png',
                                       width: 1),
                                 ),
                               ),
@@ -137,7 +137,7 @@ class _AnualidadState extends State<Anualidad> {
                           prefixIcon: Padding(
                             padding: EdgeInsets.all(6),
                             child:
-                                Image.asset('assets/tiempocom.png', width: 1),
+                                Image.asset('assets/anu.png', width: 1),
                           ),
                         ),
                       ),
