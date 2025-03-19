@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:transifox/controller/interes_Compuesto.controller.service.dart';
 import 'package:transifox/controller/interes_Simple.controller.service.dart';
+import 'package:transifox/model/interes_Compuesto.module.dart';
 import 'package:transifox/model/interes_Simple.model.module.dart';
 import 'package:transifox/widgets/Dropdowbutton.riverpod.dart';
 import 'package:transifox/widgets/bottonavigator.riverpod.dart';
@@ -29,10 +31,21 @@ class _TasaState extends State<Tasa> {
 
   String? selectedCalculation;
   IntereSimpleController gestionSimple = IntereSimpleController();
+  IntereCompuestoController gestionCompuesto = IntereCompuestoController();
 
-  final TextEditingController capitalController = TextEditingController();
+  //interes Simple
   final TextEditingController tasaController = TextEditingController();
-  final TextEditingController tiempoController = TextEditingController();
+
+  //capital para simple y compuesto
+  final TextEditingController capitalControllerS = TextEditingController();
+  final TextEditingController tiempoControllerS = TextEditingController();
+  final TextEditingController interesimpleController = TextEditingController();
+
+  //interes compuesto
+  final TextEditingController montoCompuestoController =
+      TextEditingController();
+  final TextEditingController capitalControllerC = TextEditingController();
+  final TextEditingController tiempoControllerC = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -48,45 +61,73 @@ class _TasaState extends State<Tasa> {
           Container(decoration: boxDecoration),
           Container(
             padding: EdgeInsets.only(bottom: 40),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Container(
-                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-                  child: Text(
-                    'Tasa de interés:',
-                    style: TextStyle(
-                        fontWeight: FontWeight.w300,
-                        color: Colors.red[900]!,
-                        fontStyle: FontStyle.normal,
-                        fontFamily: 'Roboto'),
-                  ),
-                  margin: EdgeInsets.only(bottom: 30),
-                  height: 50,
-                  width: 230,
-                  decoration: BoxDecoration(
-                      color: Colors.white54,
-                      borderRadius: BorderRadius.circular(40)),
-                ),
-                if (!isCompuesto) ...[
-                  Row(
-                    children: [
-                      Padding(
-                        padding:
-                            EdgeInsets.symmetric(vertical: 5, horizontal: 20),
-                        child: SizedBox(
-                          width: 150,
-                          child: TextField(
-                            decoration: InputDecoration(
-                              labelText: 'Interés Simple',
-                              prefixIcon: Padding(
-                                padding: EdgeInsets.all(6),
-                                child: Image.asset('assets/interes simple.png',
-                                    width: 1),
+            child: SingleChildScrollView(
+              scrollDirection: Axis.vertical,
+              child: Container(
+                height: 800,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    if (!isCompuesto) ...[
+                      SizedBox(
+                            width: 150,
+                            child: TextField(
+                              controller: tasaController,
+                              decoration: InputDecoration(
+                                labelText: 'tasa simple',
+                                prefixIcon: Padding(
+                                  padding: EdgeInsets.all(6),
+                                  child: Image.asset(
+                                      'assets/tasa.png',
+                                      width: 1),
+                                ),
                               ),
                             ),
                           ),
-                        ),
+                          SizedBox(
+                            height: 20,
+                          ),
+                      Row(
+                        children: [
+                          
+                          Padding(
+                            padding: EdgeInsets.symmetric(
+                                vertical: 5, horizontal: 20),
+                            child: SizedBox(
+                              width: 150,
+                              child: TextField(
+                                controller: interesimpleController,
+                                decoration: InputDecoration(
+                                  labelText: 'Interes simple',
+                                  prefixIcon: Padding(
+                                    padding: EdgeInsets.all(6),
+                                    child: Image.asset(
+                                        'assets/interes simple.png',
+                                        width: 1),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.symmetric(
+                                vertical: 5, horizontal: 20),
+                            child: SizedBox(
+                              width: 150,
+                              child: TextField(
+                                controller: capitalControllerS,
+                                decoration: InputDecoration(
+                                  labelText: 'Capital',
+                                  prefixIcon: Padding(
+                                    padding: EdgeInsets.all(6),
+                                    child: Image.asset('assets/capital.png',
+                                        width: 1),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                       Padding(
                         padding:
@@ -94,130 +135,179 @@ class _TasaState extends State<Tasa> {
                         child: SizedBox(
                           width: 150,
                           child: TextField(
-                            controller: capitalController,
+                            controller: tiempoControllerS,
                             decoration: InputDecoration(
-                              labelText: 'Capital',
+                              labelText: 'Tiempo',
                               prefixIcon: Padding(
                                 padding: EdgeInsets.all(6),
                                 child:
-                                    Image.asset('assets/capital.png', width: 1),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  Padding(
-                    padding: EdgeInsets.symmetric(vertical: 5, horizontal: 20),
-                    child: SizedBox(
-                      width: 150,
-                      child: TextField(
-                        controller: tiempoController,
-                        decoration: InputDecoration(
-                          labelText: 'Tiempo',
-                          prefixIcon: Padding(
-                            padding: EdgeInsets.all(6),
-                            child: Image.asset('assets/tiempo.png', width: 1),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ] else ...[
-                  Row(
-                    children: [
-                      Padding(
-                        padding:
-                            EdgeInsets.symmetric(vertical: 5, horizontal: 20),
-                        child: SizedBox(
-                          width: 150,
-                          child: TextField(
-                            decoration: InputDecoration(
-                              labelText: 'Monto Compuesto',
-                              prefixIcon: Padding(
-                                padding: EdgeInsets.all(6),
-                                child: Image.asset('assets/montocom.png',
-                                    width: 1),
+                                    Image.asset('assets/tiempo.png', width: 1),
                               ),
                             ),
                           ),
                         ),
                       ),
                       Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 20),
+                        child: Column(
+                          children: [
+                            FechaSelector(),
+                            SizedBox(
+                              height: 20,
+                            ),
+                            ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.green,
+                                foregroundColor: Colors.white,
+                              ),
+                              onPressed: () {
+                                //calcularTasaSimple
+                                calcularTasainteresSimple();
+                              },
+                              child: Text('Calcular'),
+                            ),
+                            SizedBox(
+                              height: 20,
+                            ),
+                            DropdownMenuItemButton(
+                              color: Colors.red[900]!,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ] else ...[
+                      SizedBox(
+                        width: 180,
+                        child: TextField(
+                          controller: tasaController,
+                          decoration: InputDecoration(
+                            labelText: 'Tasa generada',
+                            prefixIcon: Padding(
+                              padding: EdgeInsets.all(6),
+                              child: Image.asset('assets/interescom.png',
+                                  width: 1),
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Row(
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.symmetric(
+                                vertical: 5, horizontal: 20),
+                            child: SizedBox(
+                              width: 150,
+                              child: TextField(
+                                controller: montoCompuestoController,
+                                decoration: InputDecoration(
+                                  labelText: 'Monto Compuesto',
+                                  prefixIcon: Padding(
+                                    padding: EdgeInsets.all(6),
+                                    child: Image.asset('assets/montocom.png',
+                                        width: 1),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.symmetric(
+                                vertical: 5, horizontal: 20),
+                            child: SizedBox(
+                              width: 150,
+                              child: TextField(
+                                controller: capitalControllerC,
+                                decoration: InputDecoration(
+                                  labelText: 'Capital',
+                                  prefixIcon: Padding(
+                                    padding: EdgeInsets.all(6),
+                                    child: Image.asset('assets/capitalcom.png',
+                                        width: 1),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Padding(
                         padding:
                             EdgeInsets.symmetric(vertical: 5, horizontal: 20),
                         child: SizedBox(
                           width: 150,
                           child: TextField(
-                            controller: capitalController,
+                            controller: tiempoControllerC,
                             decoration: InputDecoration(
-                              labelText: 'Capital',
+                              labelText: 'Tiempo',
                               prefixIcon: Padding(
                                 padding: EdgeInsets.all(6),
-                                child: Image.asset('assets/capitalcom.png',
+                                child: Image.asset('assets/tiempocom.png',
                                     width: 1),
                               ),
                             ),
                           ),
                         ),
                       ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.yellow[800]!,
+                          foregroundColor: Colors.white,
+                        ),
+                        onPressed: () {
+                          calcularTasaCompuesto();
+                        },
+                        child: Text('Calcular'),
+                      )
                     ],
-                  ),
-                ],
-                SizedBox(height: 20),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 20),
-                  child: DropdownMenuItemButton(
-                    color: Colors.red[900]!,
-                  ),
-                ),
-                SizedBox(height: 20),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.green,
-                        foregroundColor: Colors.white,
-                      ),
-                      onPressed: () {
-                        setState(() {
-                          isCompuesto = false;
-                        });
-                        showSnackbar(context, "Simple activado", Colors.green);
-                      },
-                      child: Text('Modo Simple'),
+                    SizedBox(height: 20),
+                    SizedBox(height: 20),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.green,
+                            foregroundColor: Colors.white,
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              isCompuesto = false;
+                            });
+                            showSnackbar(
+                                context, "Simple activado", Colors.green);
+                          },
+                          child: Text('Modo Simple'),
+                        ),
+                        SizedBox(width: 17),
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.yellow[800]!,
+                            foregroundColor: Colors.white,
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              isCompuesto = true;
+                            });
+                            showSnackbar(context, "Compuesto activado",
+                                Colors.yellow[800]!);
+                          },
+                          child: Text('Modo Compuesto'),
+                        ),
+                      ],
                     ),
-                    SizedBox(width: 17),
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.yellow[800]!,
-                        foregroundColor: Colors.white,
-                      ),
-                      onPressed: () {
-                        setState(() {
-                          isCompuesto = true;
-                        });
-                        showSnackbar(
-                            context, "Compuesto activado", Colors.yellow[800]!);
-                      },
-                      child: Text('Modo Compuesto'),
-                    ),
+                    SizedBox(height: 20),
                   ],
                 ),
-                SizedBox(height: 20),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.red[900]!,
-                    foregroundColor: Colors.white,
-                  ),
-                  onPressed: () {
-                    CalcularTiempo();
-                  },
-                  child: Text('Calcular'),
-                ),
-              ],
+              ),
             ),
           ),
         ],
@@ -252,6 +342,45 @@ class _TasaState extends State<Tasa> {
         backgroundColor: color,
       ),
     );
+  }
+
+  //compuesto
+  void calcularTasaCompuesto() async {
+    try {
+      double? montoCompuesto =
+          double.tryParse(montoCompuestoController.text.trim());
+      double? capital = double.tryParse(capitalControllerC.text.trim());
+      double? tiempo = double.tryParse(tiempoControllerC.text.trim());
+
+      // Se permite que los valores sean null
+      InteresCompuesto interesCompu = InteresCompuesto(
+          Monto_Compuesto: montoCompuesto,
+          Capital: capital,
+          Tasa_Interes: null,
+          Tiempo: tiempo,
+          Interes_Compuesto: 0);
+
+      Map<String, dynamic> resultado =
+          await gestionCompuesto.registrarCompuesto(interesCompu);
+
+      print(resultado);
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Interés Calculado con éxito')),
+      );
+
+      // Evita asignar null a los controladores
+      tasaController.text = resultado["Tasa_Interes"]?.toString() ?? "";
+      montoCompuestoController.text =
+          resultado["Monto_Compuesto"]?.toString() ?? "";
+      tiempoControllerC.text = resultado["Tiempo"]?.toString() ?? "";
+      capitalControllerC.text = resultado["Capital"]?.toString() ?? "";
+    } catch (e) {
+      print(e);
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Error al registrar interés: $e')),
+      );
+    }
   }
 
   double CalcularTiempo() {
@@ -325,13 +454,12 @@ class _TasaState extends State<Tasa> {
     }
   }
 
-  void calcularTasa() async {
+  void calcularTasainteresSimple() async {
     try {
-      LimpiarCampos(selectedCalculation!);
+      double? capital = double.tryParse(capitalControllerS.text.trim());
+      double? interesSimple =
+          double.tryParse(interesimpleController.text.trim());
 
-      double? capital = double.tryParse(capitalController.text.trim());
-
-      double? tasaInteres = double.tryParse(tasaController.text.trim());
       double? tiempo = CalcularTiempo();
 
       if (tiempo != null) {
@@ -342,9 +470,9 @@ class _TasaState extends State<Tasa> {
       // Se permite que los valores sean null
       InteresSimple interesSimpleObj = InteresSimple(
         Capital: capital,
-        Interes_Simple: null,
-        Monto: null,
-        Tasa_Interes: tasaInteres,
+        Interes_Simple: interesSimple,
+        Monto: 0,
+        Tasa_Interes: null,
         Tiempo: tiempo,
       );
 
@@ -358,28 +486,17 @@ class _TasaState extends State<Tasa> {
       );
 
       // Evita asignar null a los controladores
-      capitalController.text = resultado["Capital"]?.toString() ?? "";
+
+      interesimpleController.text =
+          resultado["Interes_Simple"]?.toString() ?? "";
+      capitalControllerS.text = resultado["Capital"]?.toString() ?? "";
       tasaController.text = resultado["Tasa_Interes"]?.toString() ?? "";
-      tiempoController.text = resultado["Tiempo"]?.toString() ?? "";
+      tiempoControllerS.text = resultado["Tiempo"]?.toString() ?? "";
     } catch (e) {
       print(e);
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Error al registrar interés: $e')),
       );
-    }
-  }
-
-  void LimpiarCampos(String Seleccion) {
-    if (Seleccion == 'Capital') {
-      capitalController.clear();
-    }
-
-    if (Seleccion == 'Tasa de interes') {
-      tasaController.clear();
-    }
-
-    if (Seleccion == 'Tiempo') {
-      tiempoController.clear();
     }
   }
 }
