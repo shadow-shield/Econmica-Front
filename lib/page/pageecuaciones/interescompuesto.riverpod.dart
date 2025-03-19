@@ -210,7 +210,7 @@ class _InteresCompuestoState extends State<InteresCompuestoPage> {
                       style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.yellow[800]!,
                           foregroundColor: Colors.white),
-                      onPressed: () {},
+                      onPressed: () { calcularCompuesto();},
                       child: Text('Calcular'),
                     ),
                   ],
@@ -227,11 +227,6 @@ class _InteresCompuestoState extends State<InteresCompuestoPage> {
     try {
 
 
-       final TextEditingController TasainteresController = TextEditingController();
-      final TextEditingController capitalController = TextEditingController();
-      final TextEditingController montoController = TextEditingController();
-      final TextEditingController tiempoController = TextEditingController();
-      final TextEditingController interesCompuestoController = TextEditingController();
 
       LimpiarCampos(selectedCalculation!);
 
@@ -274,6 +269,7 @@ class _InteresCompuestoState extends State<InteresCompuestoPage> {
       capitalController.text =   resultado["Capital"]?.toString() ?? "";
       tiempoController.text = resultado["Tiempo"]?.toString() ?? "";
       interesCompuestoController.text = resultado["Interes_Compuesto"]?.toString() ?? "";
+      montoController.text=resultado["Monto_Compuesto"]?.toString() ?? "";
    
     } catch (e) {
       print(e);
