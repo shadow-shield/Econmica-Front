@@ -123,7 +123,6 @@ class _Interes_simpleState extends State<Interes_simple> {
                           width: 180,
                           child: TextField(
                             controller: interesimpleController,
-                            enabled: selectedCalculation == 'Tiempo',
                             decoration: InputDecoration(
                               labelText: 'Interes Simple',
                               prefixIcon: Padding(
@@ -141,10 +140,6 @@ class _Interes_simpleState extends State<Interes_simple> {
                               width: 180,
                               child: TextField(
                                 controller: montoController,
-                                enabled: selectedCalculation != 'Monto' &&
-                                    selectedCalculation != 'Capital' &&
-                                    selectedCalculation != 'Tasa de interes' &&
-                                    selectedCalculation != 'Tiempo',
                                 decoration: InputDecoration(
                                   labelText: 'Monto',
                                   prefixIcon: Padding(
@@ -160,7 +155,6 @@ class _Interes_simpleState extends State<Interes_simple> {
                               width: 180,
                               child: TextField(
                                 controller: capitalController,
-                                enabled: selectedCalculation != 'Capital',
                                 decoration: InputDecoration(
                                   labelText: 'Capital',
                                   prefixIcon: Padding(
@@ -183,7 +177,6 @@ class _Interes_simpleState extends State<Interes_simple> {
                           width: 180,
                           child: TextField(
                             controller: tasaController,
-                            enabled: selectedCalculation != 'Tasa de interes',
                             decoration: InputDecoration(
                               labelText: 'Tasa de interes',
                               prefixIcon: Padding(
@@ -198,10 +191,6 @@ class _Interes_simpleState extends State<Interes_simple> {
                           width: 180,
                           child: TextField(
                             controller: tiempoController,
-                            enabled: selectedCalculation != 'Tiempo' &&
-                                selectedCalculation != 'Monto' &&
-                                selectedCalculation != 'Capital' &&
-                                selectedCalculation != 'Tasa de interes',
                             decoration: InputDecoration(
                               labelText: 'Tiempo',
                               prefixIcon: Padding(
@@ -345,7 +334,8 @@ class _Interes_simpleState extends State<Interes_simple> {
 
       // Evita asignar null a los controladores
       montoController.text = resultado["Monto"]?.toString() ?? "";
-      interesimpleController.text = resultado["Interes_Simple"]?.toString() ?? "";
+      interesimpleController.text =
+          resultado["Interes_Simple"]?.toString() ?? "";
       capitalController.text = resultado["Capital"]?.toString() ?? "";
       tasaController.text = resultado["Tasa_Interes"]?.toString() ?? "";
       tiempoController.text = resultado["Tiempo"]?.toString() ?? "";

@@ -26,12 +26,13 @@ class _InteresCompuestoState extends State<InteresCompuestoPage> {
   );
 
   String? selectedCalculation;
-  IntereCompuestoController gestionCompuesto= IntereCompuestoController();
+  IntereCompuestoController gestionCompuesto = IntereCompuestoController();
   final TextEditingController TasainteresController = TextEditingController();
   final TextEditingController capitalController = TextEditingController();
   final TextEditingController montoController = TextEditingController();
   final TextEditingController tiempoController = TextEditingController();
-  final TextEditingController interesCompuestoController = TextEditingController();
+  final TextEditingController interesCompuestoController =
+      TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -99,7 +100,7 @@ class _InteresCompuestoState extends State<InteresCompuestoPage> {
                                   'Capital',
                                   'Monto Compuesto',
                                   'Tiempo',
-                                  'Interes Simple'
+                                  'Interes Compuesto'
                                 ].map<DropdownMenuItem<String>>((String value) {
                                   return DropdownMenuItem<String>(
                                     value: value,
@@ -122,12 +123,14 @@ class _InteresCompuestoState extends State<InteresCompuestoPage> {
                           width: 180,
                           child: TextField(
                             controller: interesCompuestoController,
-                            enabled: selectedCalculation != 'Interés' && selectedCalculation != 'Interés Compuesto',
+                            enabled: selectedCalculation != 'Interés' &&
+                                selectedCalculation != 'Interés Compuesto',
                             decoration: InputDecoration(
                               labelText: 'Interés Compuesto',
                               prefixIcon: Padding(
                                 padding: EdgeInsets.all(6),
-                                child: Image.asset('assets/incompuesto.png', width: 1),
+                                child: Image.asset('assets/incompuesto.png',
+                                    width: 1),
                               ),
                             ),
                           ),
@@ -145,7 +148,8 @@ class _InteresCompuestoState extends State<InteresCompuestoPage> {
                                   labelText: 'Interés',
                                   prefixIcon: Padding(
                                     padding: EdgeInsets.all(6),
-                                    child: Image.asset('assets/interescom.png', width: 1),
+                                    child: Image.asset('assets/interescom.png',
+                                        width: 1),
                                   ),
                                 ),
                               ),
@@ -160,7 +164,8 @@ class _InteresCompuestoState extends State<InteresCompuestoPage> {
                                   labelText: 'Tiempo',
                                   prefixIcon: Padding(
                                     padding: EdgeInsets.all(6),
-                                    child: Image.asset('assets/tiempocom.png', width: 1),
+                                    child: Image.asset('assets/tiempocom.png',
+                                        width: 1),
                                   ),
                                 ),
                               ),
@@ -179,7 +184,8 @@ class _InteresCompuestoState extends State<InteresCompuestoPage> {
                                   labelText: 'Capital',
                                   prefixIcon: Padding(
                                     padding: EdgeInsets.all(6),
-                                    child: Image.asset('assets/capitalcom.png', width: 1),
+                                    child: Image.asset('assets/capitalcom.png',
+                                        width: 1),
                                   ),
                                 ),
                               ),
@@ -189,12 +195,14 @@ class _InteresCompuestoState extends State<InteresCompuestoPage> {
                               width: 180,
                               child: TextField(
                                 controller: montoController,
-                                enabled: selectedCalculation != 'Monto Compuesto',
+                                enabled:
+                                    selectedCalculation != 'Monto Compuesto',
                                 decoration: InputDecoration(
                                   labelText: 'Monto Compuesto',
                                   prefixIcon: Padding(
                                     padding: EdgeInsets.all(6),
-                                    child: Image.asset('assets/montocom.png', width: 1),
+                                    child: Image.asset('assets/montocom.png',
+                                        width: 1),
                                   ),
                                 ),
                               ),
@@ -204,13 +212,17 @@ class _InteresCompuestoState extends State<InteresCompuestoPage> {
                       ],
                     ),
                     SizedBox(height: 30),
-                    DropdownMenuItemButton(color: Colors.yellow[800]!, ),
+                    DropdownMenuItemButton(
+                      color: Colors.yellow[800]!,
+                    ),
                     SizedBox(height: 20),
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.yellow[800]!,
                           foregroundColor: Colors.white),
-                      onPressed: () { calcularCompuesto();},
+                      onPressed: () {
+                        calcularCompuesto();
+                      },
                       child: Text('Calcular'),
                     ),
                   ],
@@ -221,20 +233,17 @@ class _InteresCompuestoState extends State<InteresCompuestoPage> {
         ));
   }
 
-
-
   void calcularCompuesto() async {
     try {
-
-
-
       LimpiarCampos(selectedCalculation!);
 
-      double? tasaCompuesto = double.tryParse(TasainteresController.text.trim());
+      double? tasaCompuesto =
+          double.tryParse(TasainteresController.text.trim());
       double? capital = double.tryParse(capitalController.text.trim());
-      double?  monto= double.tryParse(montoController.text.trim());
+      double? monto = double.tryParse(montoController.text.trim());
       double? tiempo = double.tryParse(tiempoController.text.trim());
-      double? interesCompuesto=double.tryParse(interesCompuestoController.text.trim());
+      double? interesCompuesto =
+          double.tryParse(interesCompuestoController.text.trim());
 
       if (tiempo != null) {
         tiempo =
@@ -243,20 +252,14 @@ class _InteresCompuestoState extends State<InteresCompuestoPage> {
 
       // Se permite que los valores sean null
       InteresCompuesto interesCompu = InteresCompuesto(
-
-        Monto_Compuesto: monto,
-        Capital: capital,
-        Tasa_Interes: tasaCompuesto,
-        Tiempo: tiempo, 
-        Interes_Compuesto: interesCompuesto
-        );
-
-        
+          Monto_Compuesto: monto,
+          Capital: capital,
+          Tasa_Interes: tasaCompuesto,
+          Tiempo: tiempo,
+          Interes_Compuesto: interesCompuesto);
 
       Map<String, dynamic> resultado =
           await gestionCompuesto.registrarCompuesto(interesCompu);
-
-          
 
       print(resultado);
 
@@ -266,11 +269,11 @@ class _InteresCompuestoState extends State<InteresCompuestoPage> {
 
       // Evita asignar null a los controladores
       TasainteresController.text = resultado["Tasa_Interes"]?.toString() ?? "";
-      capitalController.text =   resultado["Capital"]?.toString() ?? "";
+      montoController.text = resultado["Monto_Compuesto"]?.toString() ?? "";
+      capitalController.text = resultado["Capital"]?.toString() ?? "";
       tiempoController.text = resultado["Tiempo"]?.toString() ?? "";
-      interesCompuestoController.text = resultado["Interes_Compuesto"]?.toString() ?? "";
-      montoController.text=resultado["Monto_Compuesto"]?.toString() ?? "";
-   
+      interesCompuestoController.text =
+          resultado["Interes_Compuesto"]?.toString() ?? "";
     } catch (e) {
       print(e);
       ScaffoldMessenger.of(context).showSnackBar(
@@ -279,24 +282,21 @@ class _InteresCompuestoState extends State<InteresCompuestoPage> {
     }
   }
 
-
   void LimpiarCampos(String Seleccion) {
     if (Seleccion == 'Monto Compuesto') {
-   
       montoController.text = '';
-      interesCompuestoController.text='0'.toString();
+      interesCompuestoController.text = '0'.toString();
     }
 
     if (Seleccion == 'Interés') {
-      TasainteresController.text='0'.toString();
-      tiempoController.text='0'.toLowerCase();
-      interesCompuestoController.text='';
-  
+      TasainteresController.text = '0'.toString();
+      tiempoController.text = '0'.toLowerCase();
+      interesCompuestoController.text = '';
     }
 
     if (Seleccion == 'Capital') {
-      capitalController.text='';
-      interesCompuestoController.text='0'.toString();
+      capitalController.text = '';
+      interesCompuestoController.text = '0'.toString();
     }
 
     if (Seleccion == 'Tasa De Interes') {
@@ -305,9 +305,8 @@ class _InteresCompuestoState extends State<InteresCompuestoPage> {
     }
 
     if (Seleccion == 'Tiempo') {
-      tiempoController.text='';
-      interesCompuestoController.text='0'.toString();
+      tiempoController.text = '';
+      interesCompuestoController.text = '0'.toString();
     }
   }
-
 }

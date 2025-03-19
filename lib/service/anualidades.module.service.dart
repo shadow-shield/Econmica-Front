@@ -1,5 +1,5 @@
 import 'package:transifox/model/anualidades.module.dart';
-import 'package:transifox/page/pageecuaciones/anualidades.riverpod.dart';
+
 
 import 'package:transifox/service/Crudeco.riverpod.dart';
 

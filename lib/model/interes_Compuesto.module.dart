@@ -17,11 +17,11 @@ class InteresCompuesto {
   });
 
   InteresCompuesto.fromJson(Map<String, dynamic> json) {
-    Monto_Compuesto = json['Monto'];
+    Monto_Compuesto = json['Monto_Compuesto'];
     Capital = json['Capital'];
     Tasa_Interes = json['Tasa_Interes'];
     Tiempo = json['Tiempo'];
-    Interes_Compuesto = json['Interes_Simple'];
+    Interes_Compuesto = json['Interes_Compuesto'];
   }
 
   Map<String, dynamic> toJson() {
