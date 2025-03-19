@@ -28,7 +28,7 @@ class _AnualidadState extends State<Anualidad> {
   final TextEditingController tasaanualidadController = TextEditingController();
   final TextEditingController periodosanulidadController =
       TextEditingController();
-  final TextEditingController anualidadController = TextEditingController();
+  final TextEditingController montofijoController = TextEditingController();
   final TextEditingController valorFController = TextEditingController();
   final TextEditingController valorPController = TextEditingController();
 
@@ -150,7 +150,7 @@ class _AnualidadState extends State<Anualidad> {
                     SizedBox(
                       width: 180,
                       child: TextField(
-                        controller: anualidadController,
+                        controller: montofijoController,
                         enabled: selectedCalculation != 'Anualidades',
                         decoration: InputDecoration(
                           labelText: 'Anualidades',
@@ -183,15 +183,15 @@ class _AnualidadState extends State<Anualidad> {
 
   void calcularAnualidad() async {
     try {
-      limpiarCampos(selectedCalculation!);
-      double? tasa = double.parse(tasaanualidadController.text);
-      double? periodo = double.parse(periodosanulidadController.text);
-      double? anualidades = double.parse(anualidadController.text);
-      double? valorF = double.parse(valorFController.text);
-      double? valorP = double.parse(valorPController.text);
+     
+      double? tasa = double.tryParse(tasaanualidadController.text.trim());
+      double? periodo = double.tryParse(periodosanulidadController.text.trim());
+      double? monto = double.tryParse(montofijoController.text.trim());
+      double? valorF = double.tryParse(valorFController.text.trim());
+      double? valorP = double.tryParse(valorPController.text.trim());
 
       Anualidadmodel anualidad = Anualidadmodel(
-        Monto_Fijo: anualidades,
+        Monto_Fijo: monto,
         Periodos_Capitalizacion: periodo,
         Tasa_Anualidad: tasa,
         Valor_Futuro: valorF,
@@ -201,7 +201,7 @@ class _AnualidadState extends State<Anualidad> {
       Map<String, dynamic> resultado =
           await gestionAnulidad.registrarAnualidades(anualidad);
 
-      anualidadController.text = resultado["Monto_Fijo"]?.toString() ?? "";
+      montofijoController.text = resultado["Monto_Fijo"]?.toString() ?? "";
       periodosanulidadController.text =resultado["Periodos_Capitalizacion"]?.toString() ?? "";
       tasaanualidadController.text =resultado["Tasa_Anualidad"]?.toString() ?? "";
       valorFController.text = resultado["Valor_Futuro"]?.toString() ?? "";
@@ -209,7 +209,7 @@ class _AnualidadState extends State<Anualidad> {
     } catch (e) {
       print(e);
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Error al registrar la anualidad: $e')),
+        SnackBar(content: Text('Error al registrar la anualidad: ${e}')),
       );
     }
   }
