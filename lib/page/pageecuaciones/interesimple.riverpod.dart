@@ -300,6 +300,7 @@ class _Interes_simpleState extends State<Interes_simple> {
 
   void calcularSimple() async {
     try {
+
       LimpiarCampos(selectedCalculation!);
 
       double? capital = double.tryParse(capitalController.text.trim());
@@ -311,7 +312,7 @@ class _Interes_simpleState extends State<Interes_simple> {
 
       if (tiempo != null) {
         tiempo =
-            double.parse(tiempo.toStringAsFixed(2)); // Redondea a 2 decimales
+            double.parse(tiempo.toStringAsFixed(5)); // Redondea a 2 decimales
       }
 
       // Se permite que los valores sean null
@@ -335,11 +336,14 @@ class _Interes_simpleState extends State<Interes_simple> {
       // Evita asignar null a los controladores
       montoController.text = resultado["Monto"]?.toString() ?? "";
       interesimpleController.text =
-          resultado["Interes_Simple"]?.toString() ?? "";
+      resultado["Interes_Simple"]?.toString() ?? "";
       capitalController.text = resultado["Capital"]?.toString() ?? "";
       tasaController.text = resultado["Tasa_Interes"]?.toString() ?? "";
       tiempoController.text = resultado["Tiempo"]?.toString() ?? "";
+
+
     } catch (e) {
+
       print(e);
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Error al registrar interés: $e')),
