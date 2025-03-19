@@ -136,8 +136,16 @@ class _TasaState extends State<Tasa> {
                   ),
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 20),
-                    child: DropdownMenuItemButton(
-                      color: Colors.red[900]!,
+                    child: Column(
+                      children: [
+                        FechaSelector(),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        DropdownMenuItemButton(
+                          color: Colors.red[900]!,
+                        ),
+                      ],
                     ),
                   ),
                 ] else ...[
