@@ -315,6 +315,8 @@ class _Interes_simpleState extends State<Interes_simple> {
             double.parse(tiempo.toStringAsFixed(5)); // Redondea a 2 decimales
       }
 
+    
+
       // Se permite que los valores sean null
       InteresSimple interesSimpleObj = InteresSimple(
         Capital: capital,
@@ -338,6 +340,10 @@ class _Interes_simpleState extends State<Interes_simple> {
       interesimpleController.text =
       resultado["Interes_Simple"]?.toString() ?? "";
       capitalController.text = resultado["Capital"]?.toString() ?? "";
+
+ 
+
+
       tasaController.text = resultado["Tasa_Interes"]?.toString() ?? "";
       tiempoController.text = resultado["Tiempo"]?.toString() ?? "";
 
@@ -350,6 +356,9 @@ class _Interes_simpleState extends State<Interes_simple> {
       );
     }
   }
+
+
+
 
   void LimpiarCampos(String Seleccion) {
     if (Seleccion == 'Monto') {
