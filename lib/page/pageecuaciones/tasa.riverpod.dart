@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:transifox/controller/interes_Compuesto.controller.service.dart';
 import 'package:transifox/controller/interes_Simple.controller.service.dart';
+import 'package:transifox/model/interes_Compuesto.module.dart';
 import 'package:transifox/model/interes_Simple.model.module.dart';
 import 'package:transifox/widgets/Dropdowbutton.riverpod.dart';
 import 'package:transifox/widgets/bottonavigator.riverpod.dart';
@@ -29,10 +31,16 @@ class _TasaState extends State<Tasa> {
 
   String? selectedCalculation;
   IntereSimpleController gestionSimple = IntereSimpleController();
+  IntereCompuestoController gestionCompuesto = IntereCompuestoController();
 
-  final TextEditingController capitalController = TextEditingController();
+  //interes Simple
   final TextEditingController tasaController = TextEditingController();
   final TextEditingController tiempoController = TextEditingController();
+  //capital para simple y compuesto
+  final TextEditingController capitalController = TextEditingController();
+  //interes compuesto
+  final TextEditingController montoCompuestoController =
+      TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -124,6 +132,29 @@ class _TasaState extends State<Tasa> {
                       ),
                     ),
                   ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.green,
+                      foregroundColor: Colors.white,
+                    ),
+                    onPressed: () {
+                      
+                      //calcularTasaSimple
+                    },
+                    child: Text('Calcular'),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 20),
+                    child: DropdownMenuItemButton(
+                      color: Colors.red[900]!,
+                    ),
+                  ),
                 ] else ...[
                   Row(
                     children: [
@@ -133,6 +164,7 @@ class _TasaState extends State<Tasa> {
                         child: SizedBox(
                           width: 150,
                           child: TextField(
+                            controller: montoCompuestoController,
                             decoration: InputDecoration(
                               labelText: 'Monto Compuesto',
                               prefixIcon: Padding(
@@ -164,14 +196,21 @@ class _TasaState extends State<Tasa> {
                       ),
                     ],
                   ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.yellow[800]!,
+                      foregroundColor: Colors.white,
+                    ),
+                    onPressed: () {
+                      calcularTasaCompuesto();
+                    },
+                    child: Text('Calcular'),
+                  )
                 ],
                 SizedBox(height: 20),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 20),
-                  child: DropdownMenuItemButton(
-                    color: Colors.red[900]!,
-                  ),
-                ),
                 SizedBox(height: 20),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -207,16 +246,6 @@ class _TasaState extends State<Tasa> {
                   ],
                 ),
                 SizedBox(height: 20),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.red[900]!,
-                    foregroundColor: Colors.white,
-                  ),
-                  onPressed: () {
-                    CalcularTiempo();
-                  },
-                  child: Text('Calcular'),
-                ),
               ],
             ),
           ),
@@ -254,121 +283,6 @@ class _TasaState extends State<Tasa> {
     );
   }
 
-  double CalcularTiempo() {
-    // 🔥 Acceder a los valores almacenados en los ValueNotifier
-    String? periodo = periodoNotifier.value;
-    String? formatoActual = formatoSeleccionado.value;
-
-    print(periodo);
-
-    // Extraer valores de la fecha ingresada
-    String? anioStr = valoresFechas.value['anio'];
-    String? mesStr = valoresFechas.value['mes'];
-    String? diaStr = valoresFechas.value['dia'];
-
-    String? fechaInicioStr = valoresFechas.value['fechaInicio'];
-    String? fechaFinStr = valoresFechas.value['fechaFin'];
-
-    // 🔹 Convertir valores a enteros (manejar casos nulos)
-    int ano = anioStr != null ? int.tryParse(anioStr) ?? 0 : 0;
-    int mes = mesStr != null ? int.tryParse(mesStr) ?? 0 : 0;
-    int dias = diaStr != null ? int.tryParse(diaStr) ?? 0 : 0;
-
-    DateTime fechaEspecifica;
-    DateTime fechaEspecifica2;
-
-    if (formatoActual == 'Año, Mes, Día') {
-      // Usar los valores ingresados
-      fechaEspecifica = DateTime(ano, mes, dias);
-      fechaEspecifica2 =
-          DateTime(ano + 1, mes, dias); // Un año después para referencia
-    } else {
-      // Si el usuario seleccionó 'Fecha Inicio - Fecha Fin'
-      if (fechaInicioStr != null && fechaFinStr != null) {
-        fechaEspecifica = DateTime.parse(fechaInicioStr);
-        fechaEspecifica2 = DateTime.parse(fechaFinStr);
-      } else {
-        throw Exception("Las fechas de inicio y fin no pueden estar vacías.");
-      }
-    }
-
-    // 🔹 Calcular la diferencia entre fechas
-    Duration diferencia = fechaEspecifica2.difference(fechaEspecifica);
-    double tiempo;
-
-    if (formatoActual == 'Año, Mes, Día') {
-      tiempo = ano + (mes / 12) + (dias / 360);
-    } else {
-      tiempo = diferencia.inDays / 365;
-    }
-
-    // 🔹 Ajustar tiempo según el período seleccionado
-    switch (periodo) {
-      case 'Anual':
-        return tiempo;
-      case 'Semestral':
-        return tiempo * 2;
-      case 'Trimestral':
-        return tiempo * 4;
-      case 'Cuatrimestral':
-        return tiempo * 3; //
-      case 'Bimestral':
-        return tiempo * 6;
-      case 'Mensual':
-        return tiempo * 12;
-      case 'Semanal':
-        return tiempo * 52.14;
-      case 'Diario':
-        return tiempo * 365;
-      default:
-        throw Exception("Período no válido");
-    }
-  }
-
-  void calcularTasa() async {
-    try {
-      LimpiarCampos(selectedCalculation!);
-
-      double? capital = double.tryParse(capitalController.text.trim());
-
-      double? tasaInteres = double.tryParse(tasaController.text.trim());
-      double? tiempo = CalcularTiempo();
-
-      if (tiempo != null) {
-        tiempo =
-            double.parse(tiempo.toStringAsFixed(2)); // Redondea a 2 decimales
-      }
-
-      // Se permite que los valores sean null
-      InteresSimple interesSimpleObj = InteresSimple(
-        Capital: capital,
-        Interes_Simple: null,
-        Monto: null,
-        Tasa_Interes: tasaInteres,
-        Tiempo: tiempo,
-      );
-
-      Map<String, dynamic> resultado =
-          await gestionSimple.registrarInteres(interesSimpleObj);
-
-      print(resultado);
-
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Interés Calculado con éxito')),
-      );
-
-      // Evita asignar null a los controladores
-      capitalController.text = resultado["Capital"]?.toString() ?? "";
-      tasaController.text = resultado["Tasa_Interes"]?.toString() ?? "";
-      tiempoController.text = resultado["Tiempo"]?.toString() ?? "";
-    } catch (e) {
-      print(e);
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Error al registrar interés: $e')),
-      );
-    }
-  }
-
   void LimpiarCampos(String Seleccion) {
     if (Seleccion == 'Capital') {
       capitalController.clear();
@@ -380,6 +294,46 @@ class _TasaState extends State<Tasa> {
 
     if (Seleccion == 'Tiempo') {
       tiempoController.clear();
+    }
+  }
+
+  //compuesto
+  void calcularTasaCompuesto() async {
+    try {
+      LimpiarCampos(selectedCalculation!);
+
+      double? montoCompuesto =
+          double.tryParse(montoCompuestoController.text.trim());
+      double? capital = double.tryParse(capitalController.text.trim());
+
+      // Se permite que los valores sean null
+      InteresCompuesto interesCompu = InteresCompuesto(
+          Monto_Compuesto: montoCompuesto,
+          Capital: capital,
+          Tasa_Interes: 0,
+          Tiempo: 0,
+          Interes_Compuesto: 0);
+
+      Map<String, dynamic> resultado =
+          await gestionCompuesto.registrarCompuesto(interesCompu);
+
+      print(resultado);
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Interés Calculado con éxito')),
+      );
+
+      // Evita asignar null a los controladores
+      montoCompuestoController.text =
+          resultado["Monto_Compuesto"]?.toString() ?? "";
+
+      capitalController.text = resultado["Capital"]?.toString() ?? "";
+      tiempoController.text = resultado["Tiempo"]?.toString() ?? "";
+    } catch (e) {
+      print(e);
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Error al registrar interés: $e')),
+      );
     }
   }
 }
