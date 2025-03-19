@@ -35,9 +35,12 @@ class _TasaState extends State<Tasa> {
 
   //interes Simple
   final TextEditingController tasaController = TextEditingController();
-  final TextEditingController tiempoController = TextEditingController();
+
   //capital para simple y compuesto
   final TextEditingController capitalController = TextEditingController();
+  final TextEditingController tiempoController = TextEditingController();
+  final TextEditingController capitalControllerC = TextEditingController();
+  final TextEditingController tiempoControllerC = TextEditingController();
   //interes compuesto
   final TextEditingController montoCompuestoController =
       TextEditingController();
@@ -59,23 +62,6 @@ class _TasaState extends State<Tasa> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                Container(
-                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-                  child: Text(
-                    'Tasa de interés:',
-                    style: TextStyle(
-                        fontWeight: FontWeight.w300,
-                        color: Colors.red[900]!,
-                        fontStyle: FontStyle.normal,
-                        fontFamily: 'Roboto'),
-                  ),
-                  margin: EdgeInsets.only(bottom: 30),
-                  height: 50,
-                  width: 230,
-                  decoration: BoxDecoration(
-                      color: Colors.white54,
-                      borderRadius: BorderRadius.circular(40)),
-                ),
                 if (!isCompuesto) ...[
                   Row(
                     children: [
@@ -86,7 +72,7 @@ class _TasaState extends State<Tasa> {
                           width: 150,
                           child: TextField(
                             decoration: InputDecoration(
-                              labelText: 'Interés Simple',
+                              labelText: 'Tasa interes',
                               prefixIcon: Padding(
                                 padding: EdgeInsets.all(6),
                                 child: Image.asset('assets/interes simple.png',
@@ -141,7 +127,6 @@ class _TasaState extends State<Tasa> {
                       foregroundColor: Colors.white,
                     ),
                     onPressed: () {
-                      
                       //calcularTasaSimple
                     },
                     child: Text('Calcular'),
@@ -156,6 +141,22 @@ class _TasaState extends State<Tasa> {
                     ),
                   ),
                 ] else ...[
+                  SizedBox(
+                    width: 180,
+                    child: TextField(
+                      controller: tasaController,
+                      decoration: InputDecoration(
+                        labelText: 'Tasa Interes',
+                        prefixIcon: Padding(
+                          padding: EdgeInsets.all(6),
+                          child: Image.asset('assets/interescom.png', width: 1),
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
                   Row(
                     children: [
                       Padding(
@@ -182,7 +183,7 @@ class _TasaState extends State<Tasa> {
                         child: SizedBox(
                           width: 150,
                           child: TextField(
-                            controller: capitalController,
+                            controller: capitalControllerC,
                             decoration: InputDecoration(
                               labelText: 'Capital',
                               prefixIcon: Padding(
@@ -195,6 +196,26 @@ class _TasaState extends State<Tasa> {
                         ),
                       ),
                     ],
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(vertical: 5, horizontal: 20),
+                    child: SizedBox(
+                      width: 150,
+                      child: TextField(
+                        controller: tiempoControllerC,
+                        decoration: InputDecoration(
+                          labelText: 'Tiempo',
+                          prefixIcon: Padding(
+                            padding: EdgeInsets.all(6),
+                            child:
+                                Image.asset('assets/tiempocom.png', width: 1),
+                          ),
+                        ),
+                      ),
+                    ),
                   ),
                   SizedBox(
                     height: 20,
@@ -285,7 +306,7 @@ class _TasaState extends State<Tasa> {
 
   void LimpiarCampos(String Seleccion) {
     if (Seleccion == 'Capital') {
-      capitalController.clear();
+      capitalControllerC.clear();
     }
 
     if (Seleccion == 'Tasa de interes') {
@@ -293,25 +314,24 @@ class _TasaState extends State<Tasa> {
     }
 
     if (Seleccion == 'Tiempo') {
-      tiempoController.clear();
+      tiempoControllerC.clear();
     }
   }
 
   //compuesto
   void calcularTasaCompuesto() async {
     try {
-      LimpiarCampos(selectedCalculation!);
-
       double? montoCompuesto =
           double.tryParse(montoCompuestoController.text.trim());
-      double? capital = double.tryParse(capitalController.text.trim());
+      double? capital = double.tryParse(capitalControllerC.text.trim());
+      double? tiempo = double.tryParse(tiempoControllerC.text.trim());
 
       // Se permite que los valores sean null
       InteresCompuesto interesCompu = InteresCompuesto(
           Monto_Compuesto: montoCompuesto,
           Capital: capital,
-          Tasa_Interes: 0,
-          Tiempo: 0,
+          Tasa_Interes: null,
+          Tiempo: tiempo,
           Interes_Compuesto: 0);
 
       Map<String, dynamic> resultado =
@@ -324,11 +344,11 @@ class _TasaState extends State<Tasa> {
       );
 
       // Evita asignar null a los controladores
+      tasaController.text = resultado["Tasa_Interes"]?.toString() ?? "";
       montoCompuestoController.text =
           resultado["Monto_Compuesto"]?.toString() ?? "";
-
-      capitalController.text = resultado["Capital"]?.toString() ?? "";
-      tiempoController.text = resultado["Tiempo"]?.toString() ?? "";
+      tiempoControllerC.text = resultado["Tiempo"]?.toString() ?? "";
+      capitalControllerC.text = resultado["Capital"]?.toString() ?? "";
     } catch (e) {
       print(e);
       ScaffoldMessenger.of(context).showSnackBar(
