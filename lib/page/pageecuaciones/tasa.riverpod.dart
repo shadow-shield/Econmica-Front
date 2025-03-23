@@ -4,7 +4,7 @@ import 'package:transifox/controller/interes_Simple.controller.service.dart';
 import 'package:transifox/model/interes_Compuesto.module.dart';
 import 'package:transifox/model/interes_Simple.model.module.dart';
 import 'package:transifox/widgets/Dropdowbutton.riverpod.dart';
-import 'package:transifox/widgets/bottonavigator.riverpod.dart';
+
 import 'package:transifox/widgets/formato_fecha.riverpod.dart';
 
 class Tasa extends StatefulWidget {
@@ -54,7 +54,6 @@ class _TasaState extends State<Tasa> {
         foregroundColor: Colors.red[900]!,
         title: Text('Tasa de interés'),
       ),
-      bottomNavigationBar: CustomBottomNavigator(color: Colors.red[900]!),
       body: Stack(
         fit: StackFit.expand,
         children: [

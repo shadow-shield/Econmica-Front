@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:transifox/controller/interes_Compuesto.controller.service.dart';
 import 'package:transifox/model/interes_Compuesto.module.dart';
 import 'package:transifox/widgets/Dropdowbutton.riverpod.dart';
-import 'package:transifox/widgets/bottonavigator.riverpod.dart';
+
 
 class InteresCompuestoPage extends StatefulWidget {
   const InteresCompuestoPage({super.key});
@@ -40,9 +40,7 @@ class _InteresCompuestoState extends State<InteresCompuestoPage> {
           foregroundColor: Colors.yellow[800]!,
           title: Text('Interés Compuesto'),
         ),
-        bottomNavigationBar: CustomBottomNavigator(
-          color: Colors.yellow[800]!,
-        ),
+        
         body: Stack(
           fit: StackFit.expand,
           children: [

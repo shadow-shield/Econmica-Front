@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:transifox/controller/interes_Simple.controller.service.dart';
 import 'package:transifox/model/interes_Simple.model.module.dart';
 import 'package:transifox/widgets/Dropdowbutton.riverpod.dart';
-import 'package:transifox/widgets/bottonavigator.riverpod.dart';
+
 import 'package:transifox/widgets/formato_fecha.riverpod.dart';
 import 'package:transifox/widgets/formato_fecha.riverpod.dart' as miNotifiers;
 
@@ -42,9 +42,7 @@ class _Interes_simpleState extends State<Interes_simple> {
           foregroundColor: Colors.green,
           title: Text('Interes Simple'),
         ),
-        bottomNavigationBar: CustomBottomNavigator(
-          color: Colors.green,
-        ),
+        
         body: Stack(
           fit: StackFit.expand,
           children: [

@@ -22,18 +22,21 @@ class _CustomBottomNavigatorState extends State<CustomBottomNavigator> {
       onTap: (index) {
         setState(() {
           _selectedIndex = index;
-          print('$index');
+          if (index == 0) {
+            Navigator.pushNamed(context, 'botones');
+          } else {
+            Navigator.pushNamed(context, 'botones2');
+          }
         });
       },
       items: [
         BottomNavigationBarItem(
-          
-          icon: Image.asset('assets/CalculosF.png',width: 33),
-          label: 'Cálculos Financieros',
+          icon: Image.asset('assets/CalculosF.png', width: 33),
+          label: 'Botones Corte 1',
         ),
         BottomNavigationBarItem(
-          icon:  Image.asset('assets/gestortasa.png',width: 33),
-          label: 'Gestor de Tasas',
+          icon: Image.asset('assets/gestortasa.png', width: 33),
+          label: 'Botones Corte 2',
         ),
       ],
     );

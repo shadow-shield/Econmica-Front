@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:animate_do/animate_do.dart';
+import 'package:transifox/page/pagecuaciones_segundo/Iretorno.riverpod.dart';
+import 'package:transifox/page/pagecuaciones_segundo/amortizacion.riverpod.dart';
+import 'package:transifox/page/pagecuaciones_segundo/capitalizacion.riverpod.dart';
+import 'package:transifox/page/pagecuaciones_segundo/gradientes.riverpod.dart';
 import 'package:transifox/page/pageecuaciones/anualidades.riverpod.dart';
 import 'package:transifox/page/pageecuaciones/interescompuesto.riverpod.dart';
 import 'package:transifox/page/pageecuaciones/interesimple.riverpod.dart';
 import 'package:transifox/page/pageecuaciones/tasa.riverpod.dart';
 
-class CardTable extends StatelessWidget {
-  const CardTable({super.key});
+class CardTable_Segundo extends StatelessWidget {
+  const CardTable_Segundo({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -25,24 +29,22 @@ class CardTable extends StatelessWidget {
                     TableRow(
                       children: [
                         ZoomIn(
-                          
                           // 🎬 Animación de escala
                           duration: Duration(milliseconds: 800),
                           child: _cardbotones(
-                            color: Colors.red[900]!,
-                            image: Image.asset('assets/tasa-de-interes.png'),
-                            text: 'Tasa',
-                            ruta: Tasa(),
+                            color: Color(0xFFF2FA48),
+                            image: Image.asset('assets/gradiente.png'),
+                            text: 'Gradientes',
+                            ruta: Gradientes_SeriState(),
                           ),
                         ),
                         ZoomIn(
                           duration: Duration(milliseconds: 900),
                           child: _cardbotones(
-                            color: Colors.green,
-                            image: Image.asset('assets/interes simple.png'),
-                            text: 'Interés Simple',
-                            ruta: Interes_simple()
-                          ),
+                              color: Color(0xFFFAA89C),
+                              image: Image.asset('assets/amortizacion.png'),
+                              text: 'Amortización',
+                              ruta: AmortizacionesState()),
                         ),
                       ],
                     ),
@@ -60,20 +62,19 @@ class CardTable extends StatelessWidget {
                         ZoomIn(
                           duration: Duration(milliseconds: 1000),
                           child: _cardbotones(
-                            color: Colors.yellow[800]!,
-                            image: Image.asset('assets/incompuesto.png'),
-                            text: 'Interés Compuesto',
-                            ruta: InteresCompuestoPage(),
+                            color: Color(0xFF3B3EF9),
+                            image: Image.asset('assets/capitalizacion.png'),
+                            text: 'Capitalización',
+                            ruta: Capitalizaciones(),
                           ),
                         ),
                         ZoomIn(
                           duration: Duration(milliseconds: 1100),
                           child: _cardbotones(
-
-                            color: Colors.pink,
-                            image: Image.asset('assets/anualidades.png'),
-                            text: 'Anualidades',
-                            ruta: Anualidad(),
+                            color: Color(0xFF9C93FA),
+                            image: Image.asset('assets/retorno.png'),
+                            text: 'Interes Retorno',
+                            ruta: Iretorno(),
                           ),
                         ),
                       ],
@@ -90,12 +91,10 @@ class CardTable extends StatelessWidget {
 }
 
 class _cardbotones extends StatelessWidget {
-  final Widget image; 
+  final Widget image;
   final String text;
   final Color color;
   final Widget ruta;
-
-
 
   const _cardbotones({
     required this.image,
@@ -117,7 +116,6 @@ class _cardbotones extends StatelessWidget {
         margin: EdgeInsets.all(10),
         height: 150,
         decoration: BoxDecoration(
-      
           color: Colors.white,
           borderRadius: BorderRadius.circular(20),
           boxShadow: [
@@ -133,15 +131,12 @@ class _cardbotones extends StatelessWidget {
           children: [
             CircleAvatar(
               backgroundColor: this.color,
-              radius: 40, 
+              radius: 40,
               child: ClipRRect(
-                borderRadius: BorderRadius.circular(
-                    50), 
+                borderRadius: BorderRadius.circular(50),
                 child: SizedBox(
-                  width:
-                      40, //
-                  height:
-                      40,
+                  width: 40, //
+                  height: 40,
                   child: this.image,
                 ),
               ),
