@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:transifox/controller/interes_Compuesto.controller.service.dart';
 import 'package:transifox/model/interes_Compuesto.module.dart';
 import 'package:transifox/widgets/Dropdowbutton.riverpod.dart';
-
+import 'package:transifox/widgets/textfield.riverpod.dart';
 
 class InteresCompuestoPage extends StatefulWidget {
   const InteresCompuestoPage({super.key});
@@ -40,7 +40,6 @@ class _InteresCompuestoState extends State<InteresCompuestoPage> {
           foregroundColor: Colors.yellow[800]!,
           title: Text('Interés Compuesto'),
         ),
-        
         body: Stack(
           fit: StackFit.expand,
           children: [
@@ -73,63 +72,62 @@ class _InteresCompuestoState extends State<InteresCompuestoPage> {
                               ],
                             ),
                             padding: EdgeInsets.symmetric(horizontal: 16),
-                            child: DropdownButtonHideUnderline(
-                              child: DropdownButton<String>(
-                                value: selectedCalculation,
-                                hint: Text(
-                                  'Seleccione qué calcular',
+                            child: SizedBox(
+                              width: 180,
+                              child: DropdownButtonHideUnderline(
+                                child: DropdownButton<String>(
+                                  value: selectedCalculation,
+                                  hint: Text(
+                                    'Seleccione Opcion',
+                                    style: TextStyle(
+                                        color: Colors.yellow[800]!,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  icon: Icon(Icons.arrow_drop_down,
+                                      color: Colors.yellow[800]!, size: 30),
                                   style: TextStyle(
-                                      color: Colors.yellow[800]!,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                icon: Icon(Icons.arrow_drop_down,
-                                    color: Colors.yellow[800]!, size: 30),
-                                style: TextStyle(
-                                    color: Colors.black, fontSize: 16),
-                                isExpanded: true,
-                                onChanged: (String? newValue) {
-                                  setState(() {
-                                    selectedCalculation = newValue;
-                                  });
-                                },
-                                items: [
-                                  'Tasa De Interés',
-                                  'Capital',
-                                  'Monto Compuesto',
-                                  'Tiempo',
-                                  'Interes Compuesto'
-                                ].map<DropdownMenuItem<String>>((String value) {
-                                  return DropdownMenuItem<String>(
-                                    value: value,
-                                    child: Padding(
-                                      padding:
-                                          EdgeInsets.symmetric(vertical: 8),
-                                      child: Text(
-                                        value,
-                                        style: TextStyle(fontSize: 16),
+                                      color: Colors.yellow[800]!, fontSize: 16),
+                                  isExpanded: true,
+                                  onChanged: (String? newValue) {
+                                    setState(() {
+                                      selectedCalculation = newValue;
+                                    });
+                                  },
+                                  items: [
+                                    'Tasa De Interés',
+                                    'Capital',
+                                    'Monto Compuesto',
+                                    'Tiempo',
+                                    'Interes Compuesto'
+                                  ].map<DropdownMenuItem<String>>(
+                                      (String value) {
+                                    return DropdownMenuItem<String>(
+                                      value: value,
+                                      child: Padding(
+                                        padding:
+                                            EdgeInsets.symmetric(vertical: 8),
+                                        child: Text(
+                                          value,
+                                          style: TextStyle(fontSize: 16),
+                                        ),
                                       ),
-                                    ),
-                                  );
-                                }).toList(),
+                                    );
+                                  }).toList(),
+                                ),
                               ),
                             ),
                           ),
                         ),
                         SizedBox(height: 20),
                         SizedBox(
-                          width: 180,
-                          child: TextField(
+                          width: 150,
+                          child: TextfieldStyle(
+                            enabled: true,
+                            labelText: 'Interés Compuesto',
+                            icon:
+                                Image.asset('assets/incompuesto.png', width: 1),
+                            color: Colors.yellow[800]!,
                             controller: interesCompuestoController,
-                            enabled: selectedCalculation != 'Interés' &&
-                                selectedCalculation != 'Interés Compuesto',
-                            decoration: InputDecoration(
-                              labelText: 'Interés Compuesto',
-                              prefixIcon: Padding(
-                                padding: EdgeInsets.all(6),
-                                child: Image.asset('assets/incompuesto.png',
-                                    width: 1),
-                              ),
-                            ),
                           ),
                         ),
                         SizedBox(height: 20),
@@ -137,71 +135,57 @@ class _InteresCompuestoState extends State<InteresCompuestoPage> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             SizedBox(
-                              width: 180,
-                              child: TextField(
+                              width: 150,
+                              child: TextfieldStyle(
+                                enabled: true,
+                                labelText: 'Interés',
+                                icon: Image.asset('assets/interescom.png',
+                                    width: 1),
+                                color: Colors.yellow[800]!,
                                 controller: TasainteresController,
-                                enabled: selectedCalculation != 'Interés',
-                                decoration: InputDecoration(
-                                  labelText: 'Interés',
-                                  prefixIcon: Padding(
-                                    padding: EdgeInsets.all(6),
-                                    child: Image.asset('assets/interescom.png',
-                                        width: 1),
-                                  ),
-                                ),
                               ),
                             ),
                             SizedBox(width: 10),
                             SizedBox(
-                              width: 180,
-                              child: TextField(
+                              width: 150,
+                              child: TextfieldStyle(
+                                enabled: true,
+                                labelText: 'Tiempo',
+                                icon: Image.asset('assets/tiempocom.png',
+                                    width: 1),
+                                color: Colors.yellow[800]!,
                                 controller: tiempoController,
-                                enabled: selectedCalculation != 'Tiempo',
-                                decoration: InputDecoration(
-                                  labelText: 'Tiempo',
-                                  prefixIcon: Padding(
-                                    padding: EdgeInsets.all(6),
-                                    child: Image.asset('assets/tiempocom.png',
-                                        width: 1),
-                                  ),
-                                ),
                               ),
                             ),
                           ],
+                        ),
+                        SizedBox(
+                          height: 20,
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             SizedBox(
-                              width: 180,
-                              child: TextField(
+                              width: 150,
+                              child: TextfieldStyle(
+                                enabled: true,
+                                labelText: 'Capital',
+                                icon: Image.asset('assets/capitalcom.png',
+                                    width: 1),
+                                color: Colors.yellow[800]!,
                                 controller: capitalController,
-                                enabled: selectedCalculation != 'Capital',
-                                decoration: InputDecoration(
-                                  labelText: 'Capital',
-                                  prefixIcon: Padding(
-                                    padding: EdgeInsets.all(6),
-                                    child: Image.asset('assets/capitalcom.png',
-                                        width: 1),
-                                  ),
-                                ),
                               ),
                             ),
                             SizedBox(width: 10),
                             SizedBox(
-                              width: 180,
-                              child: TextField(
+                              width: 150,
+                              child: TextfieldStyle(
+                                enabled: true,
+                                labelText: 'Monto Compuesto',
+                                icon: Image.asset('assets/montocom.png',
+                                    width: 1),
+                                color: Colors.yellow[800]!,
                                 controller: montoController,
-                                enabled:
-                                    selectedCalculation != 'Monto Compuesto',
-                                decoration: InputDecoration(
-                                  labelText: 'Monto Compuesto',
-                                  prefixIcon: Padding(
-                                    padding: EdgeInsets.all(6),
-                                    child: Image.asset('assets/montocom.png',
-                                        width: 1),
-                                  ),
-                                ),
                               ),
                             ),
                           ],

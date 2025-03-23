@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:transifox/controller/anualidad.controller.service.dart';
 import 'package:transifox/model/anualidades.module.dart';
-
+import 'package:transifox/widgets/textfield.riverpod.dart';
 
 class Anualidad extends StatefulWidget {
   const Anualidad({super.key});
@@ -39,7 +39,6 @@ class _AnualidadState extends State<Anualidad> {
         foregroundColor: Colors.pink,
         title: Text('Anualidad'),
       ),
-      
       body: Stack(
         fit: StackFit.expand,
         children: [
@@ -51,52 +50,76 @@ class _AnualidadState extends State<Anualidad> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                DropdownButton<String>(
-                  value: selectedCalculation,
-                  hint: Text('Seleccione una opción'),
-                  items: ['Valor Futuro', 'Valor Presente']
-                      .map((String value) => DropdownMenuItem<String>(
-                            value: value,
-                            child: Text(value),
-                          ))
-                      .toList(),
-                  onChanged: (String? newValue) {
-                    setState(() {
-                      selectedCalculation = newValue;
-                    });
-                  },
+                SizedBox(
+                  width: 220,
+                  child: DropdownButtonFormField<String>(
+                    value: selectedCalculation,
+                    hint: Text(
+                      'Seleccione una opción',
+                      style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.pink),
+                    ),
+                    decoration: InputDecoration(
+                      filled: true,
+                      fillColor: Colors.white,
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15),
+                        borderSide: BorderSide.none,
+                      ),
+                      contentPadding:
+                          EdgeInsets.symmetric(vertical: 14, horizontal: 16),
+                    ),
+                    dropdownColor: Colors.white,
+                    elevation: 5,
+                    style: TextStyle(color: Colors.pink, fontSize: 16),
+                    items: ['Valor Futuro', 'Valor Presente']
+                        .map((String value) => DropdownMenuItem<String>(
+                              value: value,
+                              child: Row(
+                                children: [
+                                  Icon(Icons.calculate, color: Colors.pink),
+                                  SizedBox(width: 10),
+                                  Text(value),
+                                ],
+                              ),
+                            ))
+                        .toList(),
+                    onChanged: (String? newValue) {
+                      setState(() {
+                        selectedCalculation = newValue;
+                      });
+                    },
+                  ),
                 ),
                 SizedBox(height: 20),
-                selectedCalculation == 'Valor Presente'
-                    ? SizedBox(
-                        width: 140,
-                        child: TextField(
-                          controller: valorPController,
-                          enabled: selectedCalculation == 'Valor Presente',
-                          decoration: InputDecoration(
-                            labelText: selectedCalculation,
-                            prefixIcon: Padding(
-                              padding: EdgeInsets.all(6),
-                              child: Image.asset('assets/tasa-de-interes.png',
-                                  width: 1),
-                            ),
-                          ),
-                        ),
-                      )
-                    : SizedBox(
-                        width: 140,
-                        child: TextField(
-                          controller: valorFController,
-                          enabled: selectedCalculation == 'Valor Futuro',
-                          decoration: InputDecoration(
-                            labelText: selectedCalculation,
-                            prefixIcon: Padding(
-                              padding: EdgeInsets.all(6),
-                              child: Image.asset('assets/tasanu.png', width: 1),
-                            ),
-                          ),
-                        ),
-                      ),
+                if (selectedCalculation == 'Valor Presente')
+                  SizedBox(
+                    width: 140,
+                    child: TextfieldStyle(
+                      enabled: true,
+                      labelText: selectedCalculation,
+                      icon: Image.asset('assets/tasa-de-interes.png', width: 1),
+                      color: Colors.pink,
+                      controller: valorPController,
+                    ),
+                  )
+                else if (selectedCalculation == 'Valor Futuro')
+                  SizedBox(
+                    width: 140,
+                    child: TextfieldStyle(
+                      enabled: true,
+                      labelText: selectedCalculation,
+                      icon: Image.asset('assets/capital.png', width: 1),
+                      color: Colors.pink,
+                      controller: valorFController,
+                    ),
+                  )
+                else
+                  SizedBox
+                      .shrink(), 
+
                 SizedBox(height: 20),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -108,32 +131,24 @@ class _AnualidadState extends State<Anualidad> {
                         children: [
                           SizedBox(
                             width: 140,
-                            child: TextField(
+                            child: TextfieldStyle(
+                              enabled: true,
+                              labelText: 'Tasa anualidad',
+                              icon: Image.asset('assets/tasanu.png', width: 1),
+                              color: Colors.pink,
                               controller: tasaanualidadController,
-                              decoration: InputDecoration(
-                                labelText: 'Tasa Anualidad',
-                                prefixIcon: Padding(
-                                  padding: EdgeInsets.all(6),
-                                  child: Image.asset('assets/tasanu.png',
-                                      width: 1),
-                                ),
-                              ),
                             ),
                           ),
                           SizedBox(width: 20),
                           SizedBox(
                             width: 140,
-                            child: TextField(
+                            child: TextfieldStyle(
+                              enabled: true,
+                              labelText: 'Tiempo',
+                              icon:
+                                  Image.asset('assets/tiempoanu.png', width: 1),
+                              color: Colors.pink,
                               controller: periodosanulidadController,
-                              enabled: selectedCalculation != 'Tiempo',
-                              decoration: InputDecoration(
-                                labelText: 'Tiempo',
-                                prefixIcon: Padding(
-                                  padding: EdgeInsets.all(6),
-                                  child: Image.asset('assets/tiempoanu.png',
-                                      width: 1),
-                                ),
-                              ),
                             ),
                           ),
                         ],
@@ -146,19 +161,15 @@ class _AnualidadState extends State<Anualidad> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     SizedBox(
-                      width: 180,
-                      child: TextField(
+                      width: 140,
+                      child: TextfieldStyle(
+                        enabled: true,
+                        labelText: 'Monto Fijo',
+                        icon: Image.asset('assets/anu.png', width: 1),
+                        color: Colors.pink,
                         controller: montofijoController,
-                        enabled: selectedCalculation != 'Anualidades',
-                        decoration: InputDecoration(
-                          labelText: 'Anualidades',
-                          prefixIcon: Padding(
-                            padding: EdgeInsets.all(6),
-                            child: Image.asset('assets/anu.png', width: 1),
-                          ),
-                        ),
                       ),
-                    ),
+                    )
                   ],
                 ),
                 SizedBox(height: 20),
@@ -181,7 +192,6 @@ class _AnualidadState extends State<Anualidad> {
 
   void calcularAnualidad() async {
     try {
-     
       double? tasa = double.tryParse(tasaanualidadController.text.trim());
       double? periodo = double.tryParse(periodosanulidadController.text.trim());
       double? monto = double.tryParse(montofijoController.text.trim());
@@ -200,8 +210,10 @@ class _AnualidadState extends State<Anualidad> {
           await gestionAnulidad.registrarAnualidades(anualidad);
 
       montofijoController.text = resultado["Monto_Fijo"]?.toString() ?? "";
-      periodosanulidadController.text =resultado["Periodos_Capitalizacion"]?.toString() ?? "";
-      tasaanualidadController.text =resultado["Tasa_Anualidad"]?.toString() ?? "";
+      periodosanulidadController.text =
+          resultado["Periodos_Capitalizacion"]?.toString() ?? "";
+      tasaanualidadController.text =
+          resultado["Tasa_Anualidad"]?.toString() ?? "";
       valorFController.text = resultado["Valor_Futuro"]?.toString() ?? "";
       valorPController.text = resultado["Valor_Presente"]?.toString() ?? "";
     } catch (e) {

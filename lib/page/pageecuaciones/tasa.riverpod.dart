@@ -6,6 +6,7 @@ import 'package:transifox/model/interes_Simple.model.module.dart';
 import 'package:transifox/widgets/Dropdowbutton.riverpod.dart';
 
 import 'package:transifox/widgets/formato_fecha.riverpod.dart';
+import 'package:transifox/widgets/textfield.riverpod.dart';
 
 class Tasa extends StatefulWidget {
   const Tasa({super.key});
@@ -69,43 +70,31 @@ class _TasaState extends State<Tasa> {
                   children: [
                     if (!isCompuesto) ...[
                       SizedBox(
-                            width: 150,
-                            child: TextField(
-                              controller: tasaController,
-                              decoration: InputDecoration(
-                                labelText: 'tasa simple',
-                                prefixIcon: Padding(
-                                  padding: EdgeInsets.all(6),
-                                  child: Image.asset(
-                                      'assets/tasa.png',
-                                      width: 1),
-                                ),
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            height: 20,
-                          ),
+                        width: 150,
+                        child: TextfieldStyle(
+                            enabled: true,
+                            color: Colors.red[900]!,
+                            controller: tasaController,
+                            icon: Image.asset('assets/tasa.png', width: 1),
+                            labelText: 'tasa simple'),
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
                       Row(
                         children: [
-                          
                           Padding(
                             padding: EdgeInsets.symmetric(
                                 vertical: 5, horizontal: 20),
                             child: SizedBox(
                               width: 150,
-                              child: TextField(
-                                controller: interesimpleController,
-                                decoration: InputDecoration(
-                                  labelText: 'Interes simple',
-                                  prefixIcon: Padding(
-                                    padding: EdgeInsets.all(6),
-                                    child: Image.asset(
-                                        'assets/interes simple.png',
-                                        width: 1),
-                                  ),
-                                ),
-                              ),
+                              child: TextfieldStyle(
+                                  enabled: true,
+                                  color: Colors.red[900]!,
+                                  controller: interesimpleController,
+                                  icon: Image.asset('assets/interes simple.png',
+                                      width: 1),
+                                  labelText: 'Interés Simple'),
                             ),
                           ),
                           Padding(
@@ -113,17 +102,13 @@ class _TasaState extends State<Tasa> {
                                 vertical: 5, horizontal: 20),
                             child: SizedBox(
                               width: 150,
-                              child: TextField(
-                                controller: capitalControllerS,
-                                decoration: InputDecoration(
-                                  labelText: 'Capital',
-                                  prefixIcon: Padding(
-                                    padding: EdgeInsets.all(6),
-                                    child: Image.asset('assets/capital.png',
-                                        width: 1),
-                                  ),
-                                ),
-                              ),
+                              child: TextfieldStyle(
+                                  enabled: true,
+                                  color: Colors.red[900]!,
+                                  controller: capitalControllerS,
+                                  icon: Image.asset('assets/capital.png',
+                                      width: 1),
+                                  labelText: 'Capital'),
                             ),
                           ),
                         ],
@@ -133,24 +118,21 @@ class _TasaState extends State<Tasa> {
                             EdgeInsets.symmetric(vertical: 5, horizontal: 20),
                         child: SizedBox(
                           width: 150,
-                          child: TextField(
-                            controller: tiempoControllerS,
-                            decoration: InputDecoration(
-                              labelText: 'Tiempo',
-                              prefixIcon: Padding(
-                                padding: EdgeInsets.all(6),
-                                child:
-                                    Image.asset('assets/tiempo.png', width: 1),
-                              ),
-                            ),
-                          ),
+                          child: TextfieldStyle(
+                              enabled: true,
+                              color: Colors.red[900]!,
+                              controller: tiempoControllerS,
+                              icon: Image.asset('assets/tiempo.png', width: 1),
+                              labelText: 'Tiempo'),
                         ),
                       ),
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: 20),
                         child: Column(
                           children: [
-                            FechaSelector(),
+                            FechaSelector(
+                              color: Colors.red[900]!,
+                            ),
                             SizedBox(
                               height: 20,
                             ),
@@ -176,18 +158,13 @@ class _TasaState extends State<Tasa> {
                       ),
                     ] else ...[
                       SizedBox(
-                        width: 180,
-                        child: TextField(
-                          controller: tasaController,
-                          decoration: InputDecoration(
-                            labelText: 'Tasa generada',
-                            prefixIcon: Padding(
-                              padding: EdgeInsets.all(6),
-                              child: Image.asset('assets/interescom.png',
-                                  width: 1),
-                            ),
-                          ),
-                        ),
+                        width: 150,
+                        child: TextfieldStyle(
+                            enabled: true,
+                            color: Colors.red[900]!,
+                            controller: tasaController,
+                            icon: Image.asset('assets/tasa.png', width: 1),
+                            labelText: 'Tasa Generada'),
                       ),
                       SizedBox(
                         height: 20,
@@ -199,17 +176,13 @@ class _TasaState extends State<Tasa> {
                                 vertical: 5, horizontal: 20),
                             child: SizedBox(
                               width: 150,
-                              child: TextField(
-                                controller: montoCompuestoController,
-                                decoration: InputDecoration(
-                                  labelText: 'Monto Compuesto',
-                                  prefixIcon: Padding(
-                                    padding: EdgeInsets.all(6),
-                                    child: Image.asset('assets/montocom.png',
-                                        width: 1),
-                                  ),
-                                ),
-                              ),
+                              child: TextfieldStyle(
+                                  enabled: true,
+                                  color: Colors.red[900]!,
+                                  controller: montoCompuestoController,
+                                  icon: Image.asset('assets/montocom.png',
+                                      width: 1),
+                                  labelText: 'Monto Compuesto'),
                             ),
                           ),
                           Padding(
@@ -217,19 +190,15 @@ class _TasaState extends State<Tasa> {
                                 vertical: 5, horizontal: 20),
                             child: SizedBox(
                               width: 150,
-                              child: TextField(
-                                controller: capitalControllerC,
-                                decoration: InputDecoration(
-                                  labelText: 'Capital',
-                                  prefixIcon: Padding(
-                                    padding: EdgeInsets.all(6),
-                                    child: Image.asset('assets/capitalcom.png',
-                                        width: 1),
-                                  ),
-                                ),
-                              ),
+                              child: TextfieldStyle(
+                                  enabled: true,
+                                  color: Colors.red[900]!,
+                                  controller: capitalControllerC,
+                                  icon: Image.asset('assets/capitalcom.png',
+                                      width: 1),
+                                  labelText: 'Capital'),
                             ),
-                          ),
+                          )
                         ],
                       ),
                       SizedBox(
@@ -240,17 +209,13 @@ class _TasaState extends State<Tasa> {
                             EdgeInsets.symmetric(vertical: 5, horizontal: 20),
                         child: SizedBox(
                           width: 150,
-                          child: TextField(
-                            controller: tiempoControllerC,
-                            decoration: InputDecoration(
-                              labelText: 'Tiempo',
-                              prefixIcon: Padding(
-                                padding: EdgeInsets.all(6),
-                                child: Image.asset('assets/tiempocom.png',
-                                    width: 1),
-                              ),
-                            ),
-                          ),
+                          child: TextfieldStyle(
+                              enabled: true,
+                              color: Colors.red[900]!,
+                              controller: tiempoControllerC,
+                              icon:
+                                  Image.asset('assets/tiempocom.png', width: 1),
+                              labelText: 'Tiempo'),
                         ),
                       ),
                       SizedBox(

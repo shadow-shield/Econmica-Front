@@ -6,33 +6,41 @@ class TextfieldStyle extends StatelessWidget {
       {super.key,
       required this.labelText,
       required this.icon,
-      required this.color,});
-  final String labelText;
+      required this.color,
+      required this.controller,
+      required this.enabled});
+  final String? labelText;
   final Widget icon;
-  final Color color;
+  final Color? color;
+  final bool enabled;
+  final TextEditingController controller;
 
   @override
   Widget build(BuildContext context) {
     return TextField(
+      enabled: enabled,
+      controller: controller,
       keyboardType: TextInputType.numberWithOptions(decimal: true),
       inputFormatters: [
-        FilteringTextInputFormatter.allow(RegExp(
-            r'^\d*\.?\d*$')), 
+        FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d*$')),
       ],
       decoration: InputDecoration(
         filled: true,
         fillColor: Colors.white54,
-        suffixIcon: icon,
+        prefixIcon: Padding(
+          padding: EdgeInsets.all(10),
+          child: icon,
+        ),
         border: UnderlineInputBorder(
           borderRadius: BorderRadius.circular(20),
-          borderSide: BorderSide(color: color, width: 3),
+          borderSide: BorderSide(color: color!, width: 1),
         ),
         focusedBorder: UnderlineInputBorder(
           borderRadius: BorderRadius.circular(20),
-          borderSide: BorderSide(color: color, width: 3),
+          borderSide: BorderSide(color: color!, width: 1),
         ),
         labelText: labelText,
-        labelStyle: TextStyle(color: color),
+        labelStyle: TextStyle(color: color!),
       ),
     );
   }

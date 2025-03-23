@@ -5,6 +5,7 @@ import 'package:transifox/widgets/Dropdowbutton.riverpod.dart';
 
 import 'package:transifox/widgets/formato_fecha.riverpod.dart';
 import 'package:transifox/widgets/formato_fecha.riverpod.dart' as miNotifiers;
+import 'package:transifox/widgets/textfield.riverpod.dart';
 
 class Interes_simple extends StatefulWidget {
   const Interes_simple({super.key});
@@ -42,7 +43,6 @@ class _Interes_simpleState extends State<Interes_simple> {
           foregroundColor: Colors.green,
           title: Text('Interes Simple'),
         ),
-        
         body: Stack(
           fit: StackFit.expand,
           children: [
@@ -62,105 +62,99 @@ class _Interes_simpleState extends State<Interes_simple> {
                           padding: EdgeInsets.symmetric(horizontal: 20),
                           child: Container(
                             decoration: BoxDecoration(
-                              color: Colors.white,
+                              color: Colors.grey[300],
                               borderRadius: BorderRadius.circular(12),
                               border: Border.all(color: Colors.green, width: 2),
                               boxShadow: [
                                 BoxShadow(
-                                  color: Colors.black26,
+                                  color: Colors.green,
                                   blurRadius: 5,
                                   offset: Offset(2, 2),
                                 ),
                               ],
                             ),
                             padding: EdgeInsets.symmetric(horizontal: 16),
-                            child: DropdownButtonHideUnderline(
-                              child: DropdownButton<String>(
-                                value: selectedCalculation,
-                                hint: Text(
-                                  'Seleccione qué calcular',
+                            child: SizedBox(
+                              width: 165,
+                              child: DropdownButtonHideUnderline(
+                                child: DropdownButton<String>(
+                                  value: selectedCalculation,
+                                  hint: Text(
+                                    'Seleccione Opcion',
+                                    style: TextStyle(
+                                        color: Colors.green,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  icon: Icon(Icons.arrow_drop_down,
+                                      color: Colors.green, size: 30),
                                   style: TextStyle(
-                                      color: Colors.green,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                icon: Icon(Icons.arrow_drop_down,
-                                    color: Colors.green, size: 30),
-                                style: TextStyle(
-                                    color: Colors.black, fontSize: 16),
-                                isExpanded: true,
-                                onChanged: (String? newValue) {
-                                  setState(() {
-                                    selectedCalculation = newValue;
-                                  });
-                                },
-                                items: [
-                                  'Monto',
-                                  'Capital',
-                                  'Tasa de interes',
-                                  'Tiempo',
-                                  'Interes Simple'
-                                ].map<DropdownMenuItem<String>>((String value) {
-                                  return DropdownMenuItem<String>(
-                                    value: value,
-                                    child: Padding(
-                                      padding:
-                                          EdgeInsets.symmetric(vertical: 8),
-                                      child: Text(
-                                        value,
-                                        style: TextStyle(fontSize: 16),
+                                      color: Colors.green, fontSize: 16),
+                                  isExpanded: true,
+                                  onChanged: (String? newValue) {
+                                    setState(() {
+                                      selectedCalculation = newValue;
+                                    });
+                                  },
+                                  items: [
+                                    'Monto',
+                                    'Capital',
+                                    'Tasa de interes',
+                                    'Tiempo',
+                                    'Interes Simple'
+                                  ].map<DropdownMenuItem<String>>(
+                                      (String value) {
+                                    return DropdownMenuItem<String>(
+                                      value: value,
+                                      child: Padding(
+                                        padding:
+                                            EdgeInsets.symmetric(vertical: 8),
+                                        child: Text(
+                                          value,
+                                          style: TextStyle(fontSize: 16),
+                                        ),
                                       ),
-                                    ),
-                                  );
-                                }).toList(),
+                                    );
+                                  }).toList(),
+                                ),
                               ),
                             ),
                           ),
                         ),
                         SizedBox(height: 15),
                         SizedBox(
-                          width: 180,
-                          child: TextField(
+                          width: 150,
+                          child: TextfieldStyle(
+                            enabled: true,
+                            labelText: 'Interes Simple',
+                            icon: Image.asset('assets/tasanu.png', width: 1),
+                            color: Colors.green,
                             controller: interesimpleController,
-                            decoration: InputDecoration(
-                              labelText: 'Interes Simple',
-                              prefixIcon: Padding(
-                                padding: EdgeInsets.all(6),
-                                child:
-                                    Image.asset('assets/tasanu.png', width: 1),
-                              ),
-                            ),
                           ),
                         ),
+                        SizedBox(height: 15),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             SizedBox(
-                              width: 180,
-                              child: TextField(
+                              width: 150,
+                              child: TextfieldStyle(
+                                enabled: true,
+                                labelText: 'Monto',
+                                icon: Image.asset('assets/monto.png', width: 1),
+                                color: Colors.green,
                                 controller: montoController,
-                                decoration: InputDecoration(
-                                  labelText: 'Monto',
-                                  prefixIcon: Padding(
-                                    padding: EdgeInsets.all(6),
-                                    child: Image.asset('assets/monto.png',
-                                        width: 1),
-                                  ),
-                                ),
                               ),
                             ),
                             SizedBox(width: 10),
                             SizedBox(
-                              width: 180,
-                              child: TextField(
+                              width: 150,
+                              child: TextfieldStyle(
+                                enabled: true,
+                                labelText: 'Capital',
+                                icon:
+                                    Image.asset('assets/capital.png', width: 1),
+                                color: Colors.green,
                                 controller: capitalController,
-                                decoration: InputDecoration(
-                                  labelText: 'Capital',
-                                  prefixIcon: Padding(
-                                    padding: EdgeInsets.all(6),
-                                    child: Image.asset('assets/capital.png',
-                                        width: 1),
-                                  ),
-                                ),
                               ),
                             ),
                           ],
@@ -172,37 +166,32 @@ class _Interes_simpleState extends State<Interes_simple> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         SizedBox(
-                          width: 180,
-                          child: TextField(
+                          width: 150,
+                          child: TextfieldStyle(
+                            enabled: true,
+                            labelText: 'Tasa de Interes',
+                            icon: Image.asset('assets/tasa.png', width: 1),
+                            color: Colors.green,
                             controller: tasaController,
-                            decoration: InputDecoration(
-                              labelText: 'Tasa de interes',
-                              prefixIcon: Padding(
-                                padding: EdgeInsets.all(6),
-                                child: Image.asset('assets/tasa.png', width: 1),
-                              ),
-                            ),
                           ),
                         ),
                         SizedBox(width: 10),
                         SizedBox(
-                          width: 180,
-                          child: TextField(
+                          width: 150,
+                          child: TextfieldStyle(
+                            enabled: true,
+                            labelText: 'Tiempo',
+                            icon: Image.asset('assets/tiempo.png', width: 1),
+                            color: Colors.green,
                             controller: tiempoController,
-                            decoration: InputDecoration(
-                              labelText: 'Tiempo',
-                              prefixIcon: Padding(
-                                padding: EdgeInsets.all(6),
-                                child:
-                                    Image.asset('assets/tiempo.png', width: 1),
-                              ),
-                            ),
                           ),
                         ),
                       ],
                     ),
                     SizedBox(height: 30),
-                    FechaSelector(),
+                    FechaSelector(
+                      color: Colors.green,
+                    ),
                     SizedBox(height: 20),
                     DropdownMenuItemButton(
                       color: Colors.green,
@@ -298,7 +287,6 @@ class _Interes_simpleState extends State<Interes_simple> {
 
   void calcularSimple() async {
     try {
-
       LimpiarCampos(selectedCalculation!);
 
       double? capital = double.tryParse(capitalController.text.trim());
@@ -312,8 +300,6 @@ class _Interes_simpleState extends State<Interes_simple> {
         tiempo =
             double.parse(tiempo.toStringAsFixed(5)); // Redondea a 2 decimales
       }
-
-    
 
       // Se permite que los valores sean null
       InteresSimple interesSimpleObj = InteresSimple(
@@ -336,27 +322,18 @@ class _Interes_simpleState extends State<Interes_simple> {
       // Evita asignar null a los controladores
       montoController.text = resultado["Monto"]?.toString() ?? "";
       interesimpleController.text =
-      resultado["Interes_Simple"]?.toString() ?? "";
+          resultado["Interes_Simple"]?.toString() ?? "";
       capitalController.text = resultado["Capital"]?.toString() ?? "";
-
- 
-
 
       tasaController.text = resultado["Tasa_Interes"]?.toString() ?? "";
       tiempoController.text = resultado["Tiempo"]?.toString() ?? "";
-
-
     } catch (e) {
-
       print(e);
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Error al registrar interés: $e')),
       );
     }
   }
-
-
-
 
   void LimpiarCampos(String Seleccion) {
     if (Seleccion == 'Monto') {
