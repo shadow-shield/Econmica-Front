@@ -4,10 +4,6 @@ import 'package:transifox/page/pagecuaciones_segundo/Iretorno.riverpod.dart';
 import 'package:transifox/page/pagecuaciones_segundo/amortizacion.riverpod.dart';
 import 'package:transifox/page/pagecuaciones_segundo/capitalizacion.riverpod.dart';
 import 'package:transifox/page/pagecuaciones_segundo/gradientes.riverpod.dart';
-import 'package:transifox/page/pageecuaciones/anualidades.riverpod.dart';
-import 'package:transifox/page/pageecuaciones/interescompuesto.riverpod.dart';
-import 'package:transifox/page/pageecuaciones/interesimple.riverpod.dart';
-import 'package:transifox/page/pageecuaciones/tasa.riverpod.dart';
 
 class CardTable_Segundo extends StatelessWidget {
   const CardTable_Segundo({super.key});
@@ -32,7 +28,7 @@ class CardTable_Segundo extends StatelessWidget {
                           // 🎬 Animación de escala
                           duration: Duration(milliseconds: 800),
                           child: _cardbotones(
-                            color: Color(0xFFF2FA48),
+                            color: Colors.brown[200]!,
                             image: Image.asset('assets/gradiente.png'),
                             text: 'Gradientes',
                             ruta: Gradientes_SeriState(),

@@ -426,6 +426,7 @@ class _TasaState extends State<Tasa> {
 
       double? tiempo = CalcularTiempo();
 
+      // ignore: unnecessary_null_comparison
       if (tiempo != null) {
         tiempo =
             double.parse(tiempo.toStringAsFixed(2)); // Redondea a 2 decimales

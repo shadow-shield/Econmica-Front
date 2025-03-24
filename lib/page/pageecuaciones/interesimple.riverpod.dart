@@ -4,6 +4,7 @@ import 'package:transifox/model/interes_Simple.model.module.dart';
 import 'package:transifox/widgets/Dropdowbutton.riverpod.dart';
 
 import 'package:transifox/widgets/formato_fecha.riverpod.dart';
+// ignore: unused_import
 import 'package:transifox/widgets/formato_fecha.riverpod.dart' as miNotifiers;
 import 'package:transifox/widgets/textfield.riverpod.dart';
 
@@ -296,6 +297,7 @@ class _Interes_simpleState extends State<Interes_simple> {
       double? tasaInteres = double.tryParse(tasaController.text.trim());
       double? tiempo = CalcularTiempo();
 
+      // ignore: unnecessary_null_comparison
       if (tiempo != null) {
         tiempo =
             double.parse(tiempo.toStringAsFixed(5)); // Redondea a 2 decimales
