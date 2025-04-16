@@ -14,7 +14,7 @@ class _CustomBottomNavigatorState extends State<CustomBottomNavigator> {
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
-      selectedLabelStyle: TextStyle(fontWeight: FontWeight.bold),
+      selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold),
       backgroundColor: Colors.grey[250],
       selectedItemColor: widget.color,
       unselectedItemColor: Colors.grey,

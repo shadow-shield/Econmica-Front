@@ -25,11 +25,11 @@ class CapitalizacionModel {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['Capital_Inicial'] = this.Capital_Inicial;
-    data['Capital_Final'] = this.Capital_Final;
-    data['Tasa_Interes'] = this.Tasa_Interes;
-    data['Tiempo'] = this.Tiempo;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['Capital_Inicial'] = Capital_Inicial;
+    data['Capital_Final'] = Capital_Final;
+    data['Tasa_Interes'] = Tasa_Interes;
+    data['Tiempo'] = Tiempo;
 
     return data;
   }

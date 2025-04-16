@@ -17,10 +17,10 @@ class Usuario {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['Email'] = this.Email;
-    data['Cedula'] = this.Cedula;
-    data['Clave'] = this.Clave;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['Email'] = Email;
+    data['Cedula'] = Cedula;
+    data['Clave'] = Clave;
     return data;
   }
 

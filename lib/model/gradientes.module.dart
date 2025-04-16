@@ -29,13 +29,13 @@ class GradientesModel {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['ValorPF'] = this.ValorPF;
-    data['Primera_Cuota'] = this.Primera_Cuota;
-    data['Constante_Incremento'] = this.Constante_Incremento;
-    data['Tasa_Periodo'] = this.Tasa_Periodo;
-    data['Numero_Pago'] = this.Numero_Pago;
-    data['Variable_Porcentual'] = this.Variable_Porcentual;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['ValorPF'] = ValorPF;
+    data['Primera_Cuota'] = Primera_Cuota;
+    data['Constante_Incremento'] = Constante_Incremento;
+    data['Tasa_Periodo'] = Tasa_Periodo;
+    data['Numero_Pago'] = Numero_Pago;
+    data['Variable_Porcentual'] = Variable_Porcentual;
     return data;
   }
 }

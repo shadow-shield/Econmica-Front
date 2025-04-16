@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:transifox/widgets/Dropdowbutton.riverpod.dart';
 import 'package:transifox/widgets/formato_fecha.riverpod.dart';
-import 'package:transifox/widgets/textfield.riverpod.dart';
+import 'package:transifox/widgets/textfieldd.riverpod.dart';
 
 class Gradientes_SeriState extends StatefulWidget {
   const Gradientes_SeriState({super.key});
@@ -15,7 +15,7 @@ class _Gradientes_SeriStateState extends State<Gradientes_SeriState> {
     gradient: LinearGradient(
       begin: Alignment.bottomLeft,
       end: Alignment.topRight,
-      stops: [0.2, 0.9],
+      stops: const [0.2, 0.9],
       colors: [
         Colors.white,
         Colors.brown[400]!,
@@ -34,7 +34,7 @@ class _Gradientes_SeriStateState extends State<Gradientes_SeriState> {
     return Scaffold(
         appBar: AppBar(
           foregroundColor: Colors.brown[400]!,
-          title: Text('Gradientes'),
+          title: const Text('Gradientes'),
         ),
         body: Stack(
           fit: StackFit.expand,
@@ -43,7 +43,7 @@ class _Gradientes_SeriStateState extends State<Gradientes_SeriState> {
               decoration: boxDecoration,
             ),
             Container(
-              padding: EdgeInsets.only(top: 160),
+              padding: const EdgeInsets.only(top: 160),
               child: SingleChildScrollView(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -63,7 +63,7 @@ class _Gradientes_SeriStateState extends State<Gradientes_SeriState> {
                               controller: valorPFController,
                             ),
                           ),
-                          SizedBox(width: 10),
+                          const SizedBox(width: 10),
                           SizedBox(
                             height: 50,
                             width: 150,
@@ -78,7 +78,7 @@ class _Gradientes_SeriStateState extends State<Gradientes_SeriState> {
                         ],
                       ),
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     Container(
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -94,7 +94,7 @@ class _Gradientes_SeriStateState extends State<Gradientes_SeriState> {
                               controller: Constante_Controller,
                             ),
                           ),
-                          SizedBox(width: 10),
+                          const SizedBox(width: 10),
                           SizedBox(
                             height: 50,
                             width: 150,
@@ -109,7 +109,7 @@ class _Gradientes_SeriStateState extends State<Gradientes_SeriState> {
                         ],
                       ),
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     Container(
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -125,7 +125,7 @@ class _Gradientes_SeriStateState extends State<Gradientes_SeriState> {
                               controller: NPago_Controller,
                             ),
                           ),
-                          SizedBox(width: 10),
+                          const SizedBox(width: 10),
                           SizedBox(
                             height: 50,
                             width: 150,
@@ -140,19 +140,19 @@ class _Gradientes_SeriStateState extends State<Gradientes_SeriState> {
                         ],
                       ),
                     ),
-                    SizedBox(height: 30),
+                    const SizedBox(height: 30),
                     FechaSelector(
                       color: Colors.brown[200]!,
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     DropdownMenuItemButton(color: Colors.brown[400]!),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.brown[400]!,
                           foregroundColor: Colors.white),
                       onPressed: () {},
-                      child: Text('Calcular'),
+                      child: const Text('Calcular'),
                     )
                   ],
                 ),

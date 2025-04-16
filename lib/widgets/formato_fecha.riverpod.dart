@@ -33,7 +33,7 @@ class _FechaSelectorState extends State<FechaSelector> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
+          const Text(
             "Seleccione el Formato de Fecha",
             style: TextStyle(
                 fontSize: 18, fontWeight: FontWeight.w600, color: Colors.white),
@@ -88,7 +88,7 @@ class _FechaSelectorState extends State<FechaSelector> {
                   ],
                 );
               }
-              return SizedBox.shrink();
+              return const SizedBox.shrink();
             },
           ),
         ],

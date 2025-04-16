@@ -25,11 +25,11 @@ class Tasa_Retorno {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['Monto'] = this.Flujo_Caja;
-    data['Capital'] = this.Periodo_Tiempo;
-    data['Tasa_Interes'] = this.Numero_Periodo;
-    data['TasaInteres_Retorno'] = this.TasaInteres_Retorno;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['Monto'] = Flujo_Caja;
+    data['Capital'] = Periodo_Tiempo;
+    data['Tasa_Interes'] = Numero_Periodo;
+    data['TasaInteres_Retorno'] = TasaInteres_Retorno;
 
     return data;
   }

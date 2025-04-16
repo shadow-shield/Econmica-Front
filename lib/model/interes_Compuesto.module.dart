@@ -25,12 +25,12 @@ class InteresCompuesto {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['Monto_Compuesto'] = this.Monto_Compuesto;
-    data['Capital'] = this.Capital;
-    data['Tasa_Interes'] = this.Tasa_Interes;
-    data['Tiempo'] = this.Tiempo;
-    data['Interes_Compuesto'] = this.Interes_Compuesto;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['Monto_Compuesto'] = Monto_Compuesto;
+    data['Capital'] = Capital;
+    data['Tasa_Interes'] = Tasa_Interes;
+    data['Tiempo'] = Tiempo;
+    data['Interes_Compuesto'] = Interes_Compuesto;
     return data;
   }
 }

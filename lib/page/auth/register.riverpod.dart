@@ -4,6 +4,8 @@ import 'package:transifox/model/usuario.model.module.dart';
 
 
 class Registro_User extends StatefulWidget {
+  const Registro_User({super.key});
+
   @override
   State<Registro_User> createState() => Registro_UserState();
 }
@@ -36,7 +38,7 @@ class Registro_UserState extends State<Registro_User> {
                     shadowColor: Colors.transparent,
                     elevation: 0,
                   ),
-                  label: Text(
+                  label: const Text(
                     'Atras',
                     style: TextStyle(color: Colors.white),
                   ),
@@ -50,7 +52,7 @@ class Registro_UserState extends State<Registro_User> {
                   },
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 14,
               ),
               Expanded(
@@ -58,7 +60,7 @@ class Registro_UserState extends State<Registro_User> {
                   child: Container(
                     width: double.infinity,
                     height: double.infinity,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       image: DecorationImage(
                         image: AssetImage("assets/fondoregistrar.png"),
                         fit: BoxFit.contain,
@@ -70,7 +72,7 @@ class Registro_UserState extends State<Registro_User> {
                   flex: 2,
                   child: SingleChildScrollView(
                     child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 20),
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
                       child: Column(
                         children: [
                           Align(
@@ -80,7 +82,7 @@ class Registro_UserState extends State<Registro_User> {
                               style: Theme.of(context).textTheme.headlineMedium,
                             ),
                           ),
-                          Row(
+                          const Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [],
                           ),
@@ -90,7 +92,7 @@ class Registro_UserState extends State<Registro_User> {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 Padding(
-                                    padding: EdgeInsets.only(right: 16),
+                                    padding: const EdgeInsets.only(right: 16),
                                     child: Container(
                                       decoration: BoxDecoration(
                                           color: Colors.white,
@@ -104,7 +106,7 @@ class Registro_UserState extends State<Registro_User> {
                                     )),
                                 Expanded(
                                     child: TextField(
-                                  decoration: InputDecoration(
+                                  decoration: const InputDecoration(
                                       hintStyle: TextStyle(color: Colors.white),
                                       hintText: "Cedula"),
                                   controller: user_Cedula,
@@ -116,7 +118,7 @@ class Registro_UserState extends State<Registro_User> {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Padding(
-                                padding: EdgeInsets.only(bottom: 10, right: 16),
+                                padding: const EdgeInsets.only(bottom: 10, right: 16),
                                 child: Container(
                                   decoration: BoxDecoration(
                                       color: Colors.white,
@@ -130,7 +132,7 @@ class Registro_UserState extends State<Registro_User> {
                               ),
                               Expanded(
                                   child: TextField(
-                                decoration: InputDecoration(
+                                decoration: const InputDecoration(
                                   hintStyle: TextStyle(color: Colors.white),
                                   hintText: "Clave",
                                 ),
@@ -143,7 +145,7 @@ class Registro_UserState extends State<Registro_User> {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Padding(
-                                padding: EdgeInsets.only(
+                                padding: const EdgeInsets.only(
                                     right: 16, bottom: 20, top: 20),
                                 child: Container(
                                   decoration: BoxDecoration(
@@ -158,7 +160,7 @@ class Registro_UserState extends State<Registro_User> {
                               ),
                               Expanded(
                                   child: TextField(
-                                decoration: InputDecoration(
+                                decoration: const InputDecoration(
                                   hintStyle: TextStyle(color: Colors.white),
                                   hintText: "Correo Electronico",
                                 ),
@@ -171,13 +173,13 @@ class Registro_UserState extends State<Registro_User> {
                                 left: 100, top: 20, right: 110),
                             child: MaterialButton(
                               shape: RoundedRectangleBorder(
-                                  side: BorderSide(
+                                  side: const BorderSide(
                                       color: Colors.blue, width: 1.7),
                                   borderRadius: BorderRadius.circular(30)),
                               height: 40,
                               color: Colors.white,
                               child: Row(children: [
-                                Text(
+                                const Text(
                                   'Registrarse',
                                   style: TextStyle(
                                       color: Colors.blue,
@@ -185,7 +187,7 @@ class Registro_UserState extends State<Registro_User> {
                                       fontFamily: AutofillHints.addressCity,
                                       fontWeight: FontWeight.bold),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   width: 10,
                                 ),
                                 Image.asset(
@@ -229,11 +231,11 @@ class Registro_UserState extends State<Registro_User> {
       builder: (BuildContext context) {
         return AlertDialog(
           backgroundColor: Colors.white,
-          title: Text('Error', style: TextStyle(color: Colors.blue)),
-          content: Text(mensaje, style: TextStyle(color: Colors.blue)),
+          title: const Text('Error', style: TextStyle(color: Colors.blue)),
+          content: Text(mensaje, style: const TextStyle(color: Colors.blue)),
           actions: <Widget>[
             TextButton(
-              child: Text('OK', style: TextStyle(color: Colors.blue)),
+              child: const Text('OK', style: TextStyle(color: Colors.blue)),
               onPressed: () {
                 Navigator.of(context).pop();
               },

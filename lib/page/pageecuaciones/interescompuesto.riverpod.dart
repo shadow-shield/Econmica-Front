@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:transifox/controller/interes_Compuesto.controller.service.dart';
 import 'package:transifox/model/interes_Compuesto.module.dart';
 import 'package:transifox/widgets/Dropdowbutton.riverpod.dart';
-import 'package:transifox/widgets/textfield.riverpod.dart';
+import 'package:transifox/widgets/textfieldd.riverpod.dart';
 
 class InteresCompuestoPage extends StatefulWidget {
   const InteresCompuestoPage({super.key});
@@ -16,7 +16,7 @@ class _InteresCompuestoState extends State<InteresCompuestoPage> {
     gradient: LinearGradient(
       begin: Alignment.bottomLeft,
       end: Alignment.topRight,
-      stops: [0.2, 0.9],
+      stops: const [0.2, 0.9],
       colors: [
         Colors.white,
         Colors.yellow[800]!,
@@ -38,7 +38,7 @@ class _InteresCompuestoState extends State<InteresCompuestoPage> {
     return Scaffold(
         appBar: AppBar(
           foregroundColor: Colors.yellow[800]!,
-          title: Text('Interés Compuesto'),
+          title: const Text('Interés Compuesto'),
         ),
         body: Stack(
           fit: StackFit.expand,
@@ -47,7 +47,7 @@ class _InteresCompuestoState extends State<InteresCompuestoPage> {
               decoration: boxDecoration,
             ),
             Container(
-              padding: EdgeInsets.only(top: 210),
+              padding: const EdgeInsets.only(top: 210),
               child: SingleChildScrollView(
                 scrollDirection: Axis.vertical,
                 child: Column(
@@ -56,14 +56,14 @@ class _InteresCompuestoState extends State<InteresCompuestoPage> {
                     Column(
                       children: [
                         Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 20),
+                          padding: const EdgeInsets.symmetric(horizontal: 20),
                           child: Container(
                             decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(12),
                               border: Border.all(
                                   color: Colors.yellow[800]!, width: 2),
-                              boxShadow: [
+                              boxShadow: const [
                                 BoxShadow(
                                   color: Colors.red,
                                   blurRadius: 5,
@@ -71,7 +71,7 @@ class _InteresCompuestoState extends State<InteresCompuestoPage> {
                                 ),
                               ],
                             ),
-                            padding: EdgeInsets.symmetric(horizontal: 16),
+                            padding: const EdgeInsets.symmetric(horizontal: 16),
                             child: SizedBox(
                               width: 180,
                               child: DropdownButtonHideUnderline(
@@ -105,10 +105,10 @@ class _InteresCompuestoState extends State<InteresCompuestoPage> {
                                       value: value,
                                       child: Padding(
                                         padding:
-                                            EdgeInsets.symmetric(vertical: 8),
+                                            const EdgeInsets.symmetric(vertical: 8),
                                         child: Text(
                                           value,
-                                          style: TextStyle(fontSize: 16),
+                                          style: const TextStyle(fontSize: 16),
                                         ),
                                       ),
                                     );
@@ -118,7 +118,7 @@ class _InteresCompuestoState extends State<InteresCompuestoPage> {
                             ),
                           ),
                         ),
-                        SizedBox(height: 20),
+                        const SizedBox(height: 20),
                         SizedBox(
                           width: 150,
                           child: TextfieldStyle(
@@ -130,7 +130,7 @@ class _InteresCompuestoState extends State<InteresCompuestoPage> {
                             controller: interesCompuestoController,
                           ),
                         ),
-                        SizedBox(height: 20),
+                        const SizedBox(height: 20),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -145,7 +145,7 @@ class _InteresCompuestoState extends State<InteresCompuestoPage> {
                                 controller: TasainteresController,
                               ),
                             ),
-                            SizedBox(width: 10),
+                            const SizedBox(width: 10),
                             SizedBox(
                               width: 150,
                               child: TextfieldStyle(
@@ -159,7 +159,7 @@ class _InteresCompuestoState extends State<InteresCompuestoPage> {
                             ),
                           ],
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 20,
                         ),
                         Row(
@@ -176,7 +176,7 @@ class _InteresCompuestoState extends State<InteresCompuestoPage> {
                                 controller: capitalController,
                               ),
                             ),
-                            SizedBox(width: 10),
+                            const SizedBox(width: 10),
                             SizedBox(
                               width: 150,
                               child: TextfieldStyle(
@@ -192,11 +192,11 @@ class _InteresCompuestoState extends State<InteresCompuestoPage> {
                         ),
                       ],
                     ),
-                    SizedBox(height: 30),
+                    const SizedBox(height: 30),
                     DropdownMenuItemButton(
                       color: Colors.yellow[800]!,
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.yellow[800]!,
@@ -204,7 +204,7 @@ class _InteresCompuestoState extends State<InteresCompuestoPage> {
                       onPressed: () {
                         calcularCompuesto();
                       },
-                      child: Text('Calcular'),
+                      child: const Text('Calcular'),
                     ),
                   ],
                 ),
@@ -245,7 +245,7 @@ class _InteresCompuestoState extends State<InteresCompuestoPage> {
       print(resultado);
 
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Interés Calculado con éxito')),
+        const SnackBar(content: Text('Interés Calculado con éxito')),
       );
 
       // Evita asignar null a los controladores

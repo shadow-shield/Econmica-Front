@@ -14,63 +14,63 @@ class CardTable_Segundo extends StatelessWidget {
       child: SizedBox(
         width: MediaQuery.of(context).size.width * 0.8,
         child: Container(
-          margin: EdgeInsets.only(top: 140), // Ajuste del margen superior
+          margin: const EdgeInsets.only(top: 140), // Ajuste del margen superior
           child: Column(
             children: [
               FadeInUp(
                 // 🎬 Animación de entrada
-                duration: Duration(milliseconds: 600),
+                duration: const Duration(milliseconds: 600),
                 child: Table(
                   children: [
                     TableRow(
                       children: [
                         ZoomIn(
                           // 🎬 Animación de escala
-                          duration: Duration(milliseconds: 800),
+                          duration: const Duration(milliseconds: 800),
                           child: _cardbotones(
                             color: Colors.brown[200]!,
                             image: Image.asset('assets/gradiente.png'),
                             text: 'Gradientes',
-                            ruta: Gradientes_SeriState(),
+                            ruta: const Gradientes_SeriState(),
                           ),
                         ),
                         ZoomIn(
-                          duration: Duration(milliseconds: 900),
+                          duration: const Duration(milliseconds: 900),
                           child: _cardbotones(
-                              color: Color(0xFFFAA89C),
+                              color: const Color(0xFFFAA89C),
                               image: Image.asset('assets/amortizacion.png'),
                               text: 'Amortización',
-                              ruta: AmortizacionesState()),
+                              ruta: const AmortizacionesState()),
                         ),
                       ],
                     ),
                   ],
                 ),
               ),
-              SizedBox(height: 20), // Espacio entre filas
+              const SizedBox(height: 20), // Espacio entre filas
               FadeInUp(
                 // 🎬 Segunda animación de entrada
-                duration: Duration(milliseconds: 700),
+                duration: const Duration(milliseconds: 700),
                 child: Table(
                   children: [
                     TableRow(
                       children: [
                         ZoomIn(
-                          duration: Duration(milliseconds: 1000),
+                          duration: const Duration(milliseconds: 1000),
                           child: _cardbotones(
-                            color: Color(0xFF3B3EF9),
+                            color: const Color(0xFF3B3EF9),
                             image: Image.asset('assets/capitalizacion.png'),
                             text: 'Capitalización',
-                            ruta: Capitalizaciones(),
+                            ruta: const Capitalizaciones(),
                           ),
                         ),
                         ZoomIn(
-                          duration: Duration(milliseconds: 1100),
+                          duration: const Duration(milliseconds: 1100),
                           child: _cardbotones(
-                            color: Color(0xFF9C93FA),
+                            color: const Color(0xFF9C93FA),
                             image: Image.asset('assets/retorno.png'),
                             text: 'Interes Retorno',
-                            ruta: Iretorno(),
+                            ruta: const Iretorno(),
                           ),
                         ),
                       ],
@@ -109,12 +109,12 @@ class _cardbotones extends StatelessWidget {
         );
       },
       child: Container(
-        margin: EdgeInsets.all(10),
+        margin: const EdgeInsets.all(10),
         height: 150,
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(20),
-          boxShadow: [
+          boxShadow: const [
             BoxShadow(
               color: Colors.black26,
               blurRadius: 10,
@@ -126,21 +126,21 @@ class _cardbotones extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             CircleAvatar(
-              backgroundColor: this.color,
+              backgroundColor: color,
               radius: 40,
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(50),
                 child: SizedBox(
                   width: 40, //
                   height: 40,
-                  child: this.image,
+                  child: image,
                 ),
               ),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Text(
-              this.text,
-              style: TextStyle(color: this.color, fontWeight: FontWeight.bold),
+              text,
+              style: TextStyle(color: color, fontWeight: FontWeight.bold),
             ),
           ],
         ),

@@ -6,7 +6,7 @@ import 'package:transifox/model/interes_Simple.model.module.dart';
 import 'package:transifox/widgets/Dropdowbutton.riverpod.dart';
 
 import 'package:transifox/widgets/formato_fecha.riverpod.dart';
-import 'package:transifox/widgets/textfield.riverpod.dart';
+import 'package:transifox/widgets/textfieldd.riverpod.dart';
 
 class Tasa extends StatefulWidget {
   const Tasa({super.key});
@@ -22,7 +22,7 @@ class _TasaState extends State<Tasa> {
     gradient: LinearGradient(
       begin: Alignment.bottomLeft,
       end: Alignment.topRight,
-      stops: [0.2, 0.9],
+      stops: const [0.2, 0.9],
       colors: [
         Colors.white,
         Colors.red[900]!,
@@ -53,17 +53,17 @@ class _TasaState extends State<Tasa> {
     return Scaffold(
       appBar: AppBar(
         foregroundColor: Colors.red[900]!,
-        title: Text('Tasa de interés'),
+        title: const Text('Tasa de interés'),
       ),
       body: Stack(
         fit: StackFit.expand,
         children: [
           Container(decoration: boxDecoration),
           Container(
-            padding: EdgeInsets.only(bottom: 40),
+            padding: const EdgeInsets.only(bottom: 40),
             child: SingleChildScrollView(
               scrollDirection: Axis.vertical,
-              child: Container(
+              child: SizedBox(
                 height: 800,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -78,13 +78,13 @@ class _TasaState extends State<Tasa> {
                             icon: Image.asset('assets/tasa.png', width: 1),
                             labelText: 'tasa simple'),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 20,
                       ),
                       Row(
                         children: [
                           Padding(
-                            padding: EdgeInsets.symmetric(
+                            padding: const EdgeInsets.symmetric(
                                 vertical: 5, horizontal: 20),
                             child: SizedBox(
                               width: 150,
@@ -98,7 +98,7 @@ class _TasaState extends State<Tasa> {
                             ),
                           ),
                           Padding(
-                            padding: EdgeInsets.symmetric(
+                            padding: const EdgeInsets.symmetric(
                                 vertical: 5, horizontal: 20),
                             child: SizedBox(
                               width: 150,
@@ -115,7 +115,7 @@ class _TasaState extends State<Tasa> {
                       ),
                       Padding(
                         padding:
-                            EdgeInsets.symmetric(vertical: 5, horizontal: 20),
+                            const EdgeInsets.symmetric(vertical: 5, horizontal: 20),
                         child: SizedBox(
                           width: 150,
                           child: TextfieldStyle(
@@ -127,13 +127,13 @@ class _TasaState extends State<Tasa> {
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 20),
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
                         child: Column(
                           children: [
                             FechaSelector(
                               color: Colors.red[900]!,
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 20,
                             ),
                             ElevatedButton(
@@ -145,9 +145,9 @@ class _TasaState extends State<Tasa> {
                                 //calcularTasaSimple
                                 calcularTasainteresSimple();
                               },
-                              child: Text('Calcular'),
+                              child: const Text('Calcular'),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 20,
                             ),
                             DropdownMenuItemButton(
@@ -166,13 +166,13 @@ class _TasaState extends State<Tasa> {
                             icon: Image.asset('assets/tasa.png', width: 1),
                             labelText: 'Tasa Generada'),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 20,
                       ),
                       Row(
                         children: [
                           Padding(
-                            padding: EdgeInsets.symmetric(
+                            padding: const EdgeInsets.symmetric(
                                 vertical: 5, horizontal: 20),
                             child: SizedBox(
                               width: 150,
@@ -186,7 +186,7 @@ class _TasaState extends State<Tasa> {
                             ),
                           ),
                           Padding(
-                            padding: EdgeInsets.symmetric(
+                            padding: const EdgeInsets.symmetric(
                                 vertical: 5, horizontal: 20),
                             child: SizedBox(
                               width: 150,
@@ -201,12 +201,12 @@ class _TasaState extends State<Tasa> {
                           )
                         ],
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 20,
                       ),
                       Padding(
                         padding:
-                            EdgeInsets.symmetric(vertical: 5, horizontal: 20),
+                            const EdgeInsets.symmetric(vertical: 5, horizontal: 20),
                         child: SizedBox(
                           width: 150,
                           child: TextfieldStyle(
@@ -218,7 +218,7 @@ class _TasaState extends State<Tasa> {
                               labelText: 'Tiempo'),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 20,
                       ),
                       ElevatedButton(
@@ -229,11 +229,11 @@ class _TasaState extends State<Tasa> {
                         onPressed: () {
                           calcularTasaCompuesto();
                         },
-                        child: Text('Calcular'),
+                        child: const Text('Calcular'),
                       )
                     ],
-                    SizedBox(height: 20),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -249,9 +249,9 @@ class _TasaState extends State<Tasa> {
                             showSnackbar(
                                 context, "Simple activado", Colors.green);
                           },
-                          child: Text('Modo Simple'),
+                          child: const Text('Modo Simple'),
                         ),
-                        SizedBox(width: 17),
+                        const SizedBox(width: 17),
                         ElevatedButton(
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.yellow[800]!,
@@ -264,11 +264,11 @@ class _TasaState extends State<Tasa> {
                             showSnackbar(context, "Compuesto activado",
                                 Colors.yellow[800]!);
                           },
-                          child: Text('Modo Compuesto'),
+                          child: const Text('Modo Compuesto'),
                         ),
                       ],
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                   ],
                 ),
               ),
@@ -281,14 +281,14 @@ class _TasaState extends State<Tasa> {
 
   Widget buildTextField(String labelText, String assetPath) {
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 5, horizontal: 20),
+      padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 20),
       child: SizedBox(
         width: 150,
         child: TextField(
           decoration: InputDecoration(
             labelText: 'Interés',
             prefixIcon: Padding(
-              padding: EdgeInsets.all(6),
+              padding: const EdgeInsets.all(6),
               child: Image.asset('assets/interescom.png', width: 1),
             ),
           ),
@@ -301,7 +301,7 @@ class _TasaState extends State<Tasa> {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(message),
-        duration: Duration(seconds: 1),
+        duration: const Duration(seconds: 1),
         behavior: SnackBarBehavior.floating,
         backgroundColor: color,
       ),
@@ -330,7 +330,7 @@ class _TasaState extends State<Tasa> {
       print(resultado);
 
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Interés Calculado con éxito')),
+        const SnackBar(content: Text('Interés Calculado con éxito')),
       );
 
       // Evita asignar null a los controladores
@@ -447,7 +447,7 @@ class _TasaState extends State<Tasa> {
       print(resultado);
 
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Interés Calculado con éxito')),
+        const SnackBar(content: Text('Interés Calculado con éxito')),
       );
 
       // Evita asignar null a los controladores

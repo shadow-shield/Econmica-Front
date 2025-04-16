@@ -22,7 +22,7 @@ class UsuarioService extends CrudProvider<Usuario> {
     }
   }
 
-   Future<Usuario> getUsuarioEspecifico(Usuario usuarioRe) async {
+  Future<Usuario> getUsuarioEspecifico(Usuario usuarioRe) async {
     try {
       Map<String, dynamic> usuarioVeri =
           await busquedaPersonalizada(usuarioRe, 'getUsuarioEspecifico');
@@ -32,7 +32,19 @@ class UsuarioService extends CrudProvider<Usuario> {
       return usuario;
     } catch (e) {
       print(' el error es  $e');
-      return Usuario(Cedula: '1010',Clave: '12455',Email: 'null@gmail' );
+      return Usuario(Cedula: '1010', Clave: '12455', Email: 'null@gmail');
+    }
+  }
+
+  Future<bool> verificarCuenta(Usuario usuarioRe) async {
+    try {
+      bool usuarioVeri =
+          await busquedaPersonalizada(usuarioRe, 'getUsuarioBase');
+
+      return usuarioVeri;
+    } catch (e) {
+      print(' el error es  $e');
+      return false;
     }
   }
 
@@ -49,20 +61,6 @@ class UsuarioService extends CrudProvider<Usuario> {
       return await eliminar(id, 'DeleteUser');
     } catch (error) {
       return 'Error al eliminar los Usuarios';
-    }
-  }
-
-
-
-  Future<bool> verificarCuenta(Usuario usuarioRe) async {
-    try {
-      bool usuarioVeri =
-          await busquedaPersonalizada(usuarioRe, 'getUsuarioBase');
-
-      return usuarioVeri;
-    } catch (e) {
-      print(' el error es  $e');
-      return false;
     }
   }
 }

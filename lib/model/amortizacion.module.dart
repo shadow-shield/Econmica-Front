@@ -34,14 +34,14 @@ class AmortizacionModel {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['Cuota_Periodica'] = this.Cuota_Periodica;
-    data['Capital_Prestado'] = this.Capital_Prestado;
-    data['Tasa_Periodo'] = this.Tasa_Periodo;
-    data['Numero_Periodo'] = this.Numero_Periodo;
-    data['Cuota_Fija'] = this.Cuota_Fija;
-    data['Cuota_Interes'] = this.Cuota_Interes;
-    data['Cuota_Total'] = this.Cuota_Total;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['Cuota_Periodica'] = Cuota_Periodica;
+    data['Capital_Prestado'] = Capital_Prestado;
+    data['Tasa_Periodo'] = Tasa_Periodo;
+    data['Numero_Periodo'] = Numero_Periodo;
+    data['Cuota_Fija'] = Cuota_Fija;
+    data['Cuota_Interes'] = Cuota_Interes;
+    data['Cuota_Total'] = Cuota_Total;
     return data;
   }
 }

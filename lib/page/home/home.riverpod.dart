@@ -18,7 +18,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
 
     _controller = AnimationController(
       vsync: this,
-      duration: Duration(seconds: 2),
+      duration: const Duration(seconds: 2),
     );
 
     _fadeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
@@ -42,7 +42,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
         fit: StackFit.expand,
         children: [
           Container(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               image: DecorationImage(
                 image: AssetImage('assets/fondoapp.png'),
                 fit: BoxFit.cover,
@@ -84,14 +84,14 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                   ],
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               ScaleTransition(
                 scale: _fadeAnimation,
                 child:
                     Image.asset('assets/person.png', width: 220, height: 220),
               ),
-              SizedBox(height: 20),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
+              const SizedBox(height: 20),
               SizedBox(
                 height: 42,
                 child: ElevatedButton(
@@ -100,12 +100,12 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20),
                     ),
-                    padding: EdgeInsets.symmetric(horizontal: 25, vertical: 5),
+                    padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 5),
                   ),
                   onPressed: () {
                     Navigator.pushReplacementNamed(context, 'login');
                   },
-                  child: Row(
+                  child: const Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Text(

@@ -25,12 +25,12 @@ class Anualidadmodel {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['Monto_Fijo'] = this.Monto_Fijo;
-    data['Tasa_Anualidad'] = this.Tasa_Anualidad;
-    data['Periodos_Capitalizacion'] = this.Periodos_Capitalizacion;
-    data['Valor_Presente'] = this.Valor_Presente;
-    data['Valor_Futuro'] = this.Valor_Futuro;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['Monto_Fijo'] = Monto_Fijo;
+    data['Tasa_Anualidad'] = Tasa_Anualidad;
+    data['Periodos_Capitalizacion'] = Periodos_Capitalizacion;
+    data['Valor_Presente'] = Valor_Presente;
+    data['Valor_Futuro'] = Valor_Futuro;
     return data;
   }
 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:transifox/widgets/Dropdowbutton.riverpod.dart';
 
-import 'package:transifox/widgets/textfield.riverpod.dart';
+import 'package:transifox/widgets/textfieldd.riverpod.dart';
 
 class Iretorno extends StatefulWidget {
   const Iretorno({super.key});
@@ -11,7 +11,7 @@ class Iretorno extends StatefulWidget {
 }
 
 class _IretornoState extends State<Iretorno> {
-  final boxDecoration = BoxDecoration(
+  final boxDecoration = const BoxDecoration(
     gradient: LinearGradient(
       begin: Alignment.bottomLeft,
       end: Alignment.topRight,
@@ -32,8 +32,8 @@ class _IretornoState extends State<Iretorno> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          foregroundColor: Color(0xFF9C93FA),
-          title: Text('Interes Retorno'),
+          foregroundColor: const Color(0xFF9C93FA),
+          title: const Text('Interes Retorno'),
         ),
         body: Stack(
           fit: StackFit.expand,
@@ -42,7 +42,7 @@ class _IretornoState extends State<Iretorno> {
               decoration: boxDecoration,
             ),
             Container(
-              padding: EdgeInsets.only(top: 160),
+              padding: const EdgeInsets.only(top: 160),
               child: SingleChildScrollView(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -58,11 +58,11 @@ class _IretornoState extends State<Iretorno> {
                               enabled: true,
                               labelText: 'Flujo caja',
                               icon: Image.asset('assets/rcaja.png', width: 1),
-                              color: Color(0xFF9C93FA),
+                              color: const Color(0xFF9C93FA),
                               controller: F_CajaController,
                             ),
                           ),
-                          SizedBox(width: 10),
+                          const SizedBox(width: 10),
                           SizedBox(
                             height: 50,
                             width: 150,
@@ -70,14 +70,14 @@ class _IretornoState extends State<Iretorno> {
                               enabled: true,
                               labelText: 'Periodo',
                               icon: Image.asset('assets/rtiempo.png', width: 1),
-                              color: Color(0xFF9C93FA),
+                              color: const Color(0xFF9C93FA),
                               controller: P_TiempoController,
                             ),
                           ),
                         ],
                       ),
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     Container(
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -89,11 +89,11 @@ class _IretornoState extends State<Iretorno> {
                               enabled: true,
                               labelText: 'Numero de Periodos',
                               icon: Image.asset('assets/rperiodo.png', width: 1),
-                              color: Color(0xFF9C93FA),
+                              color: const Color(0xFF9C93FA),
                               controller: N_PeriodoController,
                             ),
                           ),
-                          SizedBox(width: 10),
+                          const SizedBox(width: 10),
                           SizedBox(
                             height: 50,
                             width: 150,
@@ -101,26 +101,26 @@ class _IretornoState extends State<Iretorno> {
                               enabled: true,
                               labelText: 'Tasa de Retorno',
                               icon: Image.asset('assets/rtasa.png', width: 1),
-                              color: Color(0xFF9C93FA),
+                              color: const Color(0xFF9C93FA),
                               controller: Tasa_RetornoController,
                             ),
                           ),
                         ],
                       ),
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     /* FechaSelector(
                       color: Colors.brown[200]!,
                     ), */
-                    SizedBox(height: 20),
-                    DropdownMenuItemButton(color: Color(0xFF9C93FA)),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
+                    const DropdownMenuItemButton(color: Color(0xFF9C93FA)),
+                    const SizedBox(height: 20),
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                          backgroundColor: Color(0xFF9C93FA),
+                          backgroundColor: const Color(0xFF9C93FA),
                           foregroundColor: Colors.white),
                       onPressed: () {},
-                      child: Text('Calcular'),
+                      child: const Text('Calcular'),
                     )
                   ],
                 ),

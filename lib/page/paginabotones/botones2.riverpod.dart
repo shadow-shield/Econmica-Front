@@ -22,7 +22,7 @@ class _Botones_segundoState extends State<Botones_segundo> {
         body: Stack(
           fit: StackFit.expand,
           children: [
-            Background(),
+            const Background(),
             _texto(),
           ],
         ));
@@ -34,7 +34,7 @@ class _texto extends StatelessWidget {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Column(
-        children: [TituloTexto(), CardTable_Segundo()],
+        children: [TituloTexto(), const CardTable_Segundo()],
       ),
     );
   }

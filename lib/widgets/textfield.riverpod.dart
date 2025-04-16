@@ -20,7 +20,7 @@ class TextfieldStyle extends StatelessWidget {
     return TextField(
       enabled: enabled,
       controller: controller,
-      keyboardType: TextInputType.numberWithOptions(decimal: true),
+      keyboardType: const TextInputType.numberWithOptions(decimal: true),
       inputFormatters: [
         FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d*$')),
       ],
@@ -28,7 +28,7 @@ class TextfieldStyle extends StatelessWidget {
         filled: true,
         fillColor: Colors.white54,
         prefixIcon: Padding(
-          padding: EdgeInsets.all(10),
+          padding: const EdgeInsets.all(10),
           child: icon,
         ),
         border: UnderlineInputBorder(

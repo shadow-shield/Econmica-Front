@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:transifox/controller/anualidad.controller.service.dart';
 import 'package:transifox/model/anualidades.module.dart';
-import 'package:transifox/widgets/textfield.riverpod.dart';
+import 'package:transifox/widgets/textfieldd.riverpod.dart';
 
 class Anualidad extends StatefulWidget {
   const Anualidad({super.key});
@@ -11,7 +11,7 @@ class Anualidad extends StatefulWidget {
 }
 
 class _AnualidadState extends State<Anualidad> {
-  final boxDecoration = BoxDecoration(
+  final boxDecoration = const BoxDecoration(
     gradient: LinearGradient(
       begin: Alignment.bottomLeft,
       end: Alignment.topRight,
@@ -37,7 +37,7 @@ class _AnualidadState extends State<Anualidad> {
     return Scaffold(
       appBar: AppBar(
         foregroundColor: Colors.pink,
-        title: Text('Anualidad'),
+        title: const Text('Anualidad'),
       ),
       body: Stack(
         fit: StackFit.expand,
@@ -46,7 +46,7 @@ class _AnualidadState extends State<Anualidad> {
             decoration: boxDecoration,
           ),
           Container(
-            padding: EdgeInsets.only(bottom: 40),
+            padding: const EdgeInsets.only(bottom: 40),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
@@ -54,7 +54,7 @@ class _AnualidadState extends State<Anualidad> {
                   width: 220,
                   child: DropdownButtonFormField<String>(
                     value: selectedCalculation,
-                    hint: Text(
+                    hint: const Text(
                       'Seleccione una opción',
                       style: TextStyle(
                           fontSize: 16,
@@ -69,18 +69,18 @@ class _AnualidadState extends State<Anualidad> {
                         borderSide: BorderSide.none,
                       ),
                       contentPadding:
-                          EdgeInsets.symmetric(vertical: 14, horizontal: 16),
+                          const EdgeInsets.symmetric(vertical: 14, horizontal: 16),
                     ),
                     dropdownColor: Colors.white,
                     elevation: 5,
-                    style: TextStyle(color: Colors.pink, fontSize: 16),
+                    style: const TextStyle(color: Colors.pink, fontSize: 16),
                     items: ['Valor Futuro', 'Valor Presente']
                         .map((String value) => DropdownMenuItem<String>(
                               value: value,
                               child: Row(
                                 children: [
-                                  Icon(Icons.calculate, color: Colors.pink),
-                                  SizedBox(width: 10),
+                                  const Icon(Icons.calculate, color: Colors.pink),
+                                  const SizedBox(width: 10),
                                   Text(value),
                                 ],
                               ),
@@ -93,13 +93,13 @@ class _AnualidadState extends State<Anualidad> {
                     },
                   ),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 if (selectedCalculation == 'Valor Presente')
                   SizedBox(
                     width: 140,
                     child: TextfieldStyle(
                       enabled: true,
-                      labelText: selectedCalculation,
+                      labelText: selectedCalculation!,
                       icon: Image.asset('assets/tasa-de-interes.png', width: 1),
                       color: Colors.pink,
                       controller: valorPController,
@@ -110,17 +110,17 @@ class _AnualidadState extends State<Anualidad> {
                     width: 140,
                     child: TextfieldStyle(
                       enabled: true,
-                      labelText: selectedCalculation,
+                      labelText: selectedCalculation!,
                       icon: Image.asset('assets/capital.png', width: 1),
                       color: Colors.pink,
                       controller: valorFController,
                     ),
                   )
                 else
-                  SizedBox
+                  const SizedBox
                       .shrink(), 
 
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -139,7 +139,7 @@ class _AnualidadState extends State<Anualidad> {
                               controller: tasaanualidadController,
                             ),
                           ),
-                          SizedBox(width: 20),
+                          const SizedBox(width: 20),
                           SizedBox(
                             width: 140,
                             child: TextfieldStyle(
@@ -156,7 +156,7 @@ class _AnualidadState extends State<Anualidad> {
                     ),
                   ],
                 ),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -172,7 +172,7 @@ class _AnualidadState extends State<Anualidad> {
                     )
                   ],
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.pink,
@@ -180,7 +180,7 @@ class _AnualidadState extends State<Anualidad> {
                   onPressed: () {
                     calcularAnualidad();
                   },
-                  child: Text('Calcular'),
+                  child: const Text('Calcular'),
                 ),
               ],
             ),
@@ -219,7 +219,7 @@ class _AnualidadState extends State<Anualidad> {
     } catch (e) {
       print(e);
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Error al registrar la anualidad: ${e}')),
+        SnackBar(content: Text('Error al registrar la anualidad: $e')),
       );
     }
   }
@@ -228,7 +228,6 @@ class _AnualidadState extends State<Anualidad> {
     if (Seleccion == 'Valor Presente') {
       valorPController.text = '';
       valorFController.text = 0.toString();
-      ;
     }
 
     if (Seleccion == 'Valor Futuro') {

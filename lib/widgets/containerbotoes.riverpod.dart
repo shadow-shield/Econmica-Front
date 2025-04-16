@@ -14,7 +14,7 @@ class BackgroundState extends State<Background> {
     gradient: LinearGradient(
       begin: Alignment.topCenter,
       end: Alignment.bottomCenter,
-      stops: [0.2, 0.9],
+      stops: const [0.2, 0.9],
       colors: [
         Colors.white,
         Colors.blue[900]!,

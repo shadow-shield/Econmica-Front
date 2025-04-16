@@ -9,7 +9,7 @@ class UsuarioController extends GetxController {
     try {
       return await gestionUser.registrarUsuario(usuarioRe);
     } catch (e) {
-      return 'Erro al registrar el User ${e}';
+      return 'Erro al registrar el User $e';
     }
   }
 

@@ -39,7 +39,7 @@ class MyApp extends StatelessWidget {
         'amortizacion': (BuildContext context) => const AmortizacionesState(),
         'capitalizacion': (BuildContext context) => const Capitalizaciones(),
         'tasaretorno': (BuildContext context) => const Iretorno()
-      },
+      }, 
     );
   }
 }

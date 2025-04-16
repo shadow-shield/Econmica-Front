@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:transifox/page/auth/huella.riverpod.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -15,7 +16,7 @@ class _LoginState extends State<Login> {
       fit: StackFit.expand,
       children: [
         Container(
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             image: DecorationImage(
               image: AssetImage('assets/Loginfondo.jpg'),
               fit: BoxFit.cover,
@@ -32,7 +33,8 @@ class _LoginState extends State<Login> {
                 inputclave(),
                 botoninicarsesion(),
                 recuContrasena(),
-                registerUser()
+                registerUser(),
+                Huella(),
               ],
             )
             // Aquí va el contenido del login
@@ -49,7 +51,7 @@ class _LoginState extends State<Login> {
         onPressed: () {
           print('boton de recuperar contraseña');
         },
-        child: Text('¿Olvidastes la contraseña?',
+        child: const Text('¿Olvidastes la contraseña?',
             style: TextStyle(color: Colors.white)),
       ),
     );
@@ -66,7 +68,7 @@ class _LoginState extends State<Login> {
           foregroundColor:
               Colors.blue, 
         ),
-        child: Text(
+        child: const Text(
           'Registrarse',
           style: TextStyle(
             color: Colors.white, 
@@ -78,8 +80,8 @@ class _LoginState extends State<Login> {
   }
 
   Widget textoinicarsesion() {
-    return Padding(
-      padding: const EdgeInsets.all(20.0),
+    return const Padding(
+      padding: EdgeInsets.all(20.0),
       child: Text(
         'Iniciar Sesión',
         style: TextStyle(
@@ -95,11 +97,11 @@ class _LoginState extends State<Login> {
     return Padding(
       padding: const EdgeInsets.all(20.0),
       child: TextField(
-        style: TextStyle(color: Colors.white),
+        style: const TextStyle(color: Colors.white),
         decoration: InputDecoration(
-          prefixIcon: Icon(Icons.lock, color: Colors.white),
+          prefixIcon: const Icon(Icons.lock, color: Colors.white),
           hintText: 'Clave',
-          hintStyle: TextStyle(
+          hintStyle: const TextStyle(
             color: Colors.white,
           ),
           border: OutlineInputBorder(
@@ -114,11 +116,11 @@ class _LoginState extends State<Login> {
     return Padding(
       padding: const EdgeInsets.all(20.0),
       child: TextField(
-        style: TextStyle(color: Colors.white),
+        style: const TextStyle(color: Colors.white),
         decoration: InputDecoration(
-          prefixIcon: Icon(Icons.person, color: Colors.white),
+          prefixIcon: const Icon(Icons.person, color: Colors.white),
           hintText: 'Cuenta',
-          hintStyle: TextStyle(
+          hintStyle: const TextStyle(
             color: Colors.white,
           ),
           border: OutlineInputBorder(
@@ -138,12 +140,14 @@ class _LoginState extends State<Login> {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20),
           ),
-          padding: EdgeInsets.symmetric(horizontal: 25, vertical: 5),
+          padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 5),
         ),
         onPressed: () {
+          //funcion verificar usuario
+          
           Navigator.pushReplacementNamed(context, 'botones');
         },
-        child: Text(
+        child: const Text(
           'Iniciar Sesión',
           style: TextStyle(color: Colors.white),
         ),

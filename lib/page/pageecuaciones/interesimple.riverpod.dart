@@ -6,7 +6,7 @@ import 'package:transifox/widgets/Dropdowbutton.riverpod.dart';
 import 'package:transifox/widgets/formato_fecha.riverpod.dart';
 // ignore: unused_import
 import 'package:transifox/widgets/formato_fecha.riverpod.dart' as miNotifiers;
-import 'package:transifox/widgets/textfield.riverpod.dart';
+import 'package:transifox/widgets/textfieldd.riverpod.dart';
 
 class Interes_simple extends StatefulWidget {
   const Interes_simple({super.key});
@@ -20,7 +20,7 @@ class _Interes_simpleState extends State<Interes_simple> {
     gradient: LinearGradient(
       begin: Alignment.bottomLeft,
       end: Alignment.topRight,
-      stops: [0.2, 0.9],
+      stops: const [0.2, 0.9],
       colors: [
         Colors.white,
         Colors.green[900]!,
@@ -42,7 +42,7 @@ class _Interes_simpleState extends State<Interes_simple> {
     return Scaffold(
         appBar: AppBar(
           foregroundColor: Colors.green,
-          title: Text('Interes Simple'),
+          title: const Text('Interes Simple'),
         ),
         body: Stack(
           fit: StackFit.expand,
@@ -51,7 +51,7 @@ class _Interes_simpleState extends State<Interes_simple> {
               decoration: boxDecoration,
             ),
             Container(
-              padding: EdgeInsets.only(top: 120),
+              padding: const EdgeInsets.only(top: 100),
               child: SingleChildScrollView(
                 scrollDirection: Axis.vertical,
                 child: Column(
@@ -60,13 +60,13 @@ class _Interes_simpleState extends State<Interes_simple> {
                     Column(
                       children: [
                         Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 20),
+                          padding: const EdgeInsets.symmetric(horizontal: 20),
                           child: Container(
                             decoration: BoxDecoration(
                               color: Colors.grey[300],
                               borderRadius: BorderRadius.circular(12),
                               border: Border.all(color: Colors.green, width: 2),
-                              boxShadow: [
+                              boxShadow: const [
                                 BoxShadow(
                                   color: Colors.green,
                                   blurRadius: 5,
@@ -74,21 +74,21 @@ class _Interes_simpleState extends State<Interes_simple> {
                                 ),
                               ],
                             ),
-                            padding: EdgeInsets.symmetric(horizontal: 16),
+                            padding: const EdgeInsets.symmetric(horizontal: 16),
                             child: SizedBox(
                               width: 165,
                               child: DropdownButtonHideUnderline(
                                 child: DropdownButton<String>(
                                   value: selectedCalculation,
-                                  hint: Text(
+                                  hint: const Text(
                                     'Seleccione Opcion',
                                     style: TextStyle(
                                         color: Colors.green,
                                         fontWeight: FontWeight.bold),
                                   ),
-                                  icon: Icon(Icons.arrow_drop_down,
+                                  icon: const Icon(Icons.arrow_drop_down,
                                       color: Colors.green, size: 30),
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                       color: Colors.green, fontSize: 16),
                                   isExpanded: true,
                                   onChanged: (String? newValue) {
@@ -108,10 +108,10 @@ class _Interes_simpleState extends State<Interes_simple> {
                                       value: value,
                                       child: Padding(
                                         padding:
-                                            EdgeInsets.symmetric(vertical: 8),
+                                            const EdgeInsets.symmetric(vertical: 8),
                                         child: Text(
                                           value,
-                                          style: TextStyle(fontSize: 16),
+                                          style: const TextStyle(fontSize: 16),
                                         ),
                                       ),
                                     );
@@ -121,7 +121,7 @@ class _Interes_simpleState extends State<Interes_simple> {
                             ),
                           ),
                         ),
-                        SizedBox(height: 15),
+                        const SizedBox(height: 15),
                         SizedBox(
                           width: 150,
                           child: TextfieldStyle(
@@ -132,7 +132,7 @@ class _Interes_simpleState extends State<Interes_simple> {
                             controller: interesimpleController,
                           ),
                         ),
-                        SizedBox(height: 15),
+                        const SizedBox(height: 15),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -146,7 +146,7 @@ class _Interes_simpleState extends State<Interes_simple> {
                                 controller: montoController,
                               ),
                             ),
-                            SizedBox(width: 10),
+                            const SizedBox(width: 10),
                             SizedBox(
                               width: 150,
                               child: TextfieldStyle(
@@ -162,7 +162,7 @@ class _Interes_simpleState extends State<Interes_simple> {
                         ),
                       ],
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -176,7 +176,7 @@ class _Interes_simpleState extends State<Interes_simple> {
                             controller: tasaController,
                           ),
                         ),
-                        SizedBox(width: 10),
+                        const SizedBox(width: 10),
                         SizedBox(
                           width: 150,
                           child: TextfieldStyle(
@@ -189,15 +189,15 @@ class _Interes_simpleState extends State<Interes_simple> {
                         ),
                       ],
                     ),
-                    SizedBox(height: 30),
-                    FechaSelector(
+                    const SizedBox(height: 30),
+                    const FechaSelector(
                       color: Colors.green,
                     ),
-                    SizedBox(height: 20),
-                    DropdownMenuItemButton(
+                    const SizedBox(height: 20),
+                    const DropdownMenuItemButton(
                       color: Colors.green,
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.green,
@@ -205,7 +205,7 @@ class _Interes_simpleState extends State<Interes_simple> {
                       onPressed: () {
                         calcularSimple();
                       },
-                      child: Text('Calcular'),
+                      child: const Text('Calcular'),
                     ),
                   ],
                 ),
@@ -318,7 +318,7 @@ class _Interes_simpleState extends State<Interes_simple> {
       print(resultado);
 
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Interés Calculado con éxito')),
+        const SnackBar(content: Text('Interés Calculado con éxito')),
       );
 
       // Evita asignar null a los controladores
