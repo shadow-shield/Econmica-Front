@@ -52,6 +52,12 @@ class _TasaState extends State<Tasa> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.info_outline),
+            onPressed: mostrarInfoTema,
+          ),
+        ],
         foregroundColor: Colors.red[900]!,
         title: const Text('Tasa de interés'),
       ),
@@ -69,18 +75,6 @@ class _TasaState extends State<Tasa> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     if (!isCompuesto) ...[
-                      SizedBox(
-                        width: 150,
-                        child: TextfieldStyle(
-                            enabled: true,
-                            color: Colors.red[900]!,
-                            controller: tasaController,
-                            icon: Image.asset('assets/tasa.png', width: 1),
-                            labelText: 'tasa simple'),
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
                       Row(
                         children: [
                           Padding(
@@ -113,18 +107,35 @@ class _TasaState extends State<Tasa> {
                           ),
                         ],
                       ),
-                      Padding(
-                        padding:
-                            const EdgeInsets.symmetric(vertical: 5, horizontal: 20),
-                        child: SizedBox(
-                          width: 150,
-                          child: TextfieldStyle(
-                              enabled: true,
-                              color: Colors.red[900]!,
-                              controller: tiempoControllerS,
-                              icon: Image.asset('assets/tiempo.png', width: 1),
-                              labelText: 'Tiempo'),
-                        ),
+                      Row(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 5, horizontal: 20),
+                            child: SizedBox(
+                              width: 150,
+                              child: TextfieldStyle(
+                                  enabled: true,
+                                  color: Colors.red[900]!,
+                                  controller: tiempoControllerS,
+                                  icon: Image.asset('assets/tiempo.png',
+                                      width: 1),
+                                  labelText: 'Tiempo'),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 20,
+                          ),
+                          SizedBox(
+                            width: 150,
+                            child: TextfieldStyle(
+                                enabled: true,
+                                color: Colors.red[900]!,
+                                controller: tasaController,
+                                icon: Image.asset('assets/tasa.png', width: 1),
+                                labelText: 'tasa simple'),
+                          ),
+                        ],
                       ),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -205,8 +216,8 @@ class _TasaState extends State<Tasa> {
                         height: 20,
                       ),
                       Padding(
-                        padding:
-                            const EdgeInsets.symmetric(vertical: 5, horizontal: 20),
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 5, horizontal: 20),
                         child: SizedBox(
                           width: 150,
                           child: TextfieldStyle(
@@ -345,6 +356,66 @@ class _TasaState extends State<Tasa> {
         SnackBar(content: Text('Error al registrar interés: $e')),
       );
     }
+  }
+
+  //informacion tasa
+  void mostrarInfoTema() {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          backgroundColor: Colors.white,
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+          title: Row(
+            children: [
+              Icon(Icons.info, color: Colors.red[900]),
+              SizedBox(width: 8),
+              Text('¿Qué es la Tasa de Interés?',
+                  style: TextStyle(color: Colors.red[900], fontSize: 15)),
+            ],
+          ),
+          content: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: const [
+                Text(
+                  'La tasa de interés es el porcentaje que se cobra o se paga por el uso de una cantidad de dinero durante un período determinado.',
+                  style: TextStyle(fontSize: 14),
+                ),
+                SizedBox(height: 15),
+                Text(
+                  '📌 Fórmula (Interés Simple):',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                Text(
+                  'Tasa = Interés / (Capital × Tiempo)',
+                ),
+                SizedBox(height: 15),
+                Text(
+                  '📌 Fórmula (Interés Compuesto):',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                Text(
+                  'Tasa = (Monto / Capital)^(1/Tiempo) - 1',
+                ),
+                SizedBox(height: 15),
+                Text(
+                  '💡 Se expresa comúnmente en forma anual, mensual o diaria, dependiendo del período de tiempo evaluado.',
+                  style: TextStyle(fontSize: 13),
+                ),
+              ],
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: Text('Cerrar', style: TextStyle(color: Colors.red[900])),
+            ),
+          ],
+        );
+      },
+    );
   }
 
   double CalcularTiempo() {

@@ -40,6 +40,12 @@ class _AmortizacionesStateState extends State<AmortizacionesState> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.info),
+            onPressed: mostrarInfoTema,
+          ),
+        ],
         foregroundColor: const Color(0xFFFAA89C),
         title: const Text('Amortizaciones'),
       ),
@@ -117,18 +123,18 @@ class _AmortizacionesStateState extends State<AmortizacionesState> {
                   const SizedBox(height: 20),
                   if (selectedCalculation == 'Amortizacion Francesa') ...[
                     Padding(
-                      padding: const EdgeInsets.only(left:40, right: 40),
+                      padding: const EdgeInsets.only(left: 40, right: 40),
                       child: camposFrancesa(),
                     )
                   ] else if (selectedCalculation == 'Amortizacion Aleman') ...[
                     Padding(
-                      padding: const EdgeInsets.only(left:40, right: 40),
+                      padding: const EdgeInsets.only(left: 40, right: 40),
                       child: camposAleman(),
                     )
                   ] else if (selectedCalculation ==
                       'Amortizacion Americana') ...[
                     Padding(
-                      padding: const EdgeInsets.only(left:40, right: 40),
+                      padding: const EdgeInsets.only(left: 40, right: 40),
                       child: camposAmericana(),
                     )
                   ],
@@ -238,6 +244,159 @@ class _AmortizacionesStateState extends State<AmortizacionesState> {
           ),
         ),
       ],
+    );
+  }
+
+  void mostrarInfoTema() {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          backgroundColor: Colors.white,
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+          title: Row(
+            children: [
+              Icon(Icons.info, color: Color(0xFFFAA89C)),
+              SizedBox(width: 8),
+              Text(
+                'Sistemas de Amortización',
+                style: TextStyle(color: Color(0xFFFAA89C), fontSize: 16),
+              ),
+            ],
+          ),
+          content: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: const [
+                Text(
+                  'Los sistemas de amortización definen cómo se pagan un préstamo o crédito en cuotas a lo largo del tiempo. Los más comunes son:',
+                  style: TextStyle(fontSize: 14),
+                ),
+                SizedBox(height: 20),
+                Text(
+                  '📌 Sistema Francés:',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                SizedBox(height: 6),
+                Text(
+                  'Cuota fija durante todo el periodo. Los intereses disminuyen y el abono a capital aumenta con el tiempo.',
+                ),
+                SizedBox(height: 6),
+                Text(
+                  'Fórmula de la cuota:',
+                  style: TextStyle(fontStyle: FontStyle.italic),
+                ),
+                Text(
+                  'C = P × [ i × (1 + i)^n ] / [ (1 + i)^n - 1 ]',
+                  style: TextStyle(fontFamily: 'monospace'),
+                ),
+                SizedBox(height: 6),
+                Text(
+                  'Donde:',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                Text('• C: Cuota fija'),
+                Text('• P: Monto del préstamo'),
+                Text('• i: Tasa de interés por periodo'),
+                Text('• n: Número total de cuotas'),
+                SizedBox(height: 20),
+                Text(
+                  '📌 Sistema Alemán:',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                SizedBox(height: 6),
+                Text(
+                  'El abono a capital es fijo y los intereses van disminuyendo. Las cuotas son decrecientes.',
+                ),
+                SizedBox(height: 6),
+                Text(
+                  'Fórmula del abono a capital:',
+                  style: TextStyle(fontStyle: FontStyle.italic),
+                ),
+                Text(
+                  'A = P / n',
+                  style: TextStyle(fontFamily: 'monospace'),
+                ),
+                Text(
+                  'Fórmula del interés del periodo:',
+                  style: TextStyle(fontStyle: FontStyle.italic),
+                ),
+                Text(
+                  'I = P × i',
+                  style: TextStyle(fontFamily: 'monospace'),
+                ),
+                Text(
+                  'Fórmula de la cuota:',
+                  style: TextStyle(fontStyle: FontStyle.italic),
+                ),
+                Text(
+                  'C = A + I',
+                  style: TextStyle(fontFamily: 'monospace'),
+                ),
+                SizedBox(height: 6),
+                Text(
+                  'Donde:',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                Text('• A: Amortización constante de capital'),
+                Text('• I: Interés sobre el saldo'),
+                Text('• C: Cuota total del período'),
+                Text('• P: Monto del préstamo'),
+                Text('• i: Tasa de interés'),
+                Text('• n: Número de cuotas'),
+                SizedBox(height: 20),
+                Text(
+                  '📌 Sistema Americano:',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                SizedBox(height: 6),
+                Text(
+                  'Solo se pagan intereses durante todo el periodo, y el capital se paga en una única cuota final.',
+                ),
+                SizedBox(height: 6),
+                Text(
+                  'Fórmula del interés periódico:',
+                  style: TextStyle(fontStyle: FontStyle.italic),
+                ),
+                Text(
+                  'I = P × i',
+                  style: TextStyle(fontFamily: 'monospace'),
+                ),
+                Text(
+                  'Fórmula de la cuota final:',
+                  style: TextStyle(fontStyle: FontStyle.italic),
+                ),
+                Text(
+                  'C_final = P + I',
+                  style: TextStyle(fontFamily: 'monospace'),
+                ),
+                SizedBox(height: 6),
+                Text(
+                  'Donde:',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                Text('• I: Interés por período'),
+                Text('• P: Monto del préstamo'),
+                Text('• i: Tasa de interés'),
+                Text('• C_final: Cuota final que incluye el capital'),
+                SizedBox(height: 20),
+                Text(
+                  '💡 Elegir el sistema adecuado depende del flujo de caja del deudor, la predictibilidad de ingresos y la carga financiera que pueda asumir.',
+                  style: TextStyle(fontSize: 13),
+                ),
+              ],
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: Text('Cerrar',
+                  style: TextStyle(color: const Color(0xFFFAA89C))),
+            ),
+          ],
+        );
+      },
     );
   }
 }

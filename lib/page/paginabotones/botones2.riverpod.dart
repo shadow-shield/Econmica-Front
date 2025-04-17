@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:transifox/page/auth/login.riverpod.dart';
+import 'package:transifox/widgets/botonback.riverpod.dart';
 import 'package:transifox/widgets/bottonavigator.riverpod.dart';
 
 import 'package:transifox/widgets/cartable2.riverpod.dart';
@@ -24,6 +26,13 @@ class _Botones_segundoState extends State<Botones_segundo> {
           children: [
             const Background(),
             _texto(),
+            Container(
+              padding: EdgeInsets.only(left: 20, bottom: 400),
+              alignment: Alignment.centerLeft,
+              child: Boton_Back(
+                ruta: Login(),
+              ),
+            )
           ],
         ));
   }

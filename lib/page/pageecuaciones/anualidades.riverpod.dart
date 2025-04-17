@@ -36,6 +36,14 @@ class _AnualidadState extends State<Anualidad> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.info_outline, color: Colors.pink),
+            onPressed: () {
+              mostrarInfoTema();
+            },
+          ),
+        ],
         foregroundColor: Colors.pink,
         title: const Text('Anualidad'),
       ),
@@ -68,8 +76,8 @@ class _AnualidadState extends State<Anualidad> {
                         borderRadius: BorderRadius.circular(15),
                         borderSide: BorderSide.none,
                       ),
-                      contentPadding:
-                          const EdgeInsets.symmetric(vertical: 14, horizontal: 16),
+                      contentPadding: const EdgeInsets.symmetric(
+                          vertical: 14, horizontal: 16),
                     ),
                     dropdownColor: Colors.white,
                     elevation: 5,
@@ -79,7 +87,8 @@ class _AnualidadState extends State<Anualidad> {
                               value: value,
                               child: Row(
                                 children: [
-                                  const Icon(Icons.calculate, color: Colors.pink),
+                                  const Icon(Icons.calculate,
+                                      color: Colors.pink),
                                   const SizedBox(width: 10),
                                   Text(value),
                                 ],
@@ -117,9 +126,7 @@ class _AnualidadState extends State<Anualidad> {
                     ),
                   )
                 else
-                  const SizedBox
-                      .shrink(), 
-
+                  const SizedBox.shrink(),
                 const SizedBox(height: 20),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -234,5 +241,71 @@ class _AnualidadState extends State<Anualidad> {
       valorFController.text = '';
       valorPController.text = 0.toString();
     }
+  }
+
+  void mostrarInfoTema() {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          backgroundColor: Colors.white,
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+          title: Row(
+            children: [
+              Icon(Icons.info, color: Colors.pink),
+              SizedBox(width: 8),
+              Text(
+                '¿Qué son las Anualidades?',
+                style: TextStyle(color: Colors.pink, fontSize: 15),
+              ),
+            ],
+          ),
+          content: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: const [
+                Text(
+                  'Una anualidad es una serie de pagos iguales realizados a intervalos regulares durante un período de tiempo determinado.',
+                  style: TextStyle(fontSize: 14),
+                ),
+                SizedBox(height: 15),
+                Text(
+                  '📌 Fórmulas:',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                SizedBox(height: 5),
+                Text('• Valor Futuro (VF):'),
+                Text('  VF = R × [((1 + i)^n - 1) / i]'),
+                SizedBox(height: 5),
+                Text('• Valor Presente (VP):'),
+                Text('  VA = R × [1 - (1 + i)^-n] / i'),
+                SizedBox(height: 15),
+                Text(
+                  '📘 Donde:',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                Text('• R: Valor del pago periódico (renta o cuota)'),
+                Text('• i: Tasa de interés por período'),
+                Text('• n: Número total de períodos'),
+                Text('• VF: Monto acumulado al final de los períodos'),
+                Text('• VA: Valor equivalente en el presente de la anualidad'),
+                SizedBox(height: 15),
+                Text(
+                  '💡 Las anualidades se usan en préstamos, inversiones y seguros. Pueden ser ordinarias (al final del período) o anticipadas (al inicio del período).',
+                  style: TextStyle(fontSize: 13),
+                ),
+              ],
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: Text('Cerrar', style: TextStyle(color: Colors.pink)),
+            ),
+          ],
+        );
+      },
+    );
   }
 }

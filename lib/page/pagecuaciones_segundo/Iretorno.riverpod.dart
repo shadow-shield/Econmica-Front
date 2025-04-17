@@ -49,6 +49,12 @@ class _IretornoState extends State<Iretorno> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        actions: [
+          IconButton(
+            icon: Icon(Icons.info_outline),
+            onPressed: () => mostrarInfoInteresRetorno(context),
+          ),
+        ],
         foregroundColor: const Color(0xFF9C93FA),
         title: const Text('Interes Retorno'),
       ),
@@ -183,6 +189,83 @@ class _IretornoState extends State<Iretorno> {
           ),
         ],
       ),
+    );
+  }
+
+  void mostrarInfoInteresRetorno(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          backgroundColor: Colors.white,
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+          title: Row(
+            children: [
+              Icon(Icons.trending_up, color: Color(0xFF9C93FA)),
+              SizedBox(width: 8),
+              Text(
+                'Interés de Retorno (TIR)',
+                style: TextStyle(color: Color(0xFF9C93FA), fontSize: 16),
+              ),
+            ],
+          ),
+          content: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: const [
+                Text(
+                  'La Tasa Interna de Retorno (TIR) es una medida utilizada en finanzas para evaluar la rentabilidad de un proyecto o inversión.',
+                  style: TextStyle(fontSize: 14),
+                ),
+                SizedBox(height: 12),
+                Text(
+                  '📌 ¿Qué es la TIR?',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                SizedBox(height: 6),
+                Text(
+                  'Es la tasa de interés que iguala el valor presente de los flujos de efectivo esperados con la inversión inicial. Es decir, el Valor Presente Neto (VPN) es igual a cero.',
+                ),
+                SizedBox(height: 12),
+                Text(
+                  '🔢 Fórmula general:',
+                  style: TextStyle(fontStyle: FontStyle.italic),
+                ),
+                Text(
+                  'VPN = ∑ [ Fₜ / (1 + r)^t ] = 0',
+                  style: TextStyle(fontFamily: 'monospace'),
+                ),
+                Text('• Fₜ: Flujo de caja en el período t'),
+                Text('• r: Tasa interna de retorno (TIR)'),
+                Text('• t: Número de período'),
+                SizedBox(height: 12),
+                Text(
+                  '📊 Interpretación:',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                Text('• Si TIR > tasa mínima requerida ⇒ Proyecto viable'),
+                Text('• Si TIR < tasa mínima requerida ⇒ Proyecto no rentable'),
+                Text('• Si TIR = tasa mínima requerida ⇒ Punto de equilibrio'),
+                SizedBox(height: 12),
+                Text(
+                  '💡 Nota:',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                Text(
+                  'La TIR se calcula generalmente con métodos numéricos, ya que no se puede despejar directamente en la mayoría de los casos.',
+                ),
+              ],
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: Text('Cerrar', style: TextStyle(color: Color(0xFF9C93FA))),
+            ),
+          ],
+        );
+      },
     );
   }
 }

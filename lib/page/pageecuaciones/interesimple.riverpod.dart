@@ -41,6 +41,12 @@ class _Interes_simpleState extends State<Interes_simple> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.info_outline),
+              onPressed: mostrarInfoTema,
+            ),
+          ],
           foregroundColor: Colors.green,
           title: const Text('Interes Simple'),
         ),
@@ -107,8 +113,8 @@ class _Interes_simpleState extends State<Interes_simple> {
                                     return DropdownMenuItem<String>(
                                       value: value,
                                       child: Padding(
-                                        padding:
-                                            const EdgeInsets.symmetric(vertical: 8),
+                                        padding: const EdgeInsets.symmetric(
+                                            vertical: 8),
                                         child: Text(
                                           value,
                                           style: const TextStyle(fontSize: 16),
@@ -363,5 +369,84 @@ class _Interes_simpleState extends State<Interes_simple> {
       interesimpleController.clear();
       montoController.text = '';
     }
+  }
+
+  void mostrarInfoTema() {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          backgroundColor: Colors.white,
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+          title: Row(
+            children: [
+              Icon(Icons.info, color: Colors.green),
+              SizedBox(width: 8),
+              Text(
+                '¿Qué es el Interés Simple?',
+                style: TextStyle(color: Colors.green, fontSize: 15),
+              ),
+            ],
+          ),
+          content: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: const [
+                Text(
+                  'El interés simple es una forma de calcular el interés generado por un capital durante un período de tiempo, sin que se acumule sobre los intereses previos.',
+                  style: TextStyle(fontSize: 14),
+                ),
+                SizedBox(height: 15),
+                Text(
+                  '📌 Fórmula:',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Interés = Capital × Tasa × Tiempo',
+                    ),
+                    Text(
+                      '      Monto = Capital × (1+Tasa × Tiempo)',
+                    ),
+                    Text(
+                      ' Capital = interés / (Tasa × Tiempo)',
+                    ),
+                    Text(
+                      ' Tasa = interés / (Capital × Tiempo)',
+                    ),
+                    Text(
+                      ' Tiempo = interés / (Capital × Tasa)',
+                    ),
+                  ],
+                ),
+                SizedBox(height: 15),
+                Text(
+                  '📘 Donde:',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                Text('• Monto: Es el valor total acumulado al final del período de la inversión o préstamo'),
+                Text('• Capital: Monto inicial invertido o prestado'),
+                Text('• Tasa: Porcentaje de interés (por período)'),
+                Text('• Tiempo: Duración en la que se aplica la tasa'),
+                SizedBox(height: 15),
+                Text(
+                  '💡 El interés simple se utiliza comúnmente en préstamos a corto plazo y cálculos básicos de inversión.',
+                  style: TextStyle(fontSize: 13),
+                ),
+              ],
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: Text('Cerrar', style: TextStyle(color: Colors.green)),
+            ),
+          ],
+        );
+      },
+    );
   }
 }

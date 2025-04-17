@@ -37,6 +37,14 @@ class _InteresCompuestoState extends State<InteresCompuestoPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.info),
+              onPressed: () {
+                mostrarInfoTema();
+              },
+            ),
+          ],
           foregroundColor: Colors.yellow[800]!,
           title: const Text('Interés Compuesto'),
         ),
@@ -290,4 +298,73 @@ class _InteresCompuestoState extends State<InteresCompuestoPage> {
       interesCompuestoController.text = '0'.toString();
     }
   }
+
+  void mostrarInfoTema() {
+  showDialog(
+    context: context,
+    builder: (context) {
+      return AlertDialog(
+        backgroundColor: Colors.white,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        title: Row(
+          children: [
+            Icon(Icons.info, color: Colors.yellow[800]!),
+            SizedBox(width: 8),
+            Text(
+              '¿Qué es el Interés Compuesto?',
+              style: TextStyle(color: Colors.yellow[800]!, fontSize: 15),
+            ),
+          ],
+        ),
+        content: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: const [
+              Text(
+                'El interés compuesto es aquel que se calcula sobre el capital inicial y también sobre los intereses que se van generando en cada período.',
+                style: TextStyle(fontSize: 14),
+              ),
+              SizedBox(height: 15),
+              Text(
+                '📌 Fórmulas:',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(' Monto = Capital × (1 + Tasa)^Tiempo'),
+                  Text(' Interés = Monto - Capital'),
+                  Text(' Capital = Monto / (1 + Tasa)^Tiempo'),
+                  Text(' Tasa = (Monto / Capital)^(1/Tiempo) - 1'),
+                  Text(' Tiempo = log(Monto / Capital) / log(1 + Tasa)'),
+                ],
+              ),
+              SizedBox(height: 15),
+              Text(
+                '📘 Donde:',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              Text('• Monto: Es el valor total acumulado al final del período de la inversión o préstamo.'),
+              Text('• Capital: Monto inicial invertido o prestado.'),
+              Text('• Tasa: Porcentaje de interés (por período), expresado en forma decimal.'),
+              Text('• Tiempo: Número de períodos en los que se aplica la tasa.'),
+              SizedBox(height: 15),
+              Text(
+                '💡 El interés compuesto permite que el capital crezca más rápido, ya que se reinvierte en cada período. Es común en inversiones a mediano y largo plazo.',
+                style: TextStyle(fontSize: 13),
+              ),
+            ],
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: Text('Cerrar', style: TextStyle(color: Colors.yellow[800]!)),
+          ),
+        ],
+      );
+    },
+  );
+}
+
 }

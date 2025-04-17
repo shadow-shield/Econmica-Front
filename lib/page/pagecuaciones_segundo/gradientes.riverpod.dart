@@ -35,6 +35,12 @@ class _Gradientes_SeriStateState extends State<Gradientes_SeriState> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.info),
+              onPressed: mostrarInfoTema,
+            ),
+          ],
           foregroundColor: Colors.brown[400]!,
           title: const Text('Gradientes'),
         ),
@@ -208,7 +214,6 @@ class _Gradientes_SeriStateState extends State<Gradientes_SeriState> {
                               ],
                             ],
                           ),
-                          
                         ],
                       ),
                     FechaSelector(
@@ -230,5 +235,99 @@ class _Gradientes_SeriStateState extends State<Gradientes_SeriState> {
             ),
           ],
         ));
+  }
+
+  void mostrarInfoTema() {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          backgroundColor: Colors.white,
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+          title: Row(
+            children: [
+              Icon(Icons.info, color: Colors.brown[400]!),
+              SizedBox(width: 8),
+              Text(
+                '¿Qué son los Gradientes?',
+                style: TextStyle(color: Colors.brown[400]!, fontSize: 16),
+              ),
+            ],
+          ),
+          content: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: const [
+                Text(
+                  'Los gradientes son series de pagos que cambian con el tiempo. Estos pueden ser aritméticos (incremento fijo) o geométricos (incremento porcentual).',
+                  style: TextStyle(fontSize: 14),
+                ),
+                SizedBox(height: 20),
+                Text(
+                  '📌 Gradiente Geométrico:',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                SizedBox(height: 6),
+                Text(
+                  'Fórmula del valor futuro:',
+                  style: TextStyle(fontStyle: FontStyle.italic),
+                ),
+                Text(
+                  'Vf = [ A * (1 + G)^n * (1 + i)^n ] / (G - i)',
+                  style: TextStyle(fontFamily: 'monospace'),
+                ),
+                SizedBox(height: 8),
+                Text(
+                  'Donde:',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                Text('• Vf: Valor futuro del gradiente geométrico'),
+                Text('• A: Valor del primer pago'),
+                Text(
+                    '• G: Tasa de crecimiento del gradiente (porcentaje decimal)'),
+                Text('• i: Tasa de interés por período'),
+                Text('• n: Número de períodos'),
+                SizedBox(height: 20),
+                Text(
+                  '📌 Gradiente Aritmético:',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                SizedBox(height: 6),
+                Text(
+                  'Fórmula del valor presente:',
+                  style: TextStyle(fontStyle: FontStyle.italic),
+                ),
+                Text(
+                  'Vp = A × [ (1 - (1 + i)^-n) / i ] + (G / i) × [ (1 - (1 + i)^-n) / i - n / (1 + i)^n ]',
+                  style: TextStyle(fontFamily: 'monospace'),
+                ),
+                SizedBox(height: 8),
+                Text(
+                  'Donde:',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                Text('• Vp: Valor presente del gradiente aritmético'),
+                Text('• A: Valor constante de la anualidad'),
+                Text('• G: Incremento aritmético constante por período'),
+                Text('• i: Tasa de interés por período'),
+                Text('• n: Número total de períodos'),
+                SizedBox(height: 20),
+                Text(
+                  '💡 Estos modelos se utilizan para evaluar pagos futuros que aumentan o disminuyen progresivamente, como cuotas, rentas o sueldos escalonados.',
+                  style: TextStyle(fontSize: 13),
+                ),
+              ],
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: Text('Cerrar', style: TextStyle(color: Colors.brown[400]!)),
+            ),
+          ],
+        );
+      },
+    );
   }
 }

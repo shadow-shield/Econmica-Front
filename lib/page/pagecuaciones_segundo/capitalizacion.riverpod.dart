@@ -34,6 +34,12 @@ class _CapitalizacionesState extends State<Capitalizaciones> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.info),
+              onPressed: mostrarInfoTema,
+            ),
+          ],
           foregroundColor: const Color(0xFF3B3EF9),
           title: const Text('Capitalizaciones'),
         ),
@@ -93,7 +99,7 @@ class _CapitalizacionesState extends State<Capitalizaciones> {
                                 'Capitalizacion continua',
                                 'Capitalizacion periodica',
                                 'Capitalizacion anticipada',
-                                'Capitalizacion defirida',
+                                'Capitalizacion diferida',
                               ].map<DropdownMenuItem<String>>((String value) {
                                 return DropdownMenuItem<String>(
                                   value: value,
@@ -150,7 +156,7 @@ class _CapitalizacionesState extends State<Capitalizaciones> {
                       )
                     ],
                     const SizedBox(height: 10),
-     
+
                     /* FechaSelector(
                       color: Color(0xFF3B3EF9),
                     ), */
@@ -337,6 +343,169 @@ class _CapitalizacionesState extends State<Capitalizaciones> {
           ),
         ),
       ],
+    );
+  }
+
+  void mostrarInfoTema() {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          backgroundColor: Colors.white,
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+          title: Row(
+            children: [
+              Icon(Icons.info, color: Color(0xFF3B3EF9)),
+              SizedBox(width: 8),
+              Text(
+                'Capitalización',
+                style: TextStyle(color: Color(0xFF3B3EF9), fontSize: 16),
+              ),
+            ],
+          ),
+          content: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: const [
+                Text(
+                  'La capitalización se refiere al proceso mediante el cual los intereses generados por un capital se suman al mismo, generando nuevos intereses. Existen diferentes tipos:',
+                  style: TextStyle(fontSize: 14),
+                ),
+                SizedBox(height: 20),
+                Text(
+                  '📌 Capitalización Simple:',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                SizedBox(height: 6),
+                Text(
+                  'El interés no se reinvierte. Solo se calcula sobre el capital inicial.',
+                ),
+                SizedBox(height: 6),
+                Text(
+                  'Fórmula:',
+                  style: TextStyle(fontStyle: FontStyle.italic),
+                ),
+                Text(
+                  'I = P × i × n\nM = P + I',
+                  style: TextStyle(fontFamily: 'monospace'),
+                ),
+                Text('• P: Capital inicial'),
+                Text('• i: Tasa de interés'),
+                Text('• n: Tiempo'),
+                Text('• M: Monto final'),
+                SizedBox(height: 20),
+                Text(
+                  '📌 Capitalización Compuesta:',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                SizedBox(height: 6),
+                Text(
+                  'Los intereses se reinvierten en cada período. El capital crece exponencialmente.',
+                ),
+                SizedBox(height: 6),
+                Text(
+                  'Fórmula:',
+                  style: TextStyle(fontStyle: FontStyle.italic),
+                ),
+                Text(
+                  'M = P × (1 + i)^n',
+                  style: TextStyle(fontFamily: 'monospace'),
+                ),
+                Text('• M: Monto acumulado'),
+                Text('• P: Capital inicial'),
+                Text('• i: Tasa de interés'),
+                Text('• n: Número de períodos'),
+                SizedBox(height: 20),
+                Text(
+                  '📌 Capitalización Continua:',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                SizedBox(height: 6),
+                Text(
+                  'El interés se capitaliza infinitas veces por período.',
+                ),
+                SizedBox(height: 6),
+                Text(
+                  'Fórmula:',
+                  style: TextStyle(fontStyle: FontStyle.italic),
+                ),
+                Text(
+                  'M = P × e^(i × n)',
+                  style: TextStyle(fontFamily: 'monospace'),
+                ),
+                Text('• e: Número de Euler (≈ 2.71828)'),
+                SizedBox(height: 20),
+                Text(
+                  '📌 Capitalización Periódica:',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                SizedBox(height: 6),
+                Text(
+                  'La capitalización ocurre varias veces al año (mensual, trimestral, etc.).',
+                ),
+                SizedBox(height: 6),
+                Text(
+                  'Fórmula:',
+                  style: TextStyle(fontStyle: FontStyle.italic),
+                ),
+                Text(
+                  'M = P × (1 + i/m)^(n × m)',
+                  style: TextStyle(fontFamily: 'monospace'),
+                ),
+                Text('• m: Número de capitalizaciones por año'),
+                SizedBox(height: 20),
+                Text(
+                  '📌 Capitalización Anticipada:',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                SizedBox(height: 6),
+                Text(
+                  'El interés se cobra al inicio del período. Se aplica en operaciones como descuentos.',
+                ),
+                SizedBox(height: 6),
+                Text(
+                  'Fórmula del monto:',
+                  style: TextStyle(fontStyle: FontStyle.italic),
+                ),
+                Text(
+                  'M = P / (1 - i × n)',
+                  style: TextStyle(fontFamily: 'monospace'),
+                ),
+                SizedBox(height: 20),
+                Text(
+                  '📌 Capitalización Diferida:',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                SizedBox(height: 6),
+                Text(
+                  'La capitalización comienza después de un período de gracia sin acumulación de intereses.',
+                ),
+                SizedBox(height: 6),
+                Text(
+                  'Se aplica capitalización compuesta después del tiempo de gracia:',
+                ),
+                Text(
+                  'M = P × (1 + i)^(n - d)',
+                  style: TextStyle(fontFamily: 'monospace'),
+                ),
+                Text('• d: Período de gracia (sin intereses)'),
+                SizedBox(height: 20),
+                Text(
+                  '💡 Estos modelos permiten estimar con precisión el valor del dinero en el tiempo y planificar inversiones o préstamos. Elegir el método adecuado depende del tipo de operación financiera.',
+                  style: TextStyle(fontSize: 13),
+                ),
+              ],
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: Text('Cerrar', style: TextStyle(color: Color(0xFF3B3EF9))),
+            ),
+          ],
+        );
+      },
     );
   }
 }
