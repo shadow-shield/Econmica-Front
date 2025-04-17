@@ -3,39 +3,43 @@
 
 class GradientesModel {
   late double? ValorPF;
-  late double? Primera_Cuota;
-  late double? Constante_Incremento;
-  late double? Tasa_Periodo;
-  late double? Numero_Pago;
-  late double? Variable_Porcentual;
+  late double? Primera_Pago;
+  late double? Tasa_Interes;
+  late double? Numero_Periodo;
+  late double? Tasa_Crecimiento;
+  late double? Factor_Conversion;
+  late double? Cuota_enPeriodo;
 
 
   GradientesModel({
     required this.ValorPF,
-     required this.Primera_Cuota,
-    required this.Constante_Incremento,
-    required this.Tasa_Periodo,
-    required this.Numero_Pago,
-    required this.Variable_Porcentual,
+     required this.Primera_Pago,
+    required this.Tasa_Interes,
+    required this.Numero_Periodo,
+    required this.Tasa_Crecimiento,
+    required this.Factor_Conversion,
+    required this.Cuota_enPeriodo,
   });
 
   GradientesModel.fromJson(Map<String, dynamic> json) {
     ValorPF = json['ValorPF'];
-    Primera_Cuota = json['Primera_Cuota'];
-    Constante_Incremento = json['Constante_Incremento'];
-    Tasa_Periodo = json['Tasa_Periodo'];
-    Numero_Pago = json['Numero_Pago'];
-    Variable_Porcentual = json['Variable_Porcentual'];
+    Primera_Pago = json['Primera_Pago'];
+    Tasa_Interes = json['Tasa_Interes'];
+    Numero_Periodo = json['Numero_Periodo'];
+    Tasa_Crecimiento = json['Tasa_Crecimiento'];
+    Factor_Conversion = json['Factor_Conversion'];
+    Cuota_enPeriodo = json['Cuota_enPeriodo'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['ValorPF'] = ValorPF;
-    data['Primera_Cuota'] = Primera_Cuota;
-    data['Constante_Incremento'] = Constante_Incremento;
-    data['Tasa_Periodo'] = Tasa_Periodo;
-    data['Numero_Pago'] = Numero_Pago;
-    data['Variable_Porcentual'] = Variable_Porcentual;
+    data['Primera_Pago'] = Primera_Pago;
+    data['Tasa_Interes'] = Tasa_Interes;
+    data['Numero_Periodo'] = Numero_Periodo;
+    data['Tasa_Crecimiento'] = Tasa_Crecimiento;
+    data['Factor_Conversion'] = Factor_Conversion;
+    data['Cuota_enPeriodo'] = Cuota_enPeriodo;
     return data;
   }
 }
