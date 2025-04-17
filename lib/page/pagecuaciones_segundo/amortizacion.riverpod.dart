@@ -61,10 +61,10 @@ class _AmortizacionesStateState extends State<AmortizacionesState> {
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(12),
-                        border: Border.all(color: Colors.brown[400]!, width: 2),
+                        border: Border.all(color: Color(0xFFFAA89C), width: 2),
                         boxShadow: const [
                           BoxShadow(
-                            color: Colors.brown,
+                            color: Color(0xFFFAA89C),
                             blurRadius: 5,
                             offset: Offset(2, 2),
                           ),
@@ -79,13 +79,13 @@ class _AmortizacionesStateState extends State<AmortizacionesState> {
                             hint: Text(
                               'Seleccione Opcion',
                               style: TextStyle(
-                                  color: Colors.brown[400]!,
+                                  color: Color(0xFFFAA89C),
                                   fontWeight: FontWeight.bold),
                             ),
                             icon: Icon(Icons.arrow_drop_down,
-                                color: Colors.brown[400]!, size: 30),
+                                color: Color(0xFFFAA89C), size: 30),
                             style: TextStyle(
-                                color: Colors.brown[400]!, fontSize: 16),
+                                color: Color(0xFFFAA89C), fontSize: 16),
                             isExpanded: true,
                             onChanged: (String? newValue) {
                               setState(() {
@@ -115,17 +115,23 @@ class _AmortizacionesStateState extends State<AmortizacionesState> {
                     ),
                   ),
                   const SizedBox(height: 20),
-
-                  // Mostrar campos según selección
                   if (selectedCalculation == 'Amortizacion Francesa') ...[
-                    camposFrancesa()
+                    Padding(
+                      padding: const EdgeInsets.only(left:40, right: 40),
+                      child: camposFrancesa(),
+                    )
                   ] else if (selectedCalculation == 'Amortizacion Aleman') ...[
-                    camposAleman()
+                    Padding(
+                      padding: const EdgeInsets.only(left:40, right: 40),
+                      child: camposAleman(),
+                    )
                   ] else if (selectedCalculation ==
                       'Amortizacion Americana') ...[
-                    camposAmericana()
+                    Padding(
+                      padding: const EdgeInsets.only(left:40, right: 40),
+                      child: camposAmericana(),
+                    )
                   ],
-
                   const SizedBox(height: 20),
                   const DropdownMenuItemButton(color: Color(0xFFFAA89C)),
                   const SizedBox(height: 20),
@@ -145,21 +151,27 @@ class _AmortizacionesStateState extends State<AmortizacionesState> {
     );
   }
 
-  // ======================
-  // Campos para cada tipo
-  // ======================
-
   Widget camposFrancesa() {
     return Column(
       children: [
-        filaInput(CPeriodicaController, 'Cuota Periodica', 'assets/acuota.png'),
+        Row(
+          children: [
+            filaInput(
+                CPeriodicaController, 'Cuota Periodica', 'assets/acuota.png'),
+            const SizedBox(width: 10),
+            filaInput(
+                CPrestadoController, 'Capital Prestado', 'assets/acapital.png'),
+          ],
+        ),
         const SizedBox(height: 10),
-        filaInput(
-            CPrestadoController, 'Capital Prestado', 'assets/acapital.png'),
-        const SizedBox(height: 10),
-        filaInput(TPeriodoController, 'Tasa Periodo', 'assets/atasa.png'),
-        const SizedBox(height: 10),
-        filaInput(NPeriodoController, 'Numero de pagos', 'assets/anumero.png'),
+        Row(
+          children: [
+            filaInput(TPeriodoController, 'Tasa Periodo', 'assets/atasa.png'),
+            const SizedBox(width: 10),
+            filaInput(
+                NPeriodoController, 'Numero de pagos', 'assets/anumero.png'),
+          ],
+        ),
       ],
     );
   }
@@ -167,18 +179,25 @@ class _AmortizacionesStateState extends State<AmortizacionesState> {
   Widget camposAleman() {
     return Column(
       children: [
-        filaInput(CPeriodicaController, 'Cuota Periodica', 'assets/acuota.png'),
+        Row(
+          children: [
+            filaInput(
+                CPeriodicaController, 'Cuota Periodica', 'assets/acuota.png'),
+            const SizedBox(width: 10),
+            filaInput(Cuota_enPeriodoController, 'Cuota en el periodo',
+                'assets/ainteres.png'),
+          ],
+        ),
         const SizedBox(height: 10),
-        filaInput(Cuota_enPeriodoController, 'Cuota en el periodo',
-            'assets/ainteres.png'),
-        const SizedBox(height: 10),
-        filaInput(
-            CPrestadoController, 'Capital Prestado', 'assets/acapital.png'),
-        const SizedBox(height: 10),
-        filaInput(
-            TPeriodoController, 'Interes iniciales', 'assets/atasa.png'),
-        const SizedBox(height: 10),
-        const SizedBox(height: 10),
+        Row(
+          children: [
+            filaInput(
+                CPrestadoController, 'Capital Prestado', 'assets/acapital.png'),
+            const SizedBox(width: 10),
+            filaInput(
+                TPeriodoController, 'Interes iniciales', 'assets/atasa.png'),
+          ],
+        ),
         filaInput(NPeriodoController, 'Numero de pagos', 'assets/anumero.png'),
       ],
     );
@@ -187,10 +206,14 @@ class _AmortizacionesStateState extends State<AmortizacionesState> {
   Widget camposAmericana() {
     return Column(
       children: [
-        filaInput(
-            CPrestadoController, 'Capital Prestado', 'assets/acapital.png'),
-        const SizedBox(height: 10),
-        filaInput(TPeriodoController, 'Tasa Periodo', 'assets/atasa.png'),
+        Row(
+          children: [
+            filaInput(
+                CPrestadoController, 'Capital Prestado', 'assets/acapital.png'),
+            const SizedBox(width: 10),
+            filaInput(TPeriodoController, 'Tasa Periodo', 'assets/atasa.png'),
+          ],
+        ),
         const SizedBox(height: 10),
         filaInput(
             Interes_PeriodoController, 'Interes Periodo', 'assets/gvalor.png'),
@@ -204,8 +227,8 @@ class _AmortizacionesStateState extends State<AmortizacionesState> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         SizedBox(
-          height: 50,
-          width: 310,
+          height: 70,
+          width: 150,
           child: TextfieldStyle(
             enabled: true,
             labelText: label,

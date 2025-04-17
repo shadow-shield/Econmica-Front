@@ -22,11 +22,13 @@ class _CapitalizacionesState extends State<Capitalizaciones> {
       ],
     ),
   );
-
+  String? selectedCalculation;
   final TextEditingController C_inicialController = TextEditingController();
   final TextEditingController C_finalController = TextEditingController();
   final TextEditingController T_interessController = TextEditingController();
   final TextEditingController TiempoController = TextEditingController();
+  final TextEditingController Nperiodo_Controller = TextEditingController();
+  final TextEditingController PeriodoI_Controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -47,70 +49,108 @@ class _CapitalizacionesState extends State<Capitalizaciones> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Container(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          SizedBox(
-                            height: 50,
-                            width: 150,
-                            child: TextfieldStyle(
-                              enabled: true,
-                              labelText: 'Capital inicial',
-                              icon: Image.asset('assets/ccapital.png', width: 1),
-                              color: const Color(0xFF3B3EF9),
-                              controller: C_inicialController,
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(12),
+                          border:
+                              Border.all(color: Color(0xFF3B3EF9), width: 2),
+                          boxShadow: const [
+                            BoxShadow(
+                              color: Color(0xFF3B3EF9),
+                              blurRadius: 5,
+                              offset: Offset(2, 2),
+                            ),
+                          ],
+                        ),
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                        child: SizedBox(
+                          width: 220,
+                          child: DropdownButtonHideUnderline(
+                            child: DropdownButton<String>(
+                              value: selectedCalculation,
+                              hint: Text(
+                                'Seleccione Opcion',
+                                style: TextStyle(
+                                    color: Color(0xFF3B3EF9),
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              icon: Icon(Icons.arrow_drop_down,
+                                  color: Color(0xFF3B3EF9), size: 30),
+                              style: TextStyle(
+                                  color: Color(0xFF3B3EF9), fontSize: 16),
+                              isExpanded: true,
+                              onChanged: (String? newValue) {
+                                setState(() {
+                                  selectedCalculation = newValue;
+                                });
+                              },
+                              items: [
+                                'Capitalizacion simple',
+                                'Capitalizacion compuesta',
+                                'Capitalizacion continua',
+                                'Capitalizacion periodica',
+                                'Capitalizacion anticipada',
+                                'Capitalizacion defirida',
+                              ].map<DropdownMenuItem<String>>((String value) {
+                                return DropdownMenuItem<String>(
+                                  value: value,
+                                  child: Padding(
+                                    padding:
+                                        const EdgeInsets.symmetric(vertical: 8),
+                                    child: Text(
+                                      value,
+                                      style: const TextStyle(fontSize: 16),
+                                    ),
+                                  ),
+                                );
+                              }).toList(),
                             ),
                           ),
-                          const SizedBox(width: 10),
-                          SizedBox(
-                            height: 50,
-                            width: 150,
-                            child: TextfieldStyle(
-                              enabled: true,
-                              labelText: 'Capital final',
-                              icon: Image.asset('assets/cfinal.png', width: 1),
-                              color: const Color(0xFF3B3EF9),
-                              controller: C_finalController,
-                            ),
-                          ),
-                        ],
+                        ),
                       ),
                     ),
+                    const SizedBox(height: 20),
+                    if (selectedCalculation == 'Capitalizacion simple') ...[
+                      Padding(
+                        padding: const EdgeInsets.only(left: 30, right: 30),
+                        child: camposCapitalizacionSimple(),
+                      )
+                    ] else if (selectedCalculation ==
+                        'Capitalizacion compuesta') ...[
+                      Padding(
+                        padding: const EdgeInsets.only(left: 30, right: 30),
+                        child: camposCapitalizacionCompuesta(),
+                      )
+                    ] else if (selectedCalculation ==
+                        'Capitalizacion continua') ...[
+                      Padding(
+                        padding: const EdgeInsets.only(left: 30, right: 30),
+                        child: camposCapitalizacionContinua(),
+                      )
+                    ] else if (selectedCalculation ==
+                        'Capitalizacion periodica') ...[
+                      Padding(
+                        padding: const EdgeInsets.only(left: 30, right: 30),
+                        child: camposCapitalizacionPeriodica(),
+                      )
+                    ] else if (selectedCalculation ==
+                        'Capitalizacion anticipada') ...[
+                      Padding(
+                        padding: const EdgeInsets.only(left: 30, right: 30),
+                        child: campoCapitalizacionAnticipada(),
+                      )
+                    ] else if (selectedCalculation ==
+                        'Capitalizacion defirida') ...[
+                      Padding(
+                        padding: const EdgeInsets.only(left: 30, right: 30),
+                        child: campoCapitalizacionDefinida(),
+                      )
+                    ],
                     const SizedBox(height: 10),
-                    Container(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          SizedBox(
-                            height: 50,
-                            width: 150,
-                            child: TextfieldStyle(
-                              enabled: true,
-                              labelText: 'Tasa interes',
-                              icon: Image.asset('assets/ctasa.png', width: 1),
-                              color: const Color(0xFF3B3EF9),
-                              controller: T_interessController,
-                            ),
-                          ),
-                          const SizedBox(width: 10),
-                          SizedBox(
-                            height: 50,
-                            width: 150,
-                            child: TextfieldStyle(
-                              enabled: true,
-                              labelText: 'Tiempo',
-                              icon: Image.asset('assets/ctiempo.png', width: 1),
-                              color: const Color(0xFF3B3EF9),
-                              controller: TiempoController,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                   const SizedBox(height: 10), 
-                    
-                    const SizedBox(height: 30),
+     
                     /* FechaSelector(
                       color: Color(0xFF3B3EF9),
                     ), */
@@ -130,5 +170,173 @@ class _CapitalizacionesState extends State<Capitalizaciones> {
             )
           ],
         ));
+  }
+
+  Widget camposCapitalizacionSimple() {
+    return Column(
+      children: [
+        Row(
+          children: [
+            filaInput(
+                C_inicialController, 'Capital inicial', 'assets/ccapital.png'),
+            const SizedBox(width: 10),
+            filaInput(C_finalController, 'Monto final', 'assets/cfinal.png'),
+          ],
+        ),
+        const SizedBox(height: 10),
+        Row(
+          children: [
+            filaInput(T_interessController, 'Tasa interes', 'assets/ctasa.png'),
+            const SizedBox(width: 10),
+            filaInput(TiempoController, 'Tiempo', 'assets/ctiempo.png'),
+          ],
+        ),
+      ],
+    );
+  }
+
+  Widget camposCapitalizacionCompuesta() {
+    return Column(
+      children: [
+        Row(
+          children: [
+            filaInput(
+                C_inicialController, 'Capital inicial', 'assets/ccapital.png'),
+            const SizedBox(width: 10),
+            filaInput(C_finalController, 'Monto final', 'assets/cfinal.png'),
+          ],
+        ),
+        const SizedBox(height: 10),
+        Row(
+          children: [
+            filaInput(T_interessController, 'Tasa interes', 'assets/ctasa.png'),
+            const SizedBox(width: 10),
+            filaInput(TiempoController, 'Tiempo', 'assets/ctiempo.png'),
+          ],
+        ),
+      ],
+    );
+  }
+
+  Widget camposCapitalizacionContinua() {
+    return Column(
+      children: [
+        Row(
+          children: [
+            filaInput(
+                C_inicialController, 'Capital inicial', 'assets/ccapital.png'),
+            const SizedBox(width: 10),
+            filaInput(C_finalController, 'Monto final', 'assets/cfinal.png'),
+          ],
+        ),
+        const SizedBox(height: 10),
+        Row(
+          children: [
+            filaInput(T_interessController, 'Tasa interes', 'assets/ctasa.png'),
+            const SizedBox(width: 10),
+            filaInput(TiempoController, 'Tiempo', 'assets/ctiempo.png'),
+          ],
+        ),
+      ],
+    );
+  }
+
+  Widget camposCapitalizacionPeriodica() {
+    return Column(
+      children: [
+        Row(
+          children: [
+            Row(
+              children: [
+                filaInput(C_inicialController, 'Capital inicial',
+                    'assets/ccapital.png'),
+                const SizedBox(width: 10),
+                filaInput(
+                    C_finalController, 'Monto final', 'assets/cfinal.png'),
+              ],
+            ),
+          ],
+        ),
+        const SizedBox(height: 10),
+        Row(
+          children: [
+            filaInput(T_interessController, 'Tasa interes', 'assets/ctasa.png'),
+            const SizedBox(width: 10),
+            filaInput(TiempoController, 'Tiempo', 'assets/ctiempo.png'),
+          ],
+        ),
+        const SizedBox(height: 10),
+        filaInput(Nperiodo_Controller, 'NumeroPeriodo', 'assets/tiempo.png'),
+      ],
+    );
+  }
+
+  Widget campoCapitalizacionAnticipada() {
+    return Column(
+      children: [
+        Row(
+          children: [
+            filaInput(
+                C_inicialController, 'Capital inicial', 'assets/ccapital.png'),
+            const SizedBox(width: 10),
+            filaInput(C_finalController, 'Monto final', 'assets/cfinal.png'),
+          ],
+        ),
+        const SizedBox(height: 10),
+        Row(
+          children: [
+            filaInput(T_interessController, 'Tasa interes', 'assets/ctasa.png'),
+            const SizedBox(width: 10),
+            filaInput(TiempoController, 'Tiempo', 'assets/ctiempo.png'),
+          ],
+        ),
+      ],
+    );
+  }
+
+  Widget campoCapitalizacionDefinida() {
+    return Column(
+      children: [
+        Row(
+          children: [
+            filaInput(
+                C_inicialController, 'Capital inicial', 'assets/ccapital.png'),
+            const SizedBox(width: 10),
+            filaInput(C_finalController, 'Monto final', 'assets/cfinal.png'),
+          ],
+        ),
+        const SizedBox(height: 10),
+        Row(
+          children: [
+            filaInput(T_interessController, 'Tasa interes', 'assets/ctasa.png'),
+            const SizedBox(width: 10),
+            filaInput(TiempoController, 'Tiempo', 'assets/ctiempo.png'),
+          ],
+        ),
+        const SizedBox(height: 10),
+        filaInput(
+            PeriodoI_Controller, 'Periodo inicial', 'assets/tiempoanu.png'),
+      ],
+    );
+  }
+
+  Widget filaInput(
+      TextEditingController controller, String label, String iconPath) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        SizedBox(
+          height: 70,
+          width: 160,
+          child: TextfieldStyle(
+            enabled: true,
+            labelText: label,
+            icon: Image.asset(iconPath, width: 1),
+            color: const Color(0xFF3B3EF9),
+            controller: controller,
+          ),
+        ),
+      ],
+    );
   }
 }

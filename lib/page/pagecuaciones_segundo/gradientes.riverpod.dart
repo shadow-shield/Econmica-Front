@@ -117,7 +117,7 @@ class _Gradientes_SeriStateState extends State<Gradientes_SeriState> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               SizedBox(
-                                height: 50,
+                                height: 65,
                                 width: 150,
                                 child: TextfieldStyle(
                                   enabled: true,
@@ -130,7 +130,7 @@ class _Gradientes_SeriStateState extends State<Gradientes_SeriState> {
                               ),
                               const SizedBox(width: 10),
                               SizedBox(
-                                height: 50,
+                                height: 65,
                                 width: 150,
                                 child: TextfieldStyle(
                                   enabled: true,
@@ -148,7 +148,7 @@ class _Gradientes_SeriStateState extends State<Gradientes_SeriState> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               SizedBox(
-                                height: 50,
+                                height: 65,
                                 width: 150,
                                 child: TextfieldStyle(
                                   enabled: true,
@@ -161,7 +161,7 @@ class _Gradientes_SeriStateState extends State<Gradientes_SeriState> {
                               ),
                               const SizedBox(width: 10),
                               SizedBox(
-                                height: 50,
+                                height: 65,
                                 width: 150,
                                 child: TextfieldStyle(
                                   enabled: true,
@@ -179,7 +179,7 @@ class _Gradientes_SeriStateState extends State<Gradientes_SeriState> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               SizedBox(
-                                height: 50,
+                                height: 70,
                                 width: 150,
                                 child: TextfieldStyle(
                                   enabled: true,
@@ -194,7 +194,7 @@ class _Gradientes_SeriStateState extends State<Gradientes_SeriState> {
                                   'Gradiente Geometrico') ...[
                                 const SizedBox(width: 10),
                                 SizedBox(
-                                  height: 50,
+                                  height: 65,
                                   width: 150,
                                   child: TextfieldStyle(
                                     enabled: true,
@@ -208,7 +208,7 @@ class _Gradientes_SeriStateState extends State<Gradientes_SeriState> {
                               ],
                             ],
                           ),
-                          const SizedBox(height: 30),
+                          
                         ],
                       ),
                     FechaSelector(
