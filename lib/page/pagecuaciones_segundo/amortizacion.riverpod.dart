@@ -368,7 +368,7 @@ class _AmortizacionesStateState extends State<AmortizacionesState> {
             enabled: true,
             labelText: label,
             icon: Image.asset(iconPath, width: 1),
-            color: const Color(0xFFFAA89C),
+            color: Colors.brown[400]!,
             controller: controller,
           ),
         ),

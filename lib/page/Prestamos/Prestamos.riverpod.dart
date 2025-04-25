@@ -35,34 +35,49 @@ class _CalculadoraPrestamosState extends State<CalculadoraPrestamos> {
     int plazo = int.tryParse(_plazoController.text) ?? 0;
 
     double resultado = 0;
+    double interes = 0;
+
     switch (_tipoInteres) {
       case 'Simple':
         resultado = calcularInteresSimple(monto, tasa, plazo);
+        interes = monto * (tasa / 100) * plazo;
+
         break;
       case 'Compuesto':
         resultado = calcularInteresCompuesto(monto, tasa, plazo);
+        interes = resultado - monto;
         break;
       case 'Anualidad':
         resultado = calcularAnualidades(monto, tasa, plazo);
+        interes = monto * (tasa / 100) * plazo;
         break;
       case 'Amortización':
         resultado = calcularAmortizacion(monto, tasa, plazo);
+        interes = monto * (tasa / 100) * plazo;
         break;
       case 'Gradiente Aritmético':
         resultado = calcularGradienteAritmetico(monto, tasa, plazo);
+        interes = monto * (tasa / 100) * plazo;
         break;
       case 'Gradiente Geométrico':
         resultado = calcularGradienteGeometrico(monto, tasa, plazo);
+        interes = monto * (tasa / 100) * plazo;
         break;
       case 'Capitalización':
         resultado = calcularCapitalizacion(monto, tasa, plazo);
+        interes = monto * (tasa / 100) * plazo;
         break;
       case 'Interés de Retorno':
         resultado = calcularInteresRetorno(monto, tasa, plazo);
+        interes = monto * (tasa / 100) * plazo;
+        break;
+      default:
+        resultado = 0;
+        interes = 0;
         break;
     }
 
-    double totalPago = monto + resultado;
+    double totalPago = resultado;
     double cuotaAnual = totalPago / plazo;
 
     Prestamo nuevoPrestamo = Prestamo(
@@ -71,13 +86,13 @@ class _CalculadoraPrestamosState extends State<CalculadoraPrestamos> {
       tasa: tasa,
       plazo: plazo,
       tipoInteres: _tipoInteres,
-      interes: resultado,
+      interes: interes,
       totalPagar: totalPago,
       cuotaAnual: cuotaAnual,
     );
 
     setState(() {
-      _resultado = 'Interés: \$${resultado.toStringAsFixed(2)}\n'
+      _resultado = 'Interés: \$${interes.toStringAsFixed(2)}\n'
           'Total a pagar: \$${totalPago.toStringAsFixed(2)}\n'
           'Pago anual aproximado: \$${cuotaAnual.toStringAsFixed(2)}';
       _historial.add(nuevoPrestamo);

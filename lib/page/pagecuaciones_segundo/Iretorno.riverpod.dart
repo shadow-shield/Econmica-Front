@@ -74,9 +74,6 @@ class _IretornoState extends State<Iretorno> {
         setState(() {
           resultados = List<Map<String, dynamic>>.from(response);
         });
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Datos enviados correctamente')),
-        );
       } else {
         print('No se recibió respuesta válida del servidor.');
       }
@@ -289,8 +286,10 @@ class _IretornoState extends State<Iretorno> {
             children: [
               Icon(Icons.trending_up, color: Color(0xFF9C93FA)),
               SizedBox(width: 8),
-              Text('Interés de Retorno (TIR)',
-                  style: TextStyle(color: Color(0xFF9C93FA))),
+              Text(
+                'Interés Retorno - TIR',
+                style: TextStyle(color: Color(0xFF9C93FA), fontSize: 16),
+              ),
             ],
           ),
           content: SingleChildScrollView(
@@ -298,12 +297,62 @@ class _IretornoState extends State<Iretorno> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: const [
                 Text(
-                    'La Tasa Interna de Retorno (TIR) es una medida usada para evaluar proyectos...'),
-                SizedBox(height: 12),
-                Text('📌 ¿Qué es la TIR?',
-                    style: TextStyle(fontWeight: FontWeight.bold)),
-                Text('Es la tasa que hace que el VPN sea igual a cero.'),
-                // Puedes mantener el resto igual
+                  'La Tasa Interna de Retorno (TIR) es la tasa de interés que hace que el valor presente neto (VPN) de una serie de flujos de caja sea igual a cero. Es ampliamente utilizada en la evaluación de proyectos de inversión.',
+                  style: TextStyle(fontSize: 14),
+                ),
+                SizedBox(height: 20),
+
+                // Fórmula del VPN
+                Text(
+                  '📌 Fórmula del Valor Presente Neto (VPN):',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                SizedBox(height: 6),
+
+                Text(
+                  'VPN = Σ [A / (1 + TIR)^k] para k=1 a n',
+                  style: TextStyle(fontFamily: 'monospace'),
+                ),
+                SizedBox(height: 8),
+                Text(
+                  'Donde:',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                Text('• A: Flujo de caja o pago en cada período'),
+                Text('• TIR: Tasa Interna de Retorno que estamos buscando'),
+                Text('• k: Período en la sumatoria (desde 1 hasta n)'),
+                Text('• n: Número de períodos'),
+
+                SizedBox(height: 20),
+
+                // Cómo calcular la TIR
+                Text(
+                  '📌 Cálculo de la TIR:',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                SizedBox(height: 6),
+                Text(
+                  'La TIR es la tasa que hace que el VPN sea igual a cero:',
+                  style: TextStyle(fontStyle: FontStyle.italic),
+                ),
+                Text(
+                  'Σ [A / (1 + TIR)^k] = 0',
+                  style: TextStyle(fontFamily: 'monospace'),
+                ),
+
+                SizedBox(height: 20),
+
+                // Aplicaciones de la TIR
+                Text(
+                  '💡 Aplicaciones:',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                Text(
+                    '• Evaluación de la rentabilidad de proyectos de inversión'),
+                Text(
+                    '• Determinación de tasas de rendimiento de flujos de caja'),
+                Text(
+                    '• Análisis de viabilidad financiera de proyectos o activos'),
               ],
             ),
           ),

@@ -1,11 +1,11 @@
 import 'dart:math';
 
 double calcularInteresSimple(double capital, double tasa, int tiempo) {
-  return capital * tasa / 100 * tiempo;
+  return capital * (1 + (tasa / 100) * tiempo);
 }
 
 double calcularInteresCompuesto(double capital, double tasa, int tiempo) {
-  return capital * (pow((1 + tasa / 100), tiempo)) - capital;
+  return capital * pow((1 + (tasa / 100)), tiempo);
 }
 
 double calcularAnualidades(double capital, double tasa, int tiempo) {
@@ -34,7 +34,8 @@ double calcularCapitalizacion(double capital, double tasa, int n) {
   return capital * pow((1 + r), n);
 }
 
-double calcularInteresRetorno(double inversionInicial, double tasa, int tiempo) {
+double calcularInteresRetorno(
+    double inversionInicial, double tasa, int tiempo) {
   double r = tasa / 100;
   return inversionInicial * pow(1 + r, tiempo);
 }

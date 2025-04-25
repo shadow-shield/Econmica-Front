@@ -274,7 +274,7 @@ class _Gradientes_GeometricosState extends State<Gradientes_Geometricos> {
             TextButton(
               onPressed: () => Navigator.pop(context),
               child:
-                  Text('Cerrar', style: TextStyle(color: Colors.green[700]!)),
+                  Text('Cerrar', style: TextStyle(color: Colors.brown[400])),
             ),
           ],
         );
