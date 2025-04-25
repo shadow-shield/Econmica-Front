@@ -1,9 +1,7 @@
-import 'dart:ffi';
-import 'dart:math';
-
 import 'package:flutter/material.dart';
-import 'package:transifox/widgets/Dropdowbutton.riverpod.dart';
-import 'package:transifox/widgets/formato_fecha.riverpod.dart';
+import 'package:transifox/controller/gradiente.controller.service.dart';
+import 'package:transifox/model/gradientes.module.dart';
+
 import 'package:transifox/widgets/textfield.riverpod.dart';
 import 'package:transifox/widgets/textfieldd.riverpod.dart';
 
@@ -27,6 +25,7 @@ class _Gradientes_GeometricosState extends State<Gradientes_Geometricos> {
     ),
   );
 
+  Gradiente_Controller gestionGradiente = Gradiente_Controller();
   String? selectedCalculation;
   final TextEditingController ValorPresenteController = TextEditingController();
   final TextEditingController ValorFuturoController = TextEditingController();
@@ -37,6 +36,7 @@ class _Gradientes_GeometricosState extends State<Gradientes_Geometricos> {
   final TextEditingController TasaCrecimientoController =
       TextEditingController();
   final TextEditingController Tipo = TextEditingController();
+  final TextEditingController Resultado = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +49,7 @@ class _Gradientes_GeometricosState extends State<Gradientes_Geometricos> {
           ),
         ],
         foregroundColor: Colors.brown[400]!,
-        title: const Text('Gradientes Aritmeticos'),
+        title: const Text('Gradientes Geometricos'),
       ),
       body: Stack(
         fit: StackFit.expand,
@@ -103,7 +103,7 @@ class _Gradientes_GeometricosState extends State<Gradientes_Geometricos> {
                             items: [
                               'Valor Futuro',
                               'Valor Presente',
-                              'Serie de Pagos',
+                              'Serie',
                             ].map<DropdownMenuItem<String>>((String value) {
                               return DropdownMenuItem<String>(
                                 value: value,
@@ -133,12 +133,33 @@ class _Gradientes_GeometricosState extends State<Gradientes_Geometricos> {
                       padding: const EdgeInsets.only(left: 30, right: 30),
                       child: ValorPresente(),
                     ),
-                  ] else if (selectedCalculation == 'Serie de Pagos') ...[
+                  ] else if (selectedCalculation == 'Serie') ...[
                     Padding(
                       padding: const EdgeInsets.only(left: 30, right: 30),
                       child: Series(),
                     ),
                   ],
+                  const SizedBox(height: 20),
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.brown[400],
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10)),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 30, vertical: 12),
+                    ),
+                    onPressed: () {
+                      if (selectedCalculation == 'Valor Futuro') {
+                        GradientesGen();
+                      } else if (selectedCalculation == 'Valor Presente') {
+                        GradientesGen();
+                      } else if (selectedCalculation == 'Serie') {
+                        GradientesGen();
+                      }
+                    },
+                    child: const Text('Calcular',
+                        style: TextStyle(color: Colors.white)),
+                  ),
                 ],
               ),
             ),
@@ -274,8 +295,16 @@ class _Gradientes_GeometricosState extends State<Gradientes_Geometricos> {
           ],
         ),
         const SizedBox(height: 10),
-        filaInput(
-            ValorFuturoController, 'Valor Futuro', 'assets/interescom.png'),
+        Row(
+          children: [
+            filaInput(
+                ValorFuturoController, 'Valor Futuro', 'assets/interescom.png'),
+            SizedBox(
+              width: 10,
+            ),
+            tipoinput(Tipo, 'Tipo', 'assets/tipo.png'),
+          ],
+        ),
       ],
     );
   }
@@ -311,8 +340,16 @@ class _Gradientes_GeometricosState extends State<Gradientes_Geometricos> {
           ],
         ),
         const SizedBox(height: 10),
-        filaInput(
-            ValorPresenteController, 'Valor Presente', 'assets/rcaja.png'),
+        Row(
+          children: [
+            filaInput(
+                ValorPresenteController, 'Valor Presente', 'assets/rcaja.png'),
+            SizedBox(
+              width: 10,
+            ),
+            tipoinput(Tipo, 'Tipo', 'assets/tipo.png'),
+          ],
+        ),
       ],
     );
   }
@@ -356,7 +393,17 @@ class _Gradientes_GeometricosState extends State<Gradientes_Geometricos> {
               width: 10,
             ),
             filaInput(
-                ValorFuturoController, 'Valor Futuro', 'assets/gvalor.png'),
+                ValorPresenteController, 'Valor Prensete', 'assets/gvalor.png'),
+          ],
+        ),
+        const SizedBox(height: 10),
+        Row(
+          children: [
+            tipoinput(Tipo, 'Tipo', 'assets/tipo.png'),
+            SizedBox(
+              width: 10,
+            ),
+            tipoinput(Resultado, 'Resultado', 'assets/interesg.png'),
           ],
         ),
       ],
@@ -401,5 +448,34 @@ class _Gradientes_GeometricosState extends State<Gradientes_Geometricos> {
         ),
       ],
     );
+  }
+
+  GradientesGen() async {
+    try {
+      double? ValorPresente = double.tryParse(ValorPresenteController.text);
+      double? PagoBase = double.tryParse(PagoBaseController.text);
+      double? TasaInteres = double.tryParse(TasaInteresController.text);
+      double? NumeroPeriodos = double.tryParse(NumeroPeriodosController.text);
+      double? TasaCrecimiento = double.tryParse(TasaCrecimientoController.text);
+      double? ValorFuturo = double.tryParse(ValorFuturoController.text);
+      String? tipo = Tipo.text;
+
+      GradientesModel gradiente = GradientesModel(
+        NumeroPeriodos: NumeroPeriodos,
+        TasaInteres: TasaInteres,
+        TasaCrecimiento: TasaCrecimiento,
+        ValorPresente: ValorPresente,
+        PagoBase: PagoBase,
+        ValorFuturo: ValorFuturo,
+        Tipo: tipo,
+      );
+
+      double resultado =
+          await gestionGradiente.registrarGradienteGeo(gradiente);
+
+      Resultado.text = resultado.toStringAsFixed(2);
+    } catch (e) {
+      return 0.0;
+    }
   }
 }
