@@ -5,12 +5,19 @@ import 'package:transifox/service/amortizacion.module.service.dart';
 class Amortizacion_Controller extends GetxController {
   AmortizacionService gestionAmortizacion = AmortizacionService();
 
-  Future<Map<String, dynamic>> registrarAmortizacion(
+  Future<List<Map<String, dynamic>>> registrarAmortizacion(
       AmortizacionModel amortizacion) async {
     try {
       return await gestionAmortizacion.registrarAmortizacion(amortizacion);
     } catch (e) {
-      return {"Cedula": '1010', "Clave": '12455', "Email": 'null@gmail'};
+      return [
+        {
+          "Cedula": '1010',
+          "Clave": '12455',
+          "Email": 'null@gmail',
+          "error": 'Error al agregar el elemento: $e'
+        }
+      ];
     }
   }
 }

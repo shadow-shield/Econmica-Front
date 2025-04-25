@@ -49,9 +49,39 @@ class CrudProvider<T> {
     }
   }
 
+  Future<List<Map<String, dynamic>>> ListaSimple(
+      T body, String endpoint) async {
+    try {
+      final url = '$baseUrl/$endpoint';
+
+      print('📤 Enviando: ${jsonEncode(body)}');
+
+      final response = await http.post(
+        Uri.parse(url),
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode(body),
+      );
+
+      final data = jsonDecode(response.body);
+
+      // Asegurarte de que sea una lista
+      if (data is List) {
+        final List<Map<String, dynamic>> lista =
+            List<Map<String, dynamic>>.from(data);
+        print('✅ Respuesta recibida: $lista');
+        return lista;
+      } else {
+        throw Exception('La respuesta no es una lista.');
+      }
+    } catch (e) {
+      print('❌ Error: $e');
+      return [];
+    }
+  }
+
   Future<List<Map<String, dynamic>>> consultar(String endpoint) async {
     final url = '$baseUrl/$endpoint';
-    
+
     final response = await http.get(Uri.parse(url));
 
     if (response.statusCode == 200) {
@@ -123,7 +153,6 @@ class CrudProvider<T> {
         final resultado = jsonDecode(response.body);
         print('✅ Respuesta recibida: $resultado');
         if (resultado is num) {
-          
           return resultado.toDouble();
         } else {
           throw Exception('La respuesta no es un número.');

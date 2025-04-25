@@ -1,35 +1,35 @@
 //model usuario
 
 class AmortizacionModel {
-  late double? Cuota_Periodica;
-  late double? Capital_Prestado;
-  late double? Tasa_Periodo;
-  late double? Numero_Pagos;
-  late double? Interes_Periodo;
+  late double? Monto;
+  late double? TasaInteres;
+  late double? Plazo;
+  late String? Tipo;
+
 
   AmortizacionModel({
-    required this.Cuota_Periodica,
-    required this.Capital_Prestado,
-    required this.Tasa_Periodo,
-    required this.Numero_Pagos,
-    required this.Interes_Periodo,
+    required this.Monto,
+    required this.TasaInteres,
+    required this.Plazo,
+    required this.Tipo,
+
   });
 
   AmortizacionModel.fromJson(Map<String, dynamic> json) {
-    Cuota_Periodica = json['Cuota_Periodica'];
-    Capital_Prestado = json['Capital_Prestado'];
-    Tasa_Periodo = json['Tasa_Periodo'];
-    Numero_Pagos = json['Numero_Pagos'];
-    Interes_Periodo = json['Interes_Periodo'];
+    Monto = json['Monto'];
+    TasaInteres = json['TasaInteres'];
+    Plazo = json['Plazo'];
+    Tipo = json['Tipo'];
+
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['Cuota_Periodica'] = Cuota_Periodica;
-    data['Capital_Prestado'] = Capital_Prestado;
-    data['Tasa_Periodo'] = Tasa_Periodo;
-    data['Numero_Periodo'] = Numero_Pagos;
-    data['Interes_Periodo'] = Interes_Periodo;
+    data['Monto'] = Monto;
+    data['TasaInteres'] = TasaInteres;
+    data['Plazo'] = Plazo;
+    data['Tipo'] = Tipo;
+
 
     return data;
   }
