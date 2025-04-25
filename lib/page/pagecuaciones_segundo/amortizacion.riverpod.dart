@@ -386,27 +386,109 @@ class _AmortizacionesStateState extends State<AmortizacionesState> {
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
           title: Row(
             children: [
-              Icon(Icons.info, color: Color(0xFFFAA89C)),
+              Icon(Icons.account_balance, color: Colors.brown[400]),
               SizedBox(width: 8),
               Text(
                 'Sistemas de Amortización',
-                style: TextStyle(color: Color(0xFFFAA89C), fontSize: 16),
+                style: TextStyle(color: Colors.brown[400], fontSize: 16),
               ),
             ],
           ),
           content: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: const [
-                // Aquí va el texto de los sistemas de amortización como antes
+              children: [
+                // Francesa
+                Text(
+                  '📌 Amortización Francesa:',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                SizedBox(height: 6),
+                Text(
+                  'Las cuotas son constantes. Al inicio se paga más interés y menos capital. Al final, más capital y menos interés.',
+                  style: TextStyle(fontSize: 14),
+                ),
+                SizedBox(height: 6),
+                Text(
+                  'Fórmula:',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                Text(
+                  'A = P × [ i × (1 + i)^n ] / [ (1 + i)^n – 1 ]',
+                  style: TextStyle(fontFamily: 'monospace'),
+                ),
+                SizedBox(height: 20),
+
+                // Alemana
+                Text(
+                  '📌 Amortización Alemana:',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                SizedBox(height: 6),
+                Text(
+                  'La amortización del capital es constante. Las cuotas disminuyen con el tiempo, ya que los intereses bajan.',
+                  style: TextStyle(fontSize: 14),
+                ),
+                SizedBox(height: 6),
+                Text(
+                  'Fórmulas:',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                Text(
+                  'Amortización = P / n',
+                  style: TextStyle(fontFamily: 'monospace'),
+                ),
+                Text(
+                  'Interés_t = Saldo_t × i',
+                  style: TextStyle(fontFamily: 'monospace'),
+                ),
+                Text(
+                  'Cuota_t = Amortización + Interés_t',
+                  style: TextStyle(fontFamily: 'monospace'),
+                ),
+                SizedBox(height: 20),
+
+                // Americana
+                Text(
+                  '📌 Amortización Americana:',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                SizedBox(height: 6),
+                Text(
+                  'Se pagan solo intereses periódicamente y todo el capital al final.',
+                  style: TextStyle(fontSize: 14),
+                ),
+                SizedBox(height: 6),
+                Text(
+                  'Fórmulas:',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                Text(
+                  'Interés = P × i',
+                  style: TextStyle(fontFamily: 'monospace'),
+                ),
+                Text(
+                  'Pago final = P + Interés',
+                  style: TextStyle(fontFamily: 'monospace'),
+                ),
+                SizedBox(height: 20),
+
+                // Aplicaciones
+                Text(
+                  '💡 Aplicaciones comunes:',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                Text('• Francesa: préstamos personales e hipotecarios'),
+                Text('• Alemana: créditos empresariales, pagos decrecientes'),
+                Text('• Americana: bonos, préstamos con pago único de capital'),
               ],
             ),
           ),
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(context),
-              child: Text('Cerrar',
-                  style: TextStyle(color: const Color(0xFFFAA89C))),
+              child:
+                  Text('Cerrar', style: TextStyle(color: Colors.green[700]!)),
             ),
           ],
         );

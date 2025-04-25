@@ -179,11 +179,11 @@ class _Gradientes_GeometricosState extends State<Gradientes_Geometricos> {
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
           title: Row(
             children: [
-              Icon(Icons.info, color: Colors.brown[400]!),
+              Icon(Icons.trending_up, color: Colors.brown[400]),
               SizedBox(width: 8),
               Text(
-                '¿Qué son los Gradientes?',
-                style: TextStyle(color: Colors.brown[400]!, fontSize: 16),
+                'Gradiente Geométrico',
+                style: TextStyle(color: Colors.brown[400], fontSize: 16),
               ),
             ],
           ),
@@ -192,21 +192,20 @@ class _Gradientes_GeometricosState extends State<Gradientes_Geometricos> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: const [
                 Text(
-                  'Los gradientes son series de pagos que cambian con el tiempo. Estos pueden ser aritméticos (incremento fijo) o geométricos (incremento porcentual).',
+                  'Los gradientes geométricos son series de pagos que cambian en un porcentaje constante (g) cada período. Modelan crecimientos exponenciales como inflación o inversiones con rendimientos porcentuales fijos.',
                   style: TextStyle(fontSize: 14),
                 ),
                 SizedBox(height: 20),
+
+                // Valor Presente
                 Text(
-                  '📌 Gradiente Geométrico:',
+                  '📌 Valor Presente (Vp):',
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
                 SizedBox(height: 6),
+
                 Text(
-                  'Fórmula del valor futuro:',
-                  style: TextStyle(fontStyle: FontStyle.italic),
-                ),
-                Text(
-                  'Vf = [ A * (1 + G)^n * (1 + i)^n ] / (G - i)',
+                  'Vp = A × (i - g) / (1 - ((1 + g) / (1 + i))^n)',
                   style: TextStyle(fontFamily: 'monospace'),
                 ),
                 SizedBox(height: 8),
@@ -214,41 +213,60 @@ class _Gradientes_GeometricosState extends State<Gradientes_Geometricos> {
                   'Donde:',
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
-                Text('• Vf: Valor futuro del gradiente geométrico'),
-                Text('• A: Valor del primer pago'),
+                Text('• A: Primer pago'),
                 Text(
-                    '• G: Tasa de crecimiento del gradiente (porcentaje decimal)'),
+                    '• g: Tasa de crecimiento porcentual por período (ej. 5% → 0.05)'),
                 Text('• i: Tasa de interés por período'),
                 Text('• n: Número de períodos'),
+
                 SizedBox(height: 20),
+
+                // Valor Futuro
                 Text(
-                  '📌 Gradiente Aritmético:',
+                  '📌 Valor Futuro (Vf):',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                SizedBox(height: 6),
+
+                Text(
+                  'Vf = A × [ (1 + g)^n - (1 + i)^n ] / (g - i)',
+                  style: TextStyle(fontFamily: 'monospace'),
+                ),
+
+                SizedBox(height: 20),
+
+                // Serie con Valor Presente
+                Text(
+                  '📌 Serie (A) dado Vp:',
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
                 SizedBox(height: 6),
                 Text(
-                  'Fórmula del valor presente:',
-                  style: TextStyle(fontStyle: FontStyle.italic),
-                ),
-                Text(
-                  'Vp = A × [ (1 - (1 + i)^-n) / i ] + (G / i) × [ (1 - (1 + i)^-n) / i - n / (1 + i)^n ]',
+                  'A = Vp × (G-i) /(1 + g))^n * (1+i)^n',
                   style: TextStyle(fontFamily: 'monospace'),
                 ),
-                SizedBox(height: 8),
+
+                SizedBox(height: 20),
+
+                // Serie con Valor Futuro
                 Text(
-                  'Donde:',
+                  '📌 Serie (A) dado Vf:',
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
-                Text('• Vp: Valor presente del gradiente aritmético'),
-                Text('• A: Valor constante de la anualidad'),
-                Text('• G: Incremento aritmético constante por período'),
-                Text('• i: Tasa de interés por período'),
-                Text('• n: Número total de períodos'),
+                SizedBox(height: 6),
+                Text(
+                  'A = Vf × (G-i) /(1 + g))^n - (1+i)^n',
+                  style: TextStyle(fontFamily: 'monospace'),
+                ),
+
                 SizedBox(height: 20),
                 Text(
-                  '💡 Estos modelos se utilizan para evaluar pagos futuros que aumentan o disminuyen progresivamente, como cuotas, rentas o sueldos escalonados.',
-                  style: TextStyle(fontSize: 13),
+                  '💡 Aplicaciones:',
+                  style: TextStyle(fontWeight: FontWeight.bold),
                 ),
+                Text('• Pensiones con ajustes por inflación'),
+                Text('• Proyectos con flujos crecientes porcentualmente'),
+                Text('• Dividendos que aumentan un % fijo anual'),
               ],
             ),
           ),
@@ -256,7 +274,7 @@ class _Gradientes_GeometricosState extends State<Gradientes_Geometricos> {
             TextButton(
               onPressed: () => Navigator.pop(context),
               child:
-                  Text('Cerrar', style: TextStyle(color: Colors.brown[400]!)),
+                  Text('Cerrar', style: TextStyle(color: Colors.green[700]!)),
             ),
           ],
         );

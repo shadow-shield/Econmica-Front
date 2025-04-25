@@ -173,7 +173,7 @@ class _Gradientes_AritmeticosState extends State<Gradientes_Aritmeticos> {
     );
   }
 
-  void mostrarInfoTema() {
+  mostrarInfoTema() {
     showDialog(
       context: context,
       builder: (context) {
@@ -186,7 +186,7 @@ class _Gradientes_AritmeticosState extends State<Gradientes_Aritmeticos> {
               Icon(Icons.info, color: Colors.brown[400]!),
               SizedBox(width: 8),
               Text(
-                '¿Qué son los Gradientes?',
+                'Gradiente Aritmético',
                 style: TextStyle(color: Colors.brown[400]!, fontSize: 16),
               ),
             ],
@@ -196,61 +196,52 @@ class _Gradientes_AritmeticosState extends State<Gradientes_Aritmeticos> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: const [
                 Text(
-                  'Los gradientes son series de pagos que cambian con el tiempo. Estos pueden ser aritméticos (incremento fijo) o geométricos (incremento porcentual).',
+                  'Los gradientes aritméticos son series de pagos que cambian en una cantidad fija cada período. Se usan para modelar flujos de efectivo crecientes o decrecientes linealmente.',
                   style: TextStyle(fontSize: 14),
                 ),
                 SizedBox(height: 20),
                 Text(
-                  '📌 Gradiente Geométrico:',
+                  '📌 Valor Presente del Gradiente Aritmético:',
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
                 SizedBox(height: 6),
-                Text(
-                  'Fórmula del valor futuro:',
-                  style: TextStyle(fontStyle: FontStyle.italic),
-                ),
-                Text(
-                  'Vf = [ A * (1 + G)^n * (1 + i)^n ] / (G - i)',
-                  style: TextStyle(fontFamily: 'monospace'),
-                ),
-                SizedBox(height: 8),
-                Text(
-                  'Donde:',
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
-                Text('• Vf: Valor futuro del gradiente geométrico'),
-                Text('• A: Valor del primer pago'),
-                Text(
-                    '• G: Tasa de crecimiento del gradiente (porcentaje decimal)'),
-                Text('• i: Tasa de interés por período'),
-                Text('• n: Número de períodos'),
-                SizedBox(height: 20),
-                Text(
-                  '📌 Gradiente Aritmético:',
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
-                SizedBox(height: 6),
-                Text(
-                  'Fórmula del valor presente:',
-                  style: TextStyle(fontStyle: FontStyle.italic),
-                ),
                 Text(
                   'Vp = A × [ (1 - (1 + i)^-n) / i ] + (G / i) × [ (1 - (1 + i)^-n) / i - n / (1 + i)^n ]',
                   style: TextStyle(fontFamily: 'monospace'),
                 ),
                 SizedBox(height: 8),
                 Text(
-                  'Donde:',
+                  '📌 Valor Futuro del Gradiente Aritmético:',
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
-                Text('• Vp: Valor presente del gradiente aritmético'),
-                Text('• A: Valor constante de la anualidad'),
-                Text('• G: Incremento aritmético constante por período'),
-                Text('• i: Tasa de interés por período'),
-                Text('• n: Número total de períodos'),
+                SizedBox(height: 6),
+                Text(
+                  'Vf = A × [ ((1 + i)^n - 1) / i ] + G × [ ((1 + i)^n - i × n - 1) / i² ]',
+                  style: TextStyle(fontFamily: 'monospace'),
+                ),
                 SizedBox(height: 20),
                 Text(
-                  '💡 Estos modelos se utilizan para evaluar pagos futuros que aumentan o disminuyen progresivamente, como cuotas, rentas o sueldos escalonados.',
+                  '📌 Serie con Valor Presente:',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                SizedBox(height: 6),
+                Text(
+                  'A = Vp × [ i / (1 - (1 + i)^-n) ]-G* [1/i-n/(1+i)^n-1]',
+                  style: TextStyle(fontFamily: 'monospace'),
+                ),
+                SizedBox(height: 20),
+                Text(
+                  '📌 Serie con Valor Futuro:',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                SizedBox(height: 6),
+                Text(
+                  'A = (Vf * (i / ((1 + i)^n - 1))) - (G * ((1 / i) - (n / ((1 + i)^n - 1))))',
+                  style: TextStyle(fontFamily: 'monospace'),
+                ),
+                SizedBox(height: 20),
+                Text(
+                  '💡 Estas fórmulas permiten calcular cuánto vale hoy o en el futuro una serie de pagos crecientes o decrecientes de manera uniforme.',
                   style: TextStyle(fontSize: 13),
                 ),
               ],
@@ -476,11 +467,8 @@ class _Gradientes_AritmeticosState extends State<Gradientes_Aritmeticos> {
 
       double resultado =
           await gestionGradiente.registrarGradienteArit(gradiente);
-      
+
       Resultado.text = resultado.toStringAsFixed(2);
-
-      
-
     } catch (e) {
       return 0.0;
     }
