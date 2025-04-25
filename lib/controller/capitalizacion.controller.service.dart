@@ -5,11 +5,12 @@ import 'package:transifox/service/capitalizacion.module.service.dart';
 class Capitalizacion_Controller extends GetxController {
   Capitalizacion_Service gestionCapitalizacion = Capitalizacion_Service();
 
-  Future<Map<String, dynamic>> registrarCapitalizacion(CapitalizacionModel capitalizacion) async {
+  Future<double> registrarCapitalizacion(CapitalizacionModel capitalizacion) async {
     try {
       return await gestionCapitalizacion.registrarCapitalizacion(capitalizacion);
     } catch (e) {
-     return {"Cedula": '1010',"Clave": '12455',"Email": 'null@gmail' };
+      print('Error al registrar capitalizacion: $e');
+      return 0.0;
     }
   }
 

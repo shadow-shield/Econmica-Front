@@ -3,7 +3,7 @@ import 'package:animate_do/animate_do.dart';
 import 'package:transifox/page/pagecuaciones_segundo/Iretorno.riverpod.dart';
 import 'package:transifox/page/pagecuaciones_segundo/amortizacion.riverpod.dart';
 import 'package:transifox/page/pagecuaciones_segundo/capitalizacion.riverpod.dart';
-import 'package:transifox/page/pagecuaciones_segundo/gradientes.riverpod.dart';
+import 'package:transifox/page/pagecuaciones_segundo/gradientes/gradientes.riverpod.dart';
 
 class CardTable_Segundo extends StatelessWidget {
   const CardTable_Segundo({super.key});

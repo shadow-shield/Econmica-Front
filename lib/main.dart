@@ -6,7 +6,7 @@ import 'package:transifox/page/home/home.riverpod.dart';
 import 'package:transifox/page/pagecuaciones_segundo/Iretorno.riverpod.dart';
 import 'package:transifox/page/pagecuaciones_segundo/amortizacion.riverpod.dart';
 import 'package:transifox/page/pagecuaciones_segundo/capitalizacion.riverpod.dart';
-import 'package:transifox/page/pagecuaciones_segundo/gradientes.riverpod.dart';
+import 'package:transifox/page/pagecuaciones_segundo/gradientes/gradientes.riverpod.dart';
 import 'package:transifox/page/pageecuaciones/anualidades.riverpod.dart';
 import 'package:transifox/page/pageecuaciones/interescompuesto.riverpod.dart';
 import 'package:transifox/page/pageecuaciones/interesimple.riverpod.dart';

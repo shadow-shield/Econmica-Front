@@ -347,7 +347,6 @@ class _Interes_simpleState extends State<Interes_simple> {
     if (Seleccion == 'Monto') {
       tiempoController.text = '';
       montoController.text = '';
-      interesimpleController.text = '0.0'.toString();
     }
 
     if (Seleccion == 'Capital') {
@@ -363,11 +362,6 @@ class _Interes_simpleState extends State<Interes_simple> {
     if (Seleccion == 'Tiempo') {
       tiempoController.clear();
       montoController.text = 0.toString();
-    }
-
-    if (Seleccion == 'Interes Simple') {
-      interesimpleController.clear();
-      montoController.text = '';
     }
   }
 
@@ -427,7 +421,8 @@ class _Interes_simpleState extends State<Interes_simple> {
                   '📘 Donde:',
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
-                Text('• Monto: Es el valor total acumulado al final del período de la inversión o préstamo'),
+                Text(
+                    '• Monto: Es el valor total acumulado al final del período de la inversión o préstamo'),
                 Text('• Capital: Monto inicial invertido o prestado'),
                 Text('• Tasa: Porcentaje de interés (por período)'),
                 Text('• Tiempo: Duración en la que se aplica la tasa'),

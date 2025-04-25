@@ -37,7 +37,7 @@ class UsuarioController extends GetxController {
     }
   }
 
-  Future<String> actualizarUsuarios(Usuario usuarioRecibido) async {
+  /* Future<String> actualizarUsuarios(Usuario usuarioRecibido) async {
     try {
       return await gestionUser.actualizarUsuarios(usuarioRecibido);
     } catch (error) {
@@ -51,5 +51,5 @@ class UsuarioController extends GetxController {
     } catch (error) {
       return 'Error al eliminar el Usuario';
     }
-  }
+  } */
 }

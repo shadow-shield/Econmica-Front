@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:transifox/controller/capitalizacion.controller.service.dart';
+import 'package:transifox/model/capitalizacion.module.dart';
 import 'package:transifox/widgets/Dropdowbutton.riverpod.dart';
+import 'package:transifox/widgets/textfield.riverpod.dart';
 
 import 'package:transifox/widgets/textfieldd.riverpod.dart';
 
@@ -23,12 +26,16 @@ class _CapitalizacionesState extends State<Capitalizaciones> {
     ),
   );
   String? selectedCalculation;
-  final TextEditingController C_inicialController = TextEditingController();
-  final TextEditingController C_finalController = TextEditingController();
-  final TextEditingController T_interessController = TextEditingController();
+  Capitalizacion_Controller gestionCapitalizacion = Capitalizacion_Controller();
+  final TextEditingController CapitalController = TextEditingController();
+  final TextEditingController Tasa_InteresController = TextEditingController();
   final TextEditingController TiempoController = TextEditingController();
-  final TextEditingController Nperiodo_Controller = TextEditingController();
-  final TextEditingController PeriodoI_Controller = TextEditingController();
+  final TextEditingController TiempoDiferidoController =
+      TextEditingController();
+  final TextEditingController CapitalizacionesAnioController =
+      TextEditingController();
+  final TextEditingController TipoController = TextEditingController();
+  final TextEditingController MontoCapitalizacion = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -149,7 +156,7 @@ class _CapitalizacionesState extends State<Capitalizaciones> {
                         child: campoCapitalizacionAnticipada(),
                       )
                     ] else if (selectedCalculation ==
-                        'Capitalizacion defirida') ...[
+                        'Capitalizacion diferida') ...[
                       Padding(
                         padding: const EdgeInsets.only(left: 30, right: 30),
                         child: campoCapitalizacionDefinida(),
@@ -161,13 +168,37 @@ class _CapitalizacionesState extends State<Capitalizaciones> {
                       color: Color(0xFF3B3EF9),
                     ), */
                     const SizedBox(height: 20),
-                    const DropdownMenuItemButton(color: Color(0xFF3B3EF9)),
+                   /*  const DropdownMenuItemButton(color: Color(0xFF3B3EF9)), */
                     const SizedBox(height: 20),
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
                           backgroundColor: const Color(0xFF3B3EF9),
                           foregroundColor: Colors.white),
-                      onPressed: () {},
+                      onPressed: () {
+                        if (selectedCalculation == 'Capitalizacion simple') {
+                          CapitalizacionGene();
+                        } else if (selectedCalculation ==
+                            'Capitalizacion compuesta') {
+                              CapitalizacionGene();
+                          // Implementar lógica para capitalización compuesta
+                        } else if (selectedCalculation ==
+                            'Capitalizacion continua') {
+                              CapitalizacionGene();
+                          // Implementar lógica para capitalización continua
+                        } else if (selectedCalculation ==
+                            'Capitalizacion periodica') {
+                              CapitalizacionGene();
+                          // Implementar lógica para capitalización periódica
+                        } else if (selectedCalculation ==
+                            'Capitalizacion anticipada') {
+                              CapitalizacionGene();
+                          // Implementar lógica para capitalización anticipada
+                        } else if (selectedCalculation ==
+                            'Capitalizacion diferida') {
+                              CapitalizacionGene();
+                          // Implementar lógica para capitalización diferida
+                        }
+                      },
                       child: const Text('Calcular'),
                     )
                   ],
@@ -184,19 +215,22 @@ class _CapitalizacionesState extends State<Capitalizaciones> {
         Row(
           children: [
             filaInput(
-                C_inicialController, 'Capital inicial', 'assets/ccapital.png'),
+                CapitalController, 'Capital inicial', 'assets/ccapital.png'),
             const SizedBox(width: 10),
-            filaInput(C_finalController, 'Monto final', 'assets/cfinal.png'),
+            filaInput(MontoCapitalizacion, 'Monto final', 'assets/cfinal.png'),
           ],
         ),
         const SizedBox(height: 10),
         Row(
           children: [
-            filaInput(T_interessController, 'Tasa interes', 'assets/ctasa.png'),
+            filaInput(
+                Tasa_InteresController, 'Tasa interes', 'assets/ctasa.png'),
             const SizedBox(width: 10),
             filaInput(TiempoController, 'Tiempo', 'assets/ctiempo.png'),
           ],
         ),
+        SizedBox(height: 10),
+        tipoinput(TipoController, 'Tipo', 'assets/tipo.png'),
       ],
     );
   }
@@ -207,19 +241,22 @@ class _CapitalizacionesState extends State<Capitalizaciones> {
         Row(
           children: [
             filaInput(
-                C_inicialController, 'Capital inicial', 'assets/ccapital.png'),
+                CapitalController, 'Capital inicial', 'assets/ccapital.png'),
             const SizedBox(width: 10),
-            filaInput(C_finalController, 'Monto final', 'assets/cfinal.png'),
+            filaInput(MontoCapitalizacion, 'Monto final', 'assets/cfinal.png'),
           ],
         ),
         const SizedBox(height: 10),
         Row(
           children: [
-            filaInput(T_interessController, 'Tasa interes', 'assets/ctasa.png'),
+            filaInput(
+                Tasa_InteresController, 'Tasa interes', 'assets/ctasa.png'),
             const SizedBox(width: 10),
             filaInput(TiempoController, 'Tiempo', 'assets/ctiempo.png'),
           ],
         ),
+        SizedBox(height: 10),
+        tipoinput(TipoController, 'Tipo', 'assets/tipo.png'),
       ],
     );
   }
@@ -230,19 +267,22 @@ class _CapitalizacionesState extends State<Capitalizaciones> {
         Row(
           children: [
             filaInput(
-                C_inicialController, 'Capital inicial', 'assets/ccapital.png'),
+                CapitalController, 'Capital inicial', 'assets/ccapital.png'),
             const SizedBox(width: 10),
-            filaInput(C_finalController, 'Monto final', 'assets/cfinal.png'),
+            filaInput(MontoCapitalizacion, 'Monto final', 'assets/cfinal.png'),
           ],
         ),
         const SizedBox(height: 10),
         Row(
           children: [
-            filaInput(T_interessController, 'Tasa interes', 'assets/ctasa.png'),
+            filaInput(
+                Tasa_InteresController, 'Tasa interes', 'assets/ctasa.png'),
             const SizedBox(width: 10),
             filaInput(TiempoController, 'Tiempo', 'assets/ctiempo.png'),
           ],
         ),
+        SizedBox(height: 10),
+        tipoinput(TipoController, 'Tipo', 'assets/tipo.png'),
       ],
     );
   }
@@ -254,11 +294,11 @@ class _CapitalizacionesState extends State<Capitalizaciones> {
           children: [
             Row(
               children: [
-                filaInput(C_inicialController, 'Capital inicial',
+                filaInput(CapitalController, 'Capital inicial',
                     'assets/ccapital.png'),
                 const SizedBox(width: 10),
                 filaInput(
-                    C_finalController, 'Monto final', 'assets/cfinal.png'),
+                    MontoCapitalizacion, 'Monto final', 'assets/cfinal.png'),
               ],
             ),
           ],
@@ -266,13 +306,21 @@ class _CapitalizacionesState extends State<Capitalizaciones> {
         const SizedBox(height: 10),
         Row(
           children: [
-            filaInput(T_interessController, 'Tasa interes', 'assets/ctasa.png'),
+            filaInput(
+                Tasa_InteresController, 'Tasa interes', 'assets/ctasa.png'),
             const SizedBox(width: 10),
             filaInput(TiempoController, 'Tiempo', 'assets/ctiempo.png'),
           ],
         ),
         const SizedBox(height: 10),
-        filaInput(Nperiodo_Controller, 'NumeroPeriodo', 'assets/tiempo.png'),
+        Row(
+          children: [
+            filaInput(CapitalizacionesAnioController, 'Capitalizaciones al año',
+                'assets/tiempo.png'),
+            SizedBox(width: 10),
+            tipoinput(TipoController, 'Tipo', 'assets/tipo.png'),
+          ],
+        ),
       ],
     );
   }
@@ -283,19 +331,22 @@ class _CapitalizacionesState extends State<Capitalizaciones> {
         Row(
           children: [
             filaInput(
-                C_inicialController, 'Capital inicial', 'assets/ccapital.png'),
+                CapitalController, 'Capital inicial', 'assets/ccapital.png'),
             const SizedBox(width: 10),
-            filaInput(C_finalController, 'Monto final', 'assets/cfinal.png'),
+            filaInput(MontoCapitalizacion, 'Monto final', 'assets/cfinal.png'),
           ],
         ),
         const SizedBox(height: 10),
         Row(
           children: [
-            filaInput(T_interessController, 'Tasa interes', 'assets/ctasa.png'),
+            filaInput(
+                Tasa_InteresController, 'Tasa interes', 'assets/ctasa.png'),
             const SizedBox(width: 10),
             filaInput(TiempoController, 'Tiempo', 'assets/ctiempo.png'),
           ],
         ),
+        SizedBox(height: 10),
+        tipoinput(TipoController, 'Tipo', 'assets/tipo.png'),
       ],
     );
   }
@@ -306,22 +357,29 @@ class _CapitalizacionesState extends State<Capitalizaciones> {
         Row(
           children: [
             filaInput(
-                C_inicialController, 'Capital inicial', 'assets/ccapital.png'),
+                CapitalController, 'Capital inicial', 'assets/ccapital.png'),
             const SizedBox(width: 10),
-            filaInput(C_finalController, 'Monto final', 'assets/cfinal.png'),
+            filaInput(MontoCapitalizacion, 'Monto final', 'assets/cfinal.png'),
           ],
         ),
         const SizedBox(height: 10),
         Row(
           children: [
-            filaInput(T_interessController, 'Tasa interes', 'assets/ctasa.png'),
+            filaInput(
+                Tasa_InteresController, 'Tasa interes', 'assets/ctasa.png'),
             const SizedBox(width: 10),
             filaInput(TiempoController, 'Tiempo', 'assets/ctiempo.png'),
           ],
         ),
         const SizedBox(height: 10),
-        filaInput(
-            PeriodoI_Controller, 'Periodo inicial', 'assets/tiempoanu.png'),
+        Row(
+          children: [
+            filaInput(TiempoDiferidoController, 'Periodo inicial',
+                'assets/tiempoanu.png'),
+            SizedBox(width: 10),
+            tipoinput(TipoController, 'Tipo', 'assets/tipo.png'),
+          ],
+        ),
       ],
     );
   }
@@ -335,6 +393,28 @@ class _CapitalizacionesState extends State<Capitalizaciones> {
           height: 70,
           width: 160,
           child: TextfieldStyle(
+            enabled: true,
+            labelText: label,
+            icon: Image.asset(iconPath, width: 1),
+            color: const Color(0xFF3B3EF9),
+            controller: controller,
+          ),
+        ),
+      ],
+    );
+  }
+
+  //solo para Tipo por que es tipo string
+
+  Widget tipoinput(
+      TextEditingController controller, String label, String iconPath) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        SizedBox(
+          height: 70,
+          width: 160,
+          child: TextfieldStyleTipo(
             enabled: true,
             labelText: label,
             icon: Image.asset(iconPath, width: 1),
@@ -507,5 +587,42 @@ class _CapitalizacionesState extends State<Capitalizaciones> {
         );
       },
     );
+  }
+
+  CapitalizacionGene() async {
+    try {
+      double? capital = double.parse(CapitalController.text);
+      double? tasaInteres = double.parse(Tasa_InteresController.text);
+      double? tiempo = double.parse(TiempoController.text);
+      double? capitalizacionesAnio = double.parse(
+          CapitalizacionesAnioController.text.isEmpty
+              ? '0'
+              : CapitalizacionesAnioController.text);
+      double? tiempoDiferido = double.parse(
+          TiempoDiferidoController.text.isEmpty
+              ? '0'
+              : TiempoDiferidoController.text);
+      String? tipo = TipoController.text;
+      print(
+          'Capital: $capital, Tasa: $tasaInteres, Tiempo: $tiempo, Tipo: $tipo');
+
+      CapitalizacionModel capitalizacion = CapitalizacionModel(
+        Capital: capital,
+        Tasa_Interes: tasaInteres,
+        Tiempo: tiempo,
+        Tipo: tipo,
+        CapitalizacionesAnio: capitalizacionesAnio,
+        TiempoDiferido: tiempoDiferido,
+      );
+   
+
+      double resultado =
+          await gestionCapitalizacion.registrarCapitalizacion(capitalizacion);
+
+      MontoCapitalizacion.text = resultado.toStringAsFixed(2);
+    } catch (e) {
+      print('Error al calcular capitalización simple: $e');
+      MontoCapitalizacion.text = '0.0';
+    }
   }
 }

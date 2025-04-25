@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:transifox/controller/usuario.controller.service.dart';
+import 'package:transifox/model/usuario.model.module.dart';
 import 'package:transifox/page/auth/huella.riverpod.dart';
 
 class Login extends StatefulWidget {
@@ -9,6 +11,11 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  UsuarioController gestionUsuarios = UsuarioController();
+  UsuarioController gestionUsuarioDb = UsuarioController();
+
+  TextEditingController user_Cedula = TextEditingController();
+  TextEditingController user_Clave = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -62,17 +69,16 @@ class _LoginState extends State<Login> {
       padding: const EdgeInsets.all(0),
       child: TextButton(
         onPressed: () {
-         Navigator.pushReplacementNamed(context, 'registro');
+          Navigator.pushReplacementNamed(context, 'registro');
         },
         style: TextButton.styleFrom(
-          foregroundColor:
-              Colors.blue, 
+          foregroundColor: Colors.blue,
         ),
         child: const Text(
           'Registrarse',
           style: TextStyle(
-            color: Colors.white, 
-            decoration: TextDecoration.underline, 
+            color: Colors.white,
+            decoration: TextDecoration.underline,
           ),
         ),
       ),
@@ -108,6 +114,7 @@ class _LoginState extends State<Login> {
             borderRadius: BorderRadius.circular(20),
           ),
         ),
+        controller: user_Clave,
       ),
     );
   }
@@ -116,6 +123,7 @@ class _LoginState extends State<Login> {
     return Padding(
       padding: const EdgeInsets.all(20.0),
       child: TextField(
+        controller: user_Cedula,
         style: const TextStyle(color: Colors.white),
         decoration: InputDecoration(
           prefixIcon: const Icon(Icons.person, color: Colors.white),
@@ -143,8 +151,25 @@ class _LoginState extends State<Login> {
           padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 5),
         ),
         onPressed: () {
-          //funcion verificar usuario
-          
+          /* Usuario usuario = Usuario(
+            Email: '',
+            Cedula: user_Cedula.text,
+            Clave: user_Clave.text,
+          );
+          gestionUsuarios.verificarUser(usuario).then((value) {
+            if (value) {
+              print('Usuario correcto');
+              Navigator.pushReplacementNamed(context, 'botones');
+            } else {
+              print('Usuario incorrecto');
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  content: Text('Usuario o contraseña incorrectos'),
+                ),
+              );
+            }
+          }); */
+
           Navigator.pushReplacementNamed(context, 'botones');
         },
         child: const Text(

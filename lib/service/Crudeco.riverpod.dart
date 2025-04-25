@@ -25,33 +25,33 @@ class CrudProvider<T> {
   }
 
   Future<Map<String, dynamic>> calcular(T body, String endpoint) async {
-  try {
-    final url = '$baseUrl/$endpoint';
+    try {
+      final url = '$baseUrl/$endpoint';
 
-    print('📤 Enviando: ${jsonEncode(body)}');
+      print('📤 Enviando: ${jsonEncode(body)}');
 
-    final response = await http.post(
-      Uri.parse(url),
-      headers: {'Content-Type': 'application/json'},
-      body: jsonEncode(body),
-    );
+      final response = await http.post(
+        Uri.parse(url),
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode(body),
+      );
 
-    // Convertir la respuesta en un Map
-    final Map<String, dynamic> responseData = jsonDecode(response.body);
+      // Convertir la respuesta en un Map
+      final Map<String, dynamic> responseData = jsonDecode(response.body);
 
-    print('✅ Respuesta recibida: $responseData');
-    
-    return responseData;
-  } catch (e) {
-    print('❌ Error: $e');
+      print('✅ Respuesta recibida: $responseData');
 
-    return {'error': 'Error al agregar el elemento: $e'};
+      return responseData;
+    } catch (e) {
+      print('❌ Error: $e');
+
+      return {'error': 'Error al agregar el elemento: $e'};
+    }
   }
-}
-
 
   Future<List<Map<String, dynamic>>> consultar(String endpoint) async {
     final url = '$baseUrl/$endpoint';
+    
     final response = await http.get(Uri.parse(url));
 
     if (response.statusCode == 200) {
@@ -105,6 +105,35 @@ class CrudProvider<T> {
       return decodedData;
     } else {
       throw Exception('Error al consultar datos');
+    }
+  }
+
+  Future<double> obtenerDouble(T body, String endpoint) async {
+    try {
+      final url = '$baseUrl/$endpoint';
+      print('📤 Enviando: ${jsonEncode(body)}');
+
+      final response = await http.post(
+        Uri.parse(url),
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode(body),
+      );
+
+      if (response.statusCode == 200) {
+        final resultado = jsonDecode(response.body);
+        print('✅ Respuesta recibida: $resultado');
+        if (resultado is num) {
+          
+          return resultado.toDouble();
+        } else {
+          throw Exception('La respuesta no es un número.');
+        }
+      } else {
+        throw Exception(
+            'Error en la respuesta del servidor: ${response.statusCode}');
+      }
+    } catch (e) {
+      throw Exception('Error al obtener el valor double: $e');
     }
   }
 }

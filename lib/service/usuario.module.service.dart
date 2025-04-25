@@ -48,7 +48,7 @@ class UsuarioService extends CrudProvider<Usuario> {
     }
   }
 
-  Future<String> actualizarUsuarios(Usuario usuarioRe) async {
+  /* Future<String> actualizarUsuarios(Usuario usuarioRe) async {
     try {
       return await actualizar(usuarioRe, 'UpdateUser');
     } catch (error) {
@@ -62,5 +62,5 @@ class UsuarioService extends CrudProvider<Usuario> {
     } catch (error) {
       return 'Error al eliminar los Usuarios';
     }
-  }
+  } */
 }

@@ -5,13 +5,19 @@ import 'package:transifox/service/gradiente.module.service.dart';
 class Gradiente_Controller extends GetxController {
   GradienteService gestionGradiente = GradienteService();
 
-  Future<Map<String, dynamic>> registrarGradiente(GradientesModel gradiente) async {
+  Future<double> registrarGradienteArit(GradientesModel gradiente) async {
     try {
-      return await gestionGradiente.registrarGradiente(gradiente);
+      return await gestionGradiente.registrarGradientAritmetico(gradiente);
     } catch (e) {
-     return {"Cedula": '1010',"Clave": '12455',"Email": 'null@gmail' };
+      return 0.0;
     }
   }
 
-  
+  Future<double> registrarGradienteGeo(GradientesModel gradiente) async {
+    try {
+      return await gestionGradiente.registrarGradientGeometrico(gradiente);
+    } catch (e) {
+      return 0.0;
+    }
+  }
 }
